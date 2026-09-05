@@ -1,26 +1,24 @@
 # alphacli.github.io
 
-Static marketing site for **Alphacode** — the agentic CLI for your terminal.
+Marketing site + docs for **Alphacode** — the agentic CLI for your terminal.
 
-This repo is served at <https://alphacli.github.io>.
+- Live site: <https://alphacli.github.io/>
+- Docs (rendered README): <https://alphacli.github.io/docs/>
+- Product repo: <https://github.com/dragonked2/alphacode>
 
-## Files
+This repo only contains static site assets. CLI source lives in
+`dragonked2/alphacode`.
 
-- `index.html` — markup, social meta, JSON-LD, sitemap, robots
-- `styles.css` — design tokens, layout, components, motion-safe animations
-- `script.js` — install tabs, copy-to-clipboard, animated terminal, swarm DAG, benchmark bars, scroll reveal
-- `404.html` — graceful fallback for GitHub Pages
-- `robots.txt` — allow all
-- `sitemap.xml` — single-page sitemap
-- `.well-known/security.txt` — security disclosure contact
+## Site files
+
+- `index.html` — landing page
+- `styles.css`, `script.js` — design + behavior
+- `docs/index.html` — full README, rendered with sidebar TOC
+- `404.html` — fallback for Pages
+- `robots.txt`, `sitemap.xml`, `.well-known/security.txt` — SEO + disclosure
 - `LICENSE` — MIT (inherited from Alphacode)
-- `SECURITY.md` — vulnerability disclosure policy
-- `CODE_OF_CONDUCT.md` — Contributor Covenant v2.1
-- `CONTRIBUTING.md` — how to help with the site
-- `.github/ISSUE_TEMPLATE/bug_report.yml` — bug template
-- `.github/ISSUE_TEMPLATE/feature_request.yml` — feature template
-- `.github/PULL_REQUEST_TEMPLATE.md` — PR template
-- `.github/dependabot.yml` — weekly npm/GitHub Actions updates
+- `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`
+- `.github/` — Dependabot, issue + PR templates
 
 ## Local preview
 
@@ -34,10 +32,4 @@ Then open <http://localhost:8080>.
 
 ## Deploy
 
-Push to `main`. GitHub Pages (root, no Jekyll) auto-deploys.
-
-## Links
-
-- Product: <https://github.com/dragonked2/alphacode>
-- Releases: <https://github.com/dragonked2/alphacode/releases>
-- Org: <https://github.com/alphacli>
+Push to `main`. GitHub Pages deploys automatically.

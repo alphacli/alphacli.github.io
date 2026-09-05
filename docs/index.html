@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Docs — Alphacode</title>
+<meta name="description" content="The full Alphacode README, rendered: install, quick start, features, troubleshooting, performance numbers, commands, and FAQ." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://alphacli.github.io/docs/" />
+<meta name="theme-color" content="#09090B" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)" />
+<meta name="color-scheme" content="dark light" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" />
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../docs/docs.css" />
+</head>
+<body>
+<a class="skip" href="#docs">Skip to content</a>
+<header class="nav" role="banner">
+  <div class="nav__inner">
+    <a href="../" class="nav__brand" aria-label="Alphacode home">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect width="22" height="22" rx="5" fill="currentColor"/>
+        <path d="M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z" fill="var(--bg)"/>
+      </svg>
+      <span>Alphacode</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../">Home</a>
+      <a href="../#features">Features</a>
+      <a href="../#models">Models</a>
+      <a href="../#install">Install</a>
+      <a href="./" aria-current="page">Docs</a>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--primary btn--sm" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">
+        <span>Star on GitHub</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="docs" class="docs">
+  <aside class="docs__sidebar" aria-label="Table of contents">
+    <div class="docs__sidebar-inner">
+      <h2 class="docs__sidebar-title">Contents</h2>
+      <nav class="toc">
+<a href="#in-one-sentence" class="toc__item toc__item--h2">🪄 In one sentence</a>
+<a href="#im-brand-new-to-this-start-here" class="toc__item toc__item--h2">🆕 I&#x27;m brand new to this. Start here.</a>
+<a href="#what-is-a-terminal-and-do-i-need-to-learn-one" class="toc__item toc__item--h3">&nbsp;&nbsp;💡 What is a &quot;terminal,&quot; and do I need to learn one?</a>
+<a href="#what-is-alphacode-really-the-technical-explanation" class="toc__item toc__item--h2">🧭 What is Alphacode, really? (The technical explanation)</a>
+<a href="#why-people-choose-alphacode" class="toc__item toc__item--h2">⭐ Why people choose Alphacode</a>
+<a href="#table-of-contents" class="toc__item toc__item--h2">📑 Table of Contents</a>
+<a href="#install-alphacode" class="toc__item toc__item--h2">📥 Install Alphacode</a>
+<a href="#windows" class="toc__item toc__item--h3">&nbsp;&nbsp;Windows</a>
+<a href="#macos--linux" class="toc__item toc__item--h3">&nbsp;&nbsp;macOS / Linux</a>
+<a href="#build-from-source-advanced" class="toc__item toc__item--h3">&nbsp;&nbsp;Build from source (advanced)</a>
+<a href="#verify-your-install" class="toc__item toc__item--h3">&nbsp;&nbsp;✅ Verify your install</a>
+<a href="#quick-start-your-first-5-minutes" class="toc__item toc__item--h2">⚡ Quick Start: your first 5 minutes</a>
+<a href="#launch-it" class="toc__item toc__item--h3">&nbsp;&nbsp;Launch it</a>
+<a href="#try-your-first-task" class="toc__item toc__item--h3">&nbsp;&nbsp;Try your first task</a>
+<a href="#troubleshooting--fixing-common-errors" class="toc__item toc__item--h2">🩺 Troubleshooting — fixing common errors</a>
+<a href="#what-can-alphacode-actually-do" class="toc__item toc__item--h2">🧩 What can Alphacode actually do?</a>
+<a href="#supported-ai-models--providers" class="toc__item toc__item--h3">&nbsp;&nbsp;🤖 Supported AI models &amp; providers</a>
+<a href="#the-full-toolbox" class="toc__item toc__item--h3">&nbsp;&nbsp;🛠 The full toolbox</a>
+<a href="#built-in-skills" class="toc__item toc__item--h3">&nbsp;&nbsp;🎓 Built-in skills</a>
+<a href="#swarm-mode-multiple-ai-agents-working-together" class="toc__item toc__item--h3">&nbsp;&nbsp;🐝 Swarm Mode: multiple AI agents working together</a>
+<a href="#safety--how-alphacode-protects-your-computer" class="toc__item toc__item--h3">&nbsp;&nbsp;🛡 Safety — how Alphacode protects your computer</a>
+<a href="#reliability--never-lose-your-work" class="toc__item toc__item--h3">&nbsp;&nbsp;🔁 Reliability — never lose your work</a>
+<a href="#performance-numbers" class="toc__item toc__item--h2">📊 Performance numbers</a>
+<a href="#what-makes-it-fast" class="toc__item toc__item--h3">&nbsp;&nbsp;What makes it fast</a>
+<a href="#memory-usage--historical-snapshots" class="toc__item toc__item--h3">&nbsp;&nbsp;Memory usage — historical snapshots</a>
+<a href="#code-quality-guarantees" class="toc__item toc__item--h2">📜 Code quality guarantees</a>
+<a href="#commands-reference" class="toc__item toc__item--h2">⌨️ Commands reference</a>
+<a href="#cli-commands" class="toc__item toc__item--h3">&nbsp;&nbsp;CLI commands</a>
+<a href="#in-app-slash-commands" class="toc__item toc__item--h3">&nbsp;&nbsp;In-app slash commands</a>
+<a href="#configuration" class="toc__item toc__item--h2">⚙️ Configuration</a>
+<a href="#updating-alphacode" class="toc__item toc__item--h2">🔄 Updating Alphacode</a>
+<a href="#uninstalling-alphacode" class="toc__item toc__item--h2">🗑 Uninstalling Alphacode</a>
+<a href="#macos--linux" class="toc__item toc__item--h3">&nbsp;&nbsp;macOS / Linux</a>
+<a href="#windows" class="toc__item toc__item--h3">&nbsp;&nbsp;Windows</a>
+<a href="#project-structure" class="toc__item toc__item--h2">🏗 Project structure</a>
+<a href="#contributing" class="toc__item toc__item--h2">🤝 Contributing</a>
+<a href="#frequently-asked-questions" class="toc__item toc__item--h2">❓ Frequently Asked Questions</a>
+<a href="#acknowledgements" class="toc__item toc__item--h2">🙏 Acknowledgements</a>
+<a href="#license" class="toc__item toc__item--h2">📄 License</a>
+      </nav>
+    </div>
+  </aside>
+
+  <article class="docs__article">
+    <header class="docs__hero">
+      <span class="section__eyebrow">— documentation</span>
+      <h1 class="docs__title">Alphacode</h1>
+      <p class="docs__subtitle">The AI coding agent that turns plain English into working code — right in your terminal.</p>
+      <div class="docs__meta">
+        <a class="btn btn--ghost btn--sm" href="https://github.com/dragonked2/alphacode/blob/main/README.md" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
+        <a class="btn btn--primary btn--sm" href="../#install">Install</a>
+      </div>
+    </header>
+
+    <div class="docs__body">
+<h2 id="in-one-sentence" class="docs__h2">🪄 In one sentence</h2>
+
+<blockquote class="docs__quote"><p>**Alphacode is a free, open-source AI assistant that lives on your computer and writes, fixes, tests, and explains code for you — you just tell it what you want in plain English.**</p></blockquote>
+
+<p>Think of it like ChatGPT, except instead of only <em>talking</em> about code, it actually <strong>opens your files, makes the changes, runs the tests, and tells you what it did</strong> — safely, and with your permission at every risky step.</p>
+
+<p>It works with all the major AI models — <strong>Claude, GPT-4/GPT-5, Gemini, GitHub Copilot, Cursor</strong>, and others — so you're never locked into one company's AI.</p>
+
+<hr/>
+
+<h2 id="im-brand-new-to-this-start-here" class="docs__h2">🆕 I&#x27;m brand new to this. Start here.</h2>
+
+<p><details open> <summary><b>👉 Click to expand: "What even is Alphacode, in normal words?"</b></summary> <br></p>
+
+<p><strong>You don't need to be a programmer to use Alphacode's core idea</strong> — you tell it a goal, and it does the technical work. But Alphacode <em>itself</em> is a tool for working with code, so it does require one thing: a <strong>terminal</strong> (also called a "command line" or "console").</p>
+
+<table class="docs__table"><thead><tr><th>If you are...</th><th>What that means for you</th></tr></thead><tbody><tr><td>🧑‍💻 **A developer / student learning to code**</td><td>You&#x27;ll feel at home immediately — skip to [Quick Start](#-quick-start-your-first-5-minutes)</td></tr><tr><td>🧑‍🎨 **A designer, PM, founder, or hobbyist with zero coding background**</td><td>You *can* absolutely use this. Read [What is a terminal?](#-what-is-a-terminal-and-do-i-need-to-learn-one) below first — it&#x27;s a 3-minute read</td></tr><tr><td>🏢 **Evaluating this for a team or company**</td><td>See [Why Alphacode](#-why-people-choose-alphacode) and [Safety](#-safety--how-alphacode-protects-your-computer)</td></tr></tbody></table>
+
+<p></details></p>
+
+<h3 id="what-is-a-terminal-and-do-i-need-to-learn-one" class="docs__h3">💡 What is a &quot;terminal,&quot; and do I need to learn one?</h3>
+
+<p>A terminal is just a text window where you type commands instead of clicking buttons — like a chat box, but for talking to your computer directly. It looks intimidating the first time, but you really only need to know <strong>three things</strong> to use Alphacode:</p>
+
+<ol class="docs__list">
+<li><strong>How to open it</strong> — every operating system has one built in (see below).</li>
+<li><strong>How to copy-paste a command</strong> — you copy a line of text from this page and paste it in. That's most of what "using the terminal" means here.</li>
+<li><strong>How to press Enter</strong> — that's it.</li>
+</ol>
+
+<p><table> <tr> <th width="33%">💻 Windows</th> <th width="33%">🍎 macOS</th> <th width="33%">🐧 Linux</th> </tr> <tr> <td></p>
+
+<p>Press <code>Win</code> key → type <strong>"PowerShell"</strong> → press Enter</p>
+
+<p></td> <td></p>
+
+<p>Press <code>Cmd + Space</code> → type <strong>"Terminal"</strong> → press Enter</p>
+
+<p></td> <td></p>
+
+<p>Press <code>Ctrl + Alt + T</code> (most distros)</p>
+
+<p></td> </tr> </table></p>
+
+<p>Once it's open, everything below just works by copy-pasting one line at a time. If something looks like an error, jump straight to <a href="#-troubleshooting--fixing-common-errors">Troubleshooting</a> — every common issue has a copy-paste fix.</p>
+
+<hr/>
+
+<h2 id="what-is-alphacode-really-the-technical-explanation" class="docs__h2">🧭 What is Alphacode, really? (The technical explanation)</h2>
+
+<p>For readers who want the precise version: Alphacode is a <strong>terminal-native AI coding agent</strong>. Give it an objective in natural language, and it:</p>
+
+<ul class="docs__list">
+<li>reads and understands your codebase,</li>
+<li>plans the work,</li>
+<li>picks the best available AI model for the job,</li>
+<li>edits files, runs shell commands, and executes tests,</li>
+<li>searches the web when it needs current information,</li>
+<li>coordinates multiple AI agents in parallel for large tasks,</li>
+<li>reviews its own work before calling anything "done,"</li>
+<li>and keeps the session alive — resumable, crash-safe — until the objective is genuinely complete.</li>
+</ul>
+
+<p>Every version of that list — plain or technical — points at the same underlying rule:</p>
+
+<blockquote class="docs__quote"><p>### 🎯 *Make the smallest change that actually solves the problem — then verify it.*</p></blockquote>
+
+<p><div align="center"></p>
+
+<pre class="docs__code"><code class="lang-mermaid">flowchart TD
+    A[&quot;🧑 You: describe what you want, in plain English&quot;] --&gt; B[&quot;🔎 Alphacode reads your project&quot;]
+    B --&gt; C[&quot;🗺️ It plans the steps&quot;]
+    C --&gt; D[&quot;🤖 It picks the best AI model for the job&quot;]
+    D --&gt; E[&quot;🛠️ It uses tools: edit files, run commands, search the web&quot;]
+    E --&gt; F[&quot;✅ It tests and reviews its own work&quot;]
+    F --&gt; G[&quot;📋 It reports: what changed · what was verified · what&#x27;s left&quot;]
+
+    style A fill:#6E56CF,color:#fff,stroke:none
+    style G fill:#2CBB5D,color:#fff,stroke:none</code></pre>
+
+<p></div></p>
+
+<hr/>
+
+<h2 id="why-people-choose-alphacode" class="docs__h2">⭐ Why people choose Alphacode</h2>
+
+<p><table> <tr> <td width="26%">🧠 <b>Works with any AI</b></td> <td>Claude, GPT, Gemini, Copilot, Cursor, OpenRouter, Bedrock, Azure, or any OpenAI-compatible service — plus a <b>free built-in AI (GMI Cloud)</b> so it works immediately with zero setup and zero cost to try.</td> </tr> <tr> <td>🐝 <b>Splits big jobs into a team of AI agents</b></td> <td>Large tasks get broken into smaller pieces that run <i>at the same time</i> instead of one at a time, then get merged back together automatically.</td> </tr> <tr> <td>💻 <b>A genuinely pleasant interface</b></td> <td>Full color, syntax highlighting, image previews, diagrams — this is not a plain black-and-white command line from the 1990s.</td> </tr> <tr> <td>🧰 <b>40+ built-in tools</b></td> <td>File editing, web search, browser control, memory, scheduling, diagram rendering, and more — all available without installing anything extra.</td> </tr> <tr> <td>💾 <b>Never lose your work</b></td> <td>Close your laptop, lose your connection, or crash your terminal — your session picks up right where it left off.</td> </tr> <tr> <td>🛡️ <b>Safety built in, not bolted on</b></td> <td>Alphacode asks before doing anything risky and refuses to run commands that could destroy your files or system.</td> </tr> <tr> <td>⚡ <b>Fast and lightweight</b></td> <td>Built in Rust — starts instantly and uses a fraction of the memory of comparable tools. See real numbers in <a href="#-performance-numbers">Performance</a>.</td> </tr> </table></p>
+
+<hr/>
+
+<h2 id="table-of-contents" class="docs__h2">📑 Table of Contents</h2>
+
+<p><table> <tr> <td valign="top" width="33%"></p>
+
+<p><strong>🚀 Getting Started</strong></p>
+<ul class="docs__list">
+<li><a href="#-im-brand-new-to-this-start-here">I'm brand new — start here</a></li>
+<li><a href="#-install-alphacode">Install Alphacode</a></li>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#macos--linux">macOS / Linux</a></li>
+<li><a href="#build-from-source-advanced">Build from source</a></li>
+<li><a href="#-verify-your-install">Verify it worked</a></li>
+<li><a href="#-quick-start-your-first-5-minutes">Quick Start</a></li>
+<li><a href="#-troubleshooting--fixing-common-errors">Troubleshooting</a></li>
+</ul>
+
+<p></td> <td valign="top" width="33%"></p>
+
+<p><strong>🧩 What It Can Do</strong></p>
+<ul class="docs__list">
+<li><a href="#-what-can-alphacode-actually-do">Full feature list</a></li>
+<li><a href="#-supported-ai-models--providers">Supported AI models</a></li>
+<li><a href="#-swarm-mode-multiple-ai-agents-working-together">Multi-agent "Swarm Mode"</a></li>
+<li><a href="#-built-in-skills">Built-in skills</a></li>
+<li><a href="#-safety--how-alphacode-protects-your-computer">Safety features</a></li>
+<li><a href="#-reliability--never-lose-your-work">Reliability</a></li>
+<li><a href="#-performance-numbers">Performance numbers</a></li>
+</ul>
+
+<p></td> <td valign="top" width="33%"></p>
+
+<p><strong>📚 Reference</strong></p>
+<ul class="docs__list">
+<li><a href="#-code-quality-guarantees">Quality guarantees</a></li>
+<li><a href="#-commands-reference">Full command list</a></li>
+<li><a href="#-configuration">Settings & config files</a></li>
+<li><a href="#-updating-alphacode">Updating</a></li>
+<li><a href="#-uninstalling-alphacode">Uninstalling</a></li>
+<li><a href="#-project-structure">How the code is organized</a></li>
+<li><a href="#-contributing">Contributing</a></li>
+<li><a href="#-frequently-asked-questions">FAQ</a></li>
+<li><a href="#-license">License</a></li>
+</ul>
+
+<p></td> </tr> </table></p>
+
+<hr/>
+
+<h2 id="install-alphacode" class="docs__h2">📥 Install Alphacode</h2>
+
+<p>Pick your operating system below. Each installer downloads Alphacode, checks that the download is safe and untampered (a security step called checksum verification), and sets it up automatically.</p>
+
+<h3 id="windows" class="docs__h3">Windows</h3>
+
+<ol class="docs__list">
+<li>Open <strong>PowerShell</strong> (see <a href="#-what-is-a-terminal-and-do-i-need-to-learn-one">how to open a terminal</a> if you're not sure how).</li>
+<li>Copy this line, paste it in, and press Enter:</li>
+</ol>
+
+<pre class="docs__code"><code class="lang-powershell">iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex</code></pre>
+
+<p><details> <summary><b>🔍 What does this actually do to my computer?</b></summary> <br></p>
+
+<p>In plain English: it detects your computer's type, downloads the correct Alphacode program from GitHub's official servers, double-checks the download isn't corrupted or tampered with, and puts it in a folder on your computer where it can be launched by typing <code>alphacode</code>. It does <strong>not</strong> touch your other files, install background services, or need administrator access.</p>
+
+<p>Technical detail: detects architecture (<code>x86_64</code>/<code>arm64</code>) → resolves the latest release tag → downloads <code>alphacode-windows-{arch}.zip</code> and <code>SHA256SUMS</code> → verifies the SHA-256 checksum → extracts <code>alphacode.exe</code> into <code>%LOCALAPPDATA%\Programs\alphacode\bin\</code> → prompts you to add that folder to your <code>PATH</code> (one-time, guided).</p>
+
+<p></details></p>
+
+<p><strong>Optional: pin a specific version or install location</strong></p>
+
+<pre class="docs__code"><code class="lang-powershell"># Pin a version
+iwr -useb ... | iex -Version v1.0.7
+
+# Install into a custom folder
+iwr -useb ... | iex -Prefix &quot;$env:LOCALAPPDATA\Programs\alphacode&quot;
+
+# Build from source instead of downloading
+iwr -useb ... | iex -FromSource</code></pre>
+
+<h3 id="macos--linux" class="docs__h3">macOS / Linux</h3>
+
+<ol class="docs__list">
+<li>Open <strong>Terminal</strong>.</li>
+<li>Copy this line, paste it in, and press Enter:</li>
+</ol>
+
+<pre class="docs__code"><code class="lang-bash">curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash</code></pre>
+
+<p><details> <summary><b>🔍 What does this actually do to my computer?</b></summary> <br></p>
+
+<p>Same idea as above, in plain English: downloads the right version for your Mac or Linux machine, verifies it's authentic, and puts the <code>alphacode</code> command somewhere your terminal can find it.</p>
+
+<p>Technical detail: detects OS (<code>linux</code>/<code>macos</code>) and architecture → resolves the latest release tag from the GitHub API → downloads <code>alphacode-{os}-{arch}.tar.gz</code> and <code>SHA256SUMS</code> → verifies SHA-256 → extracts the binary into <code>~/.local/bin/</code> (or <code>$ALPHACODE_PREFIX/bin</code>) → prints a <code>PATH</code> hint if needed.</p>
+
+<p></details></p>
+
+<p><strong>Optional settings (environment variables):</strong></p>
+
+<table class="docs__table"><thead><tr><th>Variable</th><th>Default</th><th>What it changes</th></tr></thead><tbody><tr><td>`ALPHACODE_PREFIX`</td><td>`~/.local`</td><td>Where it gets installed</td></tr><tr><td>`ALPHACODE_BIN_DIR`</td><td>`$PREFIX/bin`</td><td>Exact folder for the program file</td></tr><tr><td>`ALPHACODE_VERSION`</td><td>`latest`</td><td>Lock to one version, e.g. `v1.0.7`</td></tr><tr><td>`ALPHACODE_REPO`</td><td>`dragonked2/alphacode`</td><td>Install from a fork/mirror</td></tr><tr><td>`ALPHACODE_FROM_SOURCE=1`</td><td>off</td><td>Build it yourself instead of downloading</td></tr><tr><td>`ALPHACODE_SOURCE_ONLY=1`</td><td>off</td><td>Never fall back to a source build</td></tr><tr><td>`ALPHACODE_SOURCE_REF=&lt;ref&gt;`</td><td>HEAD</td><td>Which branch/tag/commit to build</td></tr></tbody></table>
+
+<pre class="docs__code"><code class="lang-bash">curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash -s -- --version v1.0.7 --prefix ~/.local</code></pre>
+
+<h3 id="build-from-source-advanced" class="docs__h3">Build from source (advanced)</h3>
+
+<p>Only needed if you want to compile it yourself or there's no ready-made download for your exact machine type.</p>
+
+<pre class="docs__code"><code class="lang-bash">git clone https://github.com/dragonked2/alphacode.git
+cd alphacode
+cargo build --release
+./target/release/alphacode --version</code></pre>
+
+<p><details> <summary><b>Requirements</b></summary> <br></p>
+
+<ul class="docs__list">
+<li><strong>Rust 1.91+</strong> (edition 2024). The repo pins this in <code>rust-toolchain.toml</code>, so <code>rustup</code> installs the right version automatically.</li>
+<li>A C toolchain:</li>
+<li><strong>Linux:</strong> <code>build-essential</code> + <code>pkg-config</code> + <code>libssl-dev</code> (Ubuntu/Debian) or equivalent</li>
+<li><strong>macOS:</strong> Xcode Command Line Tools (<code>xcode-select --install</code>)</li>
+<li><strong>Windows:</strong> MSVC Build Tools + Windows SDK</li>
+<li><code>git</code></li>
+</ul>
+
+<p>A clean build takes 5–30 minutes. Rebuilds after that take seconds.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>Optional feature stacks (only if you need them)</b></summary> <br></p>
+
+<pre class="docs__code"><code class="lang-bash">cargo build --release --features bedrock            # AWS Bedrock support
+cargo build --release --features embeddings          # Local ONNX embeddings
+cargo build --release --features pdf                 # PDF text extraction
+cargo build --release --features mermaid-renderer     # Mermaid diagram rendering
+cargo build --release --features bedrock,embeddings,pdf,mermaid-renderer  # all of the above</code></pre>
+
+<p></details></p>
+
+<h3 id="verify-your-install" class="docs__h3">✅ Verify your install</h3>
+
+<p>Run these three, in order, to confirm everything worked:</p>
+
+<pre class="docs__code"><code class="lang-bash"># 1 — Can your computer find it?
+which alphacode          # macOS / Linux
+Get-Command alphacode    # PowerShell
+
+# 2 — Is it the version you expect?
+alphacode --version      # → v1.0.7 (964e49e, …)
+
+# 3 — Is everything healthy?
+alphacode doctor         # checks PATH, terminal, providers, optional dependencies</code></pre>
+
+<p><code>alphacode doctor</code> prints <code>OK</code>, <code>WARN</code>, or <code>FAIL</code> for each check, with a fix for anything not green. <strong>If something fails, jump to <a href="#-troubleshooting--fixing-common-errors">Troubleshooting</a>.</strong></p>
+
+<p><details> <summary>🔐 Paranoid mode: manually verify the download's checksum</summary> <br></p>
+
+<pre class="docs__code"><code class="lang-bash"># macOS / Linux
+curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.0.7/SHA256SUMS -o SHA256SUMS
+curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.0.7/alphacode-linux-x86_64.tar.gz -o alphacode.tar.gz
+sha256sum --ignore-missing -c SHA256SUMS</code></pre>
+
+<pre class="docs__code"><code class="lang-powershell"># Windows (PowerShell)
+Invoke-WebRequest https://github.com/dragonked2/alphacode/releases/download/v1.0.7/SHA256SUMS -OutFile SHA256SUMS
+$expected = (Get-Content SHA256SUMS | Where-Object { $_ -like &#x27;*windows-x86_64*&#x27; })[0].Split(&#x27; &#x27;)[0]
+$actual   = (Get-FileHash .\alphacode-windows-x86_64.zip -Algorithm SHA256).Hash.ToLower()
+&quot;$expected  expected&quot;
+&quot;$actual    actual&quot;</code></pre>
+
+<p></details></p>
+
+<hr/>
+
+<h2 id="quick-start-your-first-5-minutes" class="docs__h2">⚡ Quick Start: your first 5 minutes</h2>
+
+<p>You don't need an account to launch Alphacode — but you need at least one AI "brain" connected so it can actually think. Pick the easiest option:</p>
+
+<p><table> <tr><th width="30%">Option</th><th>Best for</th><th>How</th></tr> <tr> <td>🆓 <b>C · Just launch it</b></td> <td>Trying it out right now, zero setup</td> <td></p>
+
+<pre class="docs__code"><code class="lang-bash">alphacode</code></pre>
+<p>Uses the free built-in <strong>GMI Cloud</strong> AI automatically. </td> </tr> <tr> <td>🔑 <b>A · Sign in</b></td> <td>Using your existing Claude/OpenAI/Gemini account</td> <td></p>
+
+<pre class="docs__code"><code class="lang-bash">alphacode login
+alphacode login --provider openai</code></pre>
+<p></td> </tr> <tr> <td>⚙️ <b>B · API key</b></td> <td>Developers, CI pipelines, scripts</td> <td></p>
+
+<pre class="docs__code"><code class="lang-bash">export ALPHACODE_OPENAI_API_KEY=sk-...
+alphacode</code></pre>
+<p></td> </tr> </table></p>
+
+<blockquote class="docs__quote"><p>**💡 Beginner tip:** if you&#x27;re not sure which to pick, just run `alphacode` with no arguments. It works immediately using the free built-in AI — you can always switch providers later with `alphacode login`.</p></blockquote>
+
+<h3 id="launch-it" class="docs__h3">Launch it</h3>
+
+<pre class="docs__code"><code class="lang-bash">alphacode</code></pre>
+
+<p>The first time, it'll ask a few quick setup questions (telemetry, default model, keyboard shortcuts). <strong>You can press <code>Esc</code> to skip any of them</strong> — nothing is required upfront.</p>
+
+<h3 id="try-your-first-task" class="docs__h3">Try your first task</h3>
+
+<p>Just describe what you want in plain sentences — no special syntax needed:</p>
+
+<pre class="docs__code"><code class="lang-text">&gt; explain what this project does in simple terms
+
+&gt; add a login button to my homepage
+
+&gt; find and fix the bug that&#x27;s crashing the app
+
+&gt; write tests for my utils.js file
+
+&gt; look up the latest React release notes and summarize them
+
+&gt; /swarm &quot;split this feature into 4 parallel tasks&quot;</code></pre>
+
+<p><strong>Handy keyboard shortcuts:</strong></p>
+
+<table class="docs__table"><thead><tr><th>Key</th><th>What it does</th></tr></thead><tbody><tr><td>`F1`</td><td>Show every keyboard shortcut</td></tr><tr><td>`Ctrl+T`</td><td>Switch AI models</td></tr><tr><td>`Ctrl+Y`</td><td>See what each AI agent is doing</td></tr><tr><td>`Ctrl+C`</td><td>Pause the current response (your session is kept)</td></tr><tr><td>`Esc`</td><td>Go back / close the current dialog</td></tr></tbody></table>
+
+<hr/>
+
+<h2 id="troubleshooting--fixing-common-errors" class="docs__h2">🩺 Troubleshooting — fixing common errors</h2>
+
+<p>Every issue below has a copy-paste fix. Find the message closest to what you're seeing.</p>
+
+<p><details> <summary><b>❌ "command not found: alphacode" (macOS / Linux)</b></summary> <br></p>
+
+<p><strong>What this means in plain English:</strong> Alphacode installed correctly, but your terminal doesn't know where to find it yet. This is normal and takes 10 seconds to fix.</p>
+
+<pre class="docs__code"><code class="lang-bash"># Bash — append to ~/.bashrc
+echo &#x27;export PATH=&quot;$HOME/.local/bin:$PATH&quot;&#x27; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+
+# Zsh — append to ~/.zshrc
+echo &#x27;export PATH=&quot;$HOME/.local/bin:$PATH&quot;&#x27; &gt;&gt; ~/.zshrc
+source ~/.zshrc
+
+# Fish
+fish_add_path ~/.local/bin</code></pre>
+
+<p>Then close and reopen your terminal.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>❌ PowerShell can't find "alphacode.exe" (Windows)</b></summary> <br></p>
+
+<p><strong>What this means:</strong> same idea as above — Windows needs to be told where the program lives.</p>
+
+<ol class="docs__list">
+<li>Press <code>Win</code>, type <strong>"Edit the system environment variables"</strong>, press Enter.</li>
+<li>Click <strong>Environment Variables…</strong> → under <strong>User variables</strong>, select <code>Path</code> → <strong>Edit…</strong> → <strong>New</strong>.</li>
+<li>Paste: <code>%LOCALAPPDATA%\Programs\alphacode\bin</code> → OK → OK.</li>
+<li><strong>Open a brand new PowerShell window</strong> (old windows won't pick up the change).</li>
+</ol>
+
+<p></details></p>
+
+<p><details> <summary><b>⏳ It's stuck on "Compiling alphacode (this can take 5-30 minutes)"</b></summary> <br></p>
+
+<p><strong>What this means:</strong> there's no ready-made download for your exact computer type, so it's building Alphacode from scratch on your machine. This is normal, just slow. To avoid it next time:</p>
+
+<pre class="docs__code"><code class="lang-bash">curl -fsSL ... | ALPHACODE_VERSION=v1.0.7 bash</code></pre>
+
+<p></details></p>
+
+<p><details> <summary><b>🦀 "rustc … is too old; need >= 1.91"</b></summary> <br></p>
+
+<p>Only relevant if you're building from source.</p>
+
+<pre class="docs__code"><code class="lang-bash">rustup update stable         # macOS / Linux
+# Windows: re-run rustup-init from https://rustup.rs and choose &quot;stable&quot;</code></pre>
+
+<p></details></p>
+
+<p><details> <summary><b>🔐 "Checksum verification failed"</b></summary> <br></p>
+
+<p><strong>What this means:</strong> the safety check caught a corrupted or tampered download and refused to install it — this is the security system working as intended, not a bug. Just try the install command again. If it keeps happening, <a href="https://github.com/dragonked2/alphacode/issues">file an issue</a> with the exact error text.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>🌐 "alphacode login" opens a browser and then nothing happens</b></summary> <br></p>
+
+<p><strong>What this means:</strong> your firewall or VPN is blocking the sign-in page from talking back to Alphacode.</p>
+
+<ul class="docs__list">
+<li>Temporarily turn off your VPN or firewall.</li>
+<li>On Linux: <code>sudo ufw allow from 127.0.0.1</code></li>
+<li>Or skip sign-in entirely and use an API key: <code>export ALPHACODE_OPENAI_API_KEY=sk-…</code></li>
+</ul>
+
+<p></details></p>
+
+<p><details> <summary><b>🎨 "alphacode doctor" says the terminal isn't 256-color</b></summary> <br></p>
+
+<p><strong>What this means:</strong> your terminal app is too old to show colors and icons properly.</p>
+
+<ul class="docs__list">
+<li>✅ <strong>Use instead:</strong> Windows Terminal, iTerm2, gnome-terminal, kitty, or WezTerm.</li>
+<li>❌ <strong>Avoid:</strong> <code>cmd.exe</code> or the old Windows Console Host.</li>
+<li>Connecting over SSH? Add <code>-o RequestTTY=force</code> to your SSH command.</li>
+</ul>
+
+<p></details></p>
+
+<p><details> <summary><b>🔤 The screen flickers or shows broken symbols/squares</b></summary> <br></p>
+
+<p><strong>What this means:</strong> your terminal's font doesn't include the icon characters Alphacode uses. Install a "Nerd Font" — <strong>JetBrains Mono Nerd Font</strong> or <strong>Cascadia Code Nerd Font</strong> are good picks — and set it as your terminal's font.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>🐢 The very first response feels slow</b></summary> <br></p>
+
+<p><strong>What this means:</strong> the first message of a session does some one-time setup work behind the scenes. Every message after that is fast. If it stays slow, run <code>alphacode doctor</code> to pinpoint why.</p>
+
+<p></details></p>
+
+<p><strong>Still stuck?</strong> Run <code>alphacode doctor --verbose</code> and paste the output when you <a href="https://github.com/dragonked2/alphacode/issues">file an issue</a>. Found a security problem instead? Please report it privately via <a href="./SECURITY.md"><code>SECURITY.md</code></a> rather than a public issue.</p>
+
+<hr/>
+
+<h2 id="what-can-alphacode-actually-do" class="docs__h2">🧩 What can Alphacode actually do?</h2>
+
+<h3 id="supported-ai-models--providers" class="docs__h3">🤖 Supported AI models &amp; providers</h3>
+
+<p>Alphacode doesn't lock you into one AI company. Use whichever model is best (or cheapest, or fastest) for the task at hand — and switch anytime.</p>
+
+<table class="docs__table"><thead><tr><th>Provider</th><th>How you sign in</th><th>Good to know</th></tr></thead><tbody><tr><td>🟣 **Anthropic / Claude**</td><td>Sign-in or API key</td><td>First-class support</td></tr><tr><td>🟢 **OpenAI / GPT**</td><td>Sign-in, API key, or browser</td><td>Strong reasoning, vision, tool use</td></tr><tr><td>🔵 **Google Gemini**</td><td>Sign-in or API key</td><td>Full Gemini lineup</td></tr><tr><td>⚫ **GitHub Copilot**</td><td>Sign-in</td><td>Reuses your existing Copilot subscription</td></tr><tr><td>⚪ **Cursor**</td><td>Sign-in</td><td>Reuses your existing Cursor session</td></tr><tr><td>🟠 **AWS Bedrock**</td><td>AWS credentials</td><td>Optional `bedrock` build feature</td></tr><tr><td>🔷 **Azure**</td><td>Azure AD or API key</td><td>Optional `azure-auth` build feature</td></tr><tr><td>🟡 **OpenRouter**</td><td>API key</td><td>Access to many models via one key</td></tr><tr><td>⚙️ **Any OpenAI-compatible service**</td><td>API key</td><td>Add it with `alphacode provider add`</td></tr><tr><td>🆓 **GMI Cloud**</td><td>*Nothing — it&#x27;s built in*</td><td>Free, works out of the box, zero setup</td></tr></tbody></table>
+
+<p><strong>Switch providers anytime, mid-conversation:</strong></p>
+
+<pre class="docs__code"><code class="lang-bash">alphacode provider list              # see everything you&#x27;ve connected
+alphacode provider current           # what&#x27;s active right now
+alphacode provider use openai        # make OpenAI your default
+alphacode model list                 # list models for the current provider
+alphacode model use gpt-4o           # pin a specific model</code></pre>
+
+<p>Or press <code>Ctrl+T</code> inside the app for a visual picker.</p>
+
+<h3 id="the-full-toolbox" class="docs__h3">🛠 The full toolbox</h3>
+
+<p><table> <tr><td width="50%"></p>
+
+<ul class="docs__list">
+<li>📝 <strong>Editing</strong> — read, write, patch, multi-file edits</li>
+<li>🔍 <strong>Search</strong> — regex, fuzzy, and AST-aware code search</li>
+<li>⚙️ <strong>Execution</strong> — runs shell commands, with safety controls</li>
+<li>🌐 <strong>Web</strong> — fetches pages and searches the internet</li>
+<li>🖥️ <strong>Browser control</strong> — automates a real Chrome browser</li>
+</ul>
+
+<p></td><td width="50%"></p>
+
+<ul class="docs__list">
+<li>🧠 <strong>Memory</strong> — remembers project and conversation context</li>
+<li>🎓 <strong>Skills</strong> — reusable, pluggable capabilities</li>
+<li>💾 <strong>Sessions</strong> — save, recover, and resume anytime</li>
+<li>⏰ <strong>Scheduling</strong> — set up recurring or background tasks</li>
+<li>🎨 <strong>Rendering</strong> — generates images and diagrams</li>
+</ul>
+
+<p></td></tr> </table></p>
+
+<p>Also included: <strong>PDF text extraction</strong> (optional), <strong>secure sign-in flows</strong> for every supported AI provider, and <strong>autonomous modules</strong> — a planner, project analyzer, self-review system, quality gate, and resource monitor working behind the scenes.</p>
+
+<h3 id="built-in-skills" class="docs__h3">🎓 Built-in skills</h3>
+
+<p>"Skills" are ready-made expert playbooks Alphacode can follow. These ship inside the program itself, so they work everywhere, instantly:</p>
+
+<table class="docs__table"><thead><tr><th>Skill</th><th>What it&#x27;s for</th></tr></thead><tbody><tr><td>`/bugbounty`</td><td>A complete security-testing methodology — recon, common vulnerability classes, reporting</td></tr><tr><td>`/meme-coin-audit`</td><td>Checks crypto tokens for rug-pull and scam risk patterns</td></tr><tr><td>`/frontend-design`</td><td>Helps make UI work look distinctive and intentional, not generic</td></tr></tbody></table>
+
+<p>Type <code>/skills</code> inside the app to browse everything available, including any custom skills you've added yourself.</p>
+
+<h3 id="swarm-mode-multiple-ai-agents-working-together" class="docs__h3">🐝 Swarm Mode: multiple AI agents working together</h3>
+
+<p><strong>In plain English:</strong> instead of one AI doing everything step-by-step, Swarm Mode splits a big task into smaller independent pieces, hands each piece to its own AI agent, and has them all work <strong>at the same time</strong> — like assigning different parts of a group project to different teammates, then combining everyone's work at the end.</p>
+
+<pre class="docs__code"><code class="lang-mermaid">flowchart LR
+    G[&quot;🎯 Your goal&quot;] --&gt; P[&quot;🧭 Planner splits it up&quot;]
+    P --&gt; A[&quot;🤖 Agent A&quot;]
+    P --&gt; B[&quot;🤖 Agent B&quot;]
+    P --&gt; C[&quot;🤖 Agent C&quot;]
+    P --&gt; D[&quot;🤖 Agent D&quot;]
+    A --&gt; M[&quot;🔀 Combine everything&quot;]
+    B --&gt; M
+    C --&gt; M
+    D --&gt; M
+    M --&gt; R[&quot;✅ Review the result&quot;]
+    R --&gt; X[&quot;🏁 Done&quot;]
+
+    style G fill:#6E56CF,color:#fff,stroke:none
+    style X fill:#2CBB5D,color:#fff,stroke:none</code></pre>
+
+<p>Try it:</p>
+
+<pre class="docs__code"><code class="lang-text">/swarm &quot;split this feature into 4 parallel tasks&quot;</code></pre>
+
+<p>You can watch the whole plan and progress live inside the app.</p>
+
+<h3 id="safety--how-alphacode-protects-your-computer" class="docs__h3">🛡 Safety — how Alphacode protects your computer</h3>
+
+<p>AI agents that can run real commands are powerful — and that power needs real guardrails. Alphacode treats safety as a first-class engineering problem, not an afterthought:</p>
+
+<ul class="docs__list">
+<li>Catastrophic targets such as <code>rm -rf /</code>, home-directory wipes, and device-node writes are blocked.</li>
+<li>Routine authorized security tooling (nmap, subfinder, nuclei, httpx, ffuf, gobuster, curl against an in-scope target) runs without a reflection prompt.</li>
+<li>Risky actions pass through the TUI permission layer.</li>
+<li>Network operations use SSRF and credential-leak heuristics only where they would actually prevent abuse; authorized testing against a target that requires your own Authorization header is supported.</li>
+<li>Interrupted or crashed sessions are marked instead of silently corrupting state.</li>
+</ul>
+
+<p>Found a security vulnerability? Please report it responsibly via <a href="./SECURITY.md"><code>SECURITY.md</code></a>.</p>
+
+<h3 id="reliability--never-lose-your-work" class="docs__h3">🔁 Reliability — never lose your work</h3>
+
+<ul class="docs__list">
+<li><code>alphacode --resume</code> reopens exactly where you left off.</li>
+<li><code>alphacode sessions list</code> shows and searches every past session.</li>
+<li>Crashes, dropped connections, and interruptions are clearly marked, never silently swallowed.</li>
+<li>Everything is saved to disk in your operating system's standard, expected location.</li>
+<li>Built-in health monitoring watches memory use, slow operations, and error rates during long sessions.</li>
+</ul>
+
+<hr/>
+
+<h2 id="performance-numbers" class="docs__h2">📊 Performance numbers</h2>
+
+<p>Built in Rust for a reason: <strong>speed and a small memory footprint</strong>, especially when you're running several AI sessions at once.</p>
+
+<h3 id="what-makes-it-fast" class="docs__h3">What makes it fast</h3>
+
+<ul class="docs__list">
+<li>Compiler optimizations (<code>opt-level = 3</code>, thin LTO) tuned specifically for the release build.</li>
+<li>The performance-critical networking and interface code gets extra-focused compilation (<code>codegen-units = 1</code>).</li>
+<li>Efficient reuse of network connections instead of opening new ones repeatedly.</li>
+<li>Session history is stored on disk, not held entirely in memory.</li>
+<li>Heavy optional features are off by default, so you only pay for what you use.</li>
+<li>No embedded scripting language slowing things down — it's native, compiled Rust throughout.</li>
+</ul>
+
+<h3 id="memory-usage--historical-snapshots" class="docs__h3">Memory usage — historical snapshots</h3>
+
+<blockquote class="docs__quote"><p>⚠️ **Important:** These are **legacy benchmark snapshots**, kept for historical comparison. Alphacode has improved further since these were measured — treat these as a directional illustration of architecture, not a live, current benchmark.</p></blockquote>
+
+<p><details open> <summary><b>📈 RAM usage — 1 active session</b></summary> <br></p>
+
+<table class="docs__table"><thead><tr><th>Tool</th><th>Memory used</th><th>vs. Alphacode&#x27;s most efficient mode</th></tr></thead><tbody><tr><td>🥇 **Alphacode — local embedding off**</td><td>**27.8 MB**</td><td>**1.0×**</td></tr><tr><td>Alphacode (default)</td><td>167.1 MB</td><td>6.0×</td></tr><tr><td>pi</td><td>144.4 MB</td><td>5.2×</td></tr><tr><td>Codex CLI</td><td>140.0 MB</td><td>5.0×</td></tr><tr><td>Cursor Agent</td><td>214.9 MB</td><td>7.7×</td></tr><tr><td>Antigravity CLI</td><td>243.7 MB</td><td>8.8×</td></tr><tr><td>GitHub Copilot CLI</td><td>333.3 MB</td><td>12.0×</td></tr><tr><td>Claude Code</td><td>386.6 MB</td><td>13.9×</td></tr><tr><td>OpenCode</td><td>371.5 MB</td><td>13.4×</td></tr></tbody></table>
+
+<p></details></p>
+
+<p><details open> <summary><b>📈 RAM usage — 10 active sessions at once</b></summary> <br></p>
+
+<p>This is where architecture really matters — running several AI sessions in parallel is common for real engineering work.</p>
+
+<table class="docs__table"><thead><tr><th>Tool</th><th>Memory used</th><th>vs. Alphacode&#x27;s most efficient mode</th></tr></thead><tbody><tr><td>🥇 **Alphacode — local embedding off**</td><td>**117.0 MB**</td><td>**1.0×**</td></tr><tr><td>Alphacode (default)</td><td>260.8 MB</td><td>2.2×</td></tr><tr><td>Codex CLI</td><td>334.8 MB</td><td>2.9×</td></tr><tr><td>pi</td><td>833.0 MB</td><td>7.1×</td></tr><tr><td>Antigravity CLI</td><td>1021.2 MB</td><td>8.7×</td></tr><tr><td>Cursor Agent</td><td>1632.4 MB</td><td>14.0×</td></tr><tr><td>GitHub Copilot CLI</td><td>1756.5 MB</td><td>15.0×</td></tr><tr><td>Claude Code</td><td>2300.6 MB</td><td>19.7×</td></tr><tr><td>OpenCode</td><td>3237.2 MB</td><td>27.7×</td></tr></tbody></table>
+
+<p></details></p>
+
+<p><strong>In plain English:</strong> a tool can look fine using one session, but memory costs multiply fast with real usage. Alphacode was designed from the start to stay lean even with many sessions running side by side.</p>
+
+<p><details> <summary><b>📐 Benchmark methodology (for anyone who wants to reproduce or challenge these numbers)</b></summary> <br></p>
+
+<p>Alphacode doesn't treat a single README number as proof of universal performance. Any future benchmark report should state:</p>
+
+<ol class="docs__list">
+<li>Alphacode commit/version tested</li>
+<li>OS and hardware</li>
+<li>Build profile used</li>
+<li>Which optional features were enabled</li>
+<li>Number of active sessions</li>
+<li>Exact measurement method</li>
+<li>Warm vs. cold state</li>
+<li>The exact workload/task used</li>
+</ol>
+
+<p>That's what makes a performance claim reproducible instead of just promotional.</p>
+
+<p></details></p>
+
+<hr/>
+
+<h2 id="code-quality-guarantees" class="docs__h2">📜 Code quality guarantees</h2>
+
+<p>Every code-changing action Alphacode takes follows four rules:</p>
+
+<p><table> <tr> <td width="25%" align="center"></p>
+
+<p><strong>1️⃣ Smallest change</strong></p>
+
+<p>Only touches what's needed for the task. Unrelated issues get reported separately, never silently bundled in.</p>
+
+<p></td> <td width="25%" align="center"></p>
+
+<p><strong>2️⃣ No regressions</strong></p>
+
+<p>Tests that were passing stay passing. New warnings count as failures where it matters.</p>
+
+<p></td> <td width="25%" align="center"></p>
+
+<p><strong>3️⃣ Self-review</strong></p>
+
+<p>Before calling anything "done," it checks its own coverage, evidence, risk, and edge cases.</p>
+
+<p></td> <td width="25%" align="center"></p>
+
+<p><strong>4️⃣ Clear reporting</strong></p>
+
+<p>Every finished task ends with: <em>what changed · what was verified · what's left.</em></p>
+
+<p></td> </tr> </table></p>
+
+<p>The source of truth lives in <code>src/alphacode_base/prompt/system_prompt.md</code>, enforced by the tool implementations under <code>src/alphacode_app_core/tool/</code>.</p>
+
+<hr/>
+
+<h2 id="commands-reference" class="docs__h2">⌨️ Commands reference</h2>
+
+<h3 id="cli-commands" class="docs__h3">CLI commands</h3>
+
+<pre class="docs__code"><code class="lang-bash">alphacode                          # Launch the app
+alphacode login                    # Sign in to an AI provider
+alphacode login --provider openai  # Sign in to a specific provider
+alphacode doctor                   # Check that everything&#x27;s set up correctly
+alphacode doctor --verbose         # Same, with extra detail for bug reports
+alphacode provider list            # List every provider you&#x27;ve connected
+alphacode provider add &lt;name&gt;      # Add a custom OpenAI-compatible endpoint
+alphacode provider use &lt;name&gt;      # Set your default provider
+alphacode provider current         # Show the active provider + model
+alphacode model list               # List available models
+alphacode model use &lt;name&gt;         # Set your default model
+alphacode run &quot;fix the failing test&quot;   # Run one task without opening the full app
+alphacode repl                     # A simple text-only mode
+alphacode sessions list            # See your past sessions
+alphacode --resume                 # Search for and reopen a session
+alphacode --resume &lt;id&gt;            # Reopen one specific session
+alphacode update                   # Update to the latest version
+alphacode --version                # Check your current version
+alphacode --help                   # See every available command</code></pre>
+
+<h3 id="in-app-slash-commands" class="docs__h3">In-app slash commands</h3>
+
+<table class="docs__table"><thead><tr><th>Command</th><th>What it does</th></tr></thead><tbody><tr><td>`/help`</td><td>Show every command</td></tr><tr><td>`/agents`</td><td>Start multiple AI agents working in parallel</td></tr><tr><td>`/compact`</td><td>Shrink a long conversation to save space</td></tr><tr><td>`/memory`</td><td>View what Alphacode remembers about your project</td></tr><tr><td>`/skills`</td><td>Browse and manage available skills</td></tr><tr><td>`/diff`</td><td>See exactly what changed, file by file</td></tr><tr><td>`/exit`</td><td>Close the app (your session is saved automatically)</td></tr></tbody></table>
+
+<hr/>
+
+<h2 id="configuration" class="docs__h2">⚙️ Configuration</h2>
+
+<p>Alphacode keeps its settings, sessions, and logs in your operating system's standard location — never scattered inside your project folder.</p>
+
+<table class="docs__table"><thead><tr><th>Platform</th><th>Settings</th><th>Sessions</th><th>Logs</th></tr></thead><tbody><tr><td>🐧 Linux</td><td>`~/.config/alphacode/`</td><td>`~/.local/share/alphacode/sessions/`</td><td>`~/.local/share/alphacode/logs/`</td></tr><tr><td>🍎 macOS</td><td>`~/Library/Application Support/alphacode/`</td><td>*same*</td><td>*same*</td></tr><tr><td>🪟 Windows</td><td>`%APPDATA%\alphacode\`</td><td>`%LOCALAPPDATA%\alphacode\sessions\`</td><td>`%LOCALAPPDATA%\alphacode\logs\`</td></tr></tbody></table>
+
+<p>The main settings file, <code>config.toml</code>, is created automatically the first time you run <code>alphacode login</code>. Full reference: <a href="./docs/configuration.md"><code>docs/configuration.md</code></a>.</p>
+
+<hr/>
+
+<h2 id="updating-alphacode" class="docs__h2">🔄 Updating Alphacode</h2>
+
+<pre class="docs__code"><code class="lang-bash">alphacode update</code></pre>
+
+<p>This grabs the newest version, verifies it's safe, and swaps it in — without interrupting anything you have running. You can also just re-run the original install command any time; it's safe to run repeatedly.</p>
+
+<hr/>
+
+<h2 id="uninstalling-alphacode" class="docs__h2">🗑 Uninstalling Alphacode</h2>
+
+<h3 id="macos--linux" class="docs__h3">macOS / Linux</h3>
+
+<pre class="docs__code"><code class="lang-bash">curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/uninstall.sh | bash</code></pre>
+
+<p>Want to remove your settings, sessions, and logs too?</p>
+
+<pre class="docs__code"><code class="lang-bash">curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/uninstall.sh | bash -s -- --purge</code></pre>
+
+<h3 id="windows" class="docs__h3">Windows</h3>
+
+<pre class="docs__code"><code class="lang-powershell">iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/uninstall.ps1 | iex</code></pre>
+
+<p>Add <code>-Purge</code> to also remove settings, sessions, and logs.</p>
+
+<hr/>
+
+<h2 id="project-structure" class="docs__h2">🏗 Project structure</h2>
+
+<p>For contributors and the technically curious — here's how the codebase is organized:</p>
+
+<pre class="docs__code"><code class="lang-text">alphacode/
+├── src/
+│   ├── alphacode_core/             # Provider-agnostic trait types and shared state
+│   ├── alphacode_base/             # System prompt, prompt builder, capability enum
+│   ├── alphacode_app_core/         # Agent loop, tools, autonomous layer, server
+│   ├── alphacode_tui*/             # Terminal UI: rendering, widgets, style, animations
+│   ├── alphacode_tool_core/        # The `Tool` trait and shared tool types
+│   ├── alphacode_provider_*/       # Per-provider runtimes (Anthropic, OpenAI, …)
+│   ├── alphacode_auth_*/           # Per-provider OAuth flows
+│   ├── alphacode_swarm_core/       # Multi-agent coordination (task DAG, deep/light modes)
+│   ├── alphacode_modules/          # High-level autonomous modules
+│   └── alphacode_cli/              # The `alphacode` binary entrypoint
+├── docs/                           # Architecture + configuration reference
+├── scripts/                        # install / uninstall tooling
+├── CONTRIBUTING.md
+├── SECURITY.md
+└── Cargo.toml</code></pre>
+
+<p>Deeper tour: <a href="./docs/architecture.md"><code>docs/architecture.md</code></a>.</p>
+
+<hr/>
+
+<h2 id="contributing" class="docs__h2">🤝 Contributing</h2>
+
+<p>Contributions are genuinely welcome, from typo fixes to new features. Full guide: <a href="./CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a>. Short version:</p>
+
+<pre class="docs__code"><code class="lang-bash">git clone https://github.com/dragonked2/alphacode.git
+cd alphacode
+cargo build --release
+cargo test --lib
+cargo clippy --lib -- -D warnings</code></pre>
+
+<p>Requirements: <strong>Rust 1.91+</strong> (edition 2024) and a matching C toolchain.</p>
+
+<p><strong>Before opening a pull request:</strong></p>
+
+<ul class="docs__list">
+<li>[ ] <code>cargo build --release</code> passes locally</li>
+<li>[ ] <code>cargo test --lib</code> passes locally (add tests for behavior changes)</li>
+<li>[ ] <code>cargo clippy --lib -- -D warnings</code> is clean</li>
+<li>[ ] Public APIs have rustdoc comments</li>
+<li>[ ] No new dependencies unless justified in the PR description</li>
+<li>[ ] User-visible changes are documented in <code>CHANGELOG.md</code></li>
+</ul>
+
+<p>Security vulnerabilities: <a href="./SECURITY.md"><code>SECURITY.md</code></a>. Community standards: <a href="./CODE_OF_CONDUCT.md"><code>CODE_OF_CONDUCT.md</code></a>.</p>
+
+<hr/>
+
+<h2 id="frequently-asked-questions" class="docs__h2">❓ Frequently Asked Questions</h2>
+
+<p><details> <summary><b>Do I need to know how to code to use Alphacode?</b></summary> <br></p>
+
+<p>No. You need to be comfortable copy-pasting a command into a terminal and describing what you want in plain English. Alphacode handles the actual coding. See <a href="#-im-brand-new-to-this-start-here">I'm brand new — start here</a>.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>Is Alphacode free?</b></summary> <br></p>
+
+<p>Yes — Alphacode itself is free and open source under the MIT License. It includes a free built-in AI (GMI Cloud) so you can use it with zero cost and zero setup. If you connect a paid AI provider (like a Claude or OpenAI account) instead, that provider's own usage costs apply — Alphacode doesn't add any fee on top.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>Which AI model does Alphacode use — Claude, GPT, or Gemini?</b></summary> <br></p>
+
+<p>Whichever you choose. Alphacode isn't tied to one AI company — see <a href="#-supported-ai-models--providers">Supported AI models & providers</a> for the full list, and switch anytime with <code>Ctrl+T</code>.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>Is it safe to let an AI run commands on my computer?</b></summary> <br></p>
+
+<p>Alphacode is built with safety as a core design principle, not an add-on: it blocks catastrophic commands outright, asks for confirmation before anything risky, and never sends your code anywhere by default. See <a href="#-safety--how-alphacode-protects-your-computer">Safety</a> for the full picture. As with any tool that can modify files, it's good practice to review changes (<code>/diff</code>) and use version control (git).</p>
+
+<p></details></p>
+
+<p><details> <summary><b>How is this different from GitHub Copilot, Cursor, or Claude Code?</b></summary> <br></p>
+
+<p>The biggest differences: Alphacode works with <strong>any</strong> AI provider instead of locking you to one, runs natively in the terminal instead of requiring an IDE, supports running multiple AI agents in parallel ("Swarm Mode"), and is built in Rust for a notably smaller memory footprint — see <a href="#-performance-numbers">Performance numbers</a> for a direct comparison.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>Does it work on Windows?</b></summary> <br></p>
+
+<p>Yes — Windows, macOS, and Linux are all fully supported. See <a href="#-install-alphacode">Install Alphacode</a>.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>What if the install command doesn't work?</b></summary> <br></p>
+
+<p>Check <a href="#-troubleshooting--fixing-common-errors">Troubleshooting</a> — it covers every common install and first-run issue with a copy-paste fix.</p>
+
+<p></details></p>
+
+<p><details> <summary><b>Can I use my own OpenAI or Claude subscription instead of the free built-in AI?</b></summary> <br></p>
+
+<p>Yes. Run <code>alphacode login</code> and pick your provider, or set an API key as an environment variable. Full steps in <a href="#-quick-start-your-first-5-minutes">Quick Start</a>.</p>
+
+<p></details></p>
+
+<hr/>
+
+<h2 id="acknowledgements" class="docs__h2">🙏 Acknowledgements</h2>
+
+<p>Alphacode is built on outstanding open-source projects, including:</p>
+
+<p><div align="center"></p>
+
+<p><a href="https://img.shields.io/badge/Ratatui-1a1a2e?style=for-the-badge">![Ratatui</a>](https://ratatui.rs) <a href="https://img.shields.io/badge/Crossterm-1a1a2e?style=for-the-badge">![Crossterm</a>](https://github.com/crossterm-rs/crossterm) <a href="https://img.shields.io/badge/Tokio-1a1a2e?style=for-the-badge">![Tokio</a>](https://tokio.rs) <a href="https://img.shields.io/badge/Reqwest-1a1a2e?style=for-the-badge">![Reqwest</a>](https://github.com/seanmonstar/reqwest) <a href="https://img.shields.io/badge/Rustls-1a1a2e?style=for-the-badge">![Rustls</a>](https://github.com/rustls/rustls) <a href="https://img.shields.io/badge/Clap-1a1a2e?style=for-the-badge">![Clap</a>](https://github.com/clap-rs/clap) <a href="https://img.shields.io/badge/Pulldown--CMark-1a1a2e?style=for-the-badge">![Pulldown--CMark</a>](https://github.com/raphlinus/pulldown-cmark) <a href="https://img.shields.io/badge/Syntect-1a1a2e?style=for-the-badge">![Syntect</a>](https://github.com/trishume/syntect) <a href="https://img.shields.io/badge/Resvg-1a1a2e?style=for-the-badge">![Resvg</a>](https://github.com/RazrFalcon/resvg)</p>
+
+<p></div></p>
+
+<p>...and many others — see <code>Cargo.lock</code> for the complete dependency graph.</p>
+
+<hr/>
+
+<h2 id="license" class="docs__h2">📄 License</h2>
+
+<p>Alphacode is released under the <strong>MIT License</strong> — free to use, modify, and distribute. Full text: <a href="./LICENSE"><code>LICENSE</code></a>.</p>
+
+<hr/>
+
+<p><div align="center"></p>
+
+<p><img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=header" width="100%"></p>
+
+<p><strong>Alphacode</strong> <br> <sub>The AI coding agent for your terminal · Built with Rust 🦀 · Free & open source</sub></p>
+
+<p><br><br></p>
+
+<p><a href="https://github.com/dragonked2/alphacode">GitHub</a> · <a href="https://github.com/dragonked2/alphacode/issues">Issues</a> · <a href="https://github.com/dragonked2/alphacode/releases">Releases</a> · <a href="docs/">Documentation</a></p>
+
+<p><br><br></p>
+
+<p><sub>Made with care by <a href="https://github.com/dragonked2">Ali Essam</a> · MIT licensed</sub></p>
+
+<p></div></p>
+    </div>
+
+    <footer class="docs__footer">
+      <p>Found an issue with these docs? <a href="https://github.com/dragonked2/alphacode/edit/main/README.md" target="_blank" rel="noopener noreferrer">Edit the README on GitHub ↗</a></p>
+    </footer>
+  </article>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <svg width="16" height="16" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect width="22" height="22" rx="5" fill="currentColor"/>
+        <path d="M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z" fill="var(--bg)"/>
+      </svg>
+      <span>Alphacode</span>
+      <span class="footer__by">by <a href="https://github.com/alphacli">Alphacli</a></span>
+    </div>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="../">Home</a>
+      <a href="https://github.com/dragonked2/alphacode">GitHub</a>
+      <a href="https://github.com/dragonked2/alphacode/releases">Releases</a>
+      <a href="https://github.com/dragonked2/alphacode/blob/main/LICENSE">License</a>
+      <a href="../.well-known/security.txt">security.txt</a>
+    </nav>
+    <div class="footer__meta">MIT · Rust · 2026</div>
+  </div>
+</footer>
+
+<script src="../script.js" defer></script>
+<script>
+  // Highlight active TOC item on scroll
+  (() => {
+    const links = Array.from(document.querySelectorAll('.toc__item'));
+    const targets = links.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    if (!('IntersectionObserver' in window) || !targets.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          links.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    targets.forEach(t => io.observe(t));
+  })();
+</script>
+</body>
+</html>
