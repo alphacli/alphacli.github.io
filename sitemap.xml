@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
   <url>
-    <loc>https://alphacli.github.io/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+       <loc>https://alphacli.github.io/</loc>
+       <lastmod>2026-09-05T23:18:58+00:00</lastmod>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://alphacli.github.io/docs/</loc>
+       <lastmod>2026-09-05T23:18:58+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://alphacli.github.io/.well-known/security.txt</loc>
+       <lastmod>2026-09-05T23:18:58+00:00</lastmod>
+       <priority>0.8000</priority>
   </url>
 </urlset>
