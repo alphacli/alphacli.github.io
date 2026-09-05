@@ -1,0 +1,5 @@
+Contact: mailto:tlbbeg313@gmail.com
+Contact: https://github.com/dragonked2/alphacode/security/advisories/new
+Expires: 2027-12-31T23:59:59Z
+Preferred-Languages: en
+Canonical: https://alphacli.github.io/.well-known/security.txt

@@ -1,0 +1,10 @@
+name: Site feedback
+description: General thoughts on the marketing site or copy.
+labels: ["feedback", "site"]
+body:
+  - type: textarea
+    id: feedback
+    attributes:
+      label: What's on your mind?
+    validations:
+      required: true

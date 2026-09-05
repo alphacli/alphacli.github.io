@@ -1,384 +1,434 @@
 /* ============================================================
-   Alphacode — v5 script
+   Alphacode — site script v6
    ============================================================ */
+
 (() => {
   'use strict';
 
-  /* ---------- INSTALL TABS ---------- */
-  const tabs = document.querySelectorAll('.install__tab');
-  const panels = document.querySelectorAll('.install__panel');
-  const indicator = document.getElementById('installIndicator');
+  const $  = (s, p = document) => p.querySelector(s);
+  const $$ = (s, p = document) => Array.from(p.querySelectorAll(s));
 
-  function moveIndicator(tab) {
-    if (!indicator || !tab) return;
-    const pr = tab.parentElement.getBoundingClientRect();
-    const r = tab.getBoundingClientRect();
-    indicator.style.left = (r.left - pr.left) + 'px';
-    indicator.style.width = r.width + 'px';
-  }
-
-  function selectTab(tab) {
-    const id = tab.dataset.platform;
-    tabs.forEach((t) => {
-      t.classList.toggle('is-active', t === tab);
-      t.setAttribute('aria-selected', String(t === tab));
-    });
-    panels.forEach((p) => { p.hidden = p.dataset.platform !== id; });
-    moveIndicator(tab);
-  }
-
-  tabs.forEach((t) => t.addEventListener('click', () => selectTab(t)));
-  if (tabs[0]) requestAnimationFrame(() => moveIndicator(tabs[0]));
-  window.addEventListener('resize', () => {
-    const sel = [...tabs].find((t) => t.classList.contains('is-active'));
-    if (sel) moveIndicator(sel);
+  /* ------------------------------------------------------------
+     Scroll reveal
+     ------------------------------------------------------------ */
+  const revealEls = $$('.feat, .stat, .model, .install__card, .bench__card, .swarm__board, .faq__item, .section__head');
+  revealEls.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.setAttribute('data-d', String((i % 3) + 1));
   });
-
-  /* ---------- COPY BUTTONS ---------- */
-  document.querySelectorAll('.code__copy').forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const text = btn.dataset.copy || '';
-      try { await navigator.clipboard.writeText(text); }
-      catch {
-        const ta = document.createElement('textarea');
-        ta.value = text; document.body.appendChild(ta);
-        ta.select(); document.execCommand('copy'); ta.remove();
-      }
-      const orig = btn.textContent;
-      btn.textContent = 'copied';
-      btn.classList.add('is-copied');
-      setTimeout(() => { btn.textContent = orig; btn.classList.remove('is-copied'); }, 1400);
-    });
-  });
-
-  /* ---------- HERO TERMINAL DEMO ---------- */
-  const body = document.getElementById('demoBody');
-  const statusEl = document.getElementById('demoStatus');
-  const timeEl = document.getElementById('demoTime');
-  const toolsEl = document.getElementById('demoTools');
-  const barEl = document.getElementById('demoBar');
-  const dotEl = document.querySelector('.demo__foot-dot');
-
-  const SCRIPT = [
-    ['p', '> refactor src/auth/session.ts → use Result<T>'],
-    ['d', '\n  ⏎ planning · 6 files · 14 callsites'],
-    ['o', '\n  ✓ plan: 4 steps, 2 files'],
-    ['v', '\n\n  ◇ step 1/4  '], ['i', 'read session.ts + callers'],
-    ['d', '\n'],
-    ['v', '  ◇ step 2/4  '], ['i', 'introduce Result<T,E>'],
-    ['d', '\n'],
-    ['v', '  ◇ step 3/4  '], ['i', 'update 6 callers'],
-    ['d', '\n'],
-    ['v', '  ◇ step 4/4  '], ['i', 'tests + cargo test'],
-    ['d', '\n\n'],
-    ['o', '  ✓ 142 passed · clippy clean'],
-    ['o', '\n  ✓ coverage 91.4% → 94.2%'],
-    ['d', '\n\n'],
-    ['w', '  src/auth/session.ts       +48  -22'],
-    ['w', '\n  src/auth/session.test.ts  +31  -0'],
-    ['d', '\n\n'],
-    ['o', '  ✓ done in 28.4s · ready to commit'],
-  ];
-
-  const CLS = {
-    p: 'l-prompt', i: 'l-info', d: 'l-dim',
-    o: 'l-ok', w: 'l-warn', v: 'l-violet', r: 'l-rose',
-  };
-
-  async function play() {
-    if (!body) return;
-    body.textContent = '';
-    if (statusEl) statusEl.textContent = 'running';
-    if (dotEl) dotEl.classList.remove('is-done');
-
-    const start = performance.now();
-    const tick = () => {
-      if (!timeEl) return;
-      timeEl.textContent = ((performance.now() - start) / 1000).toFixed(1) + 's';
-      requestAnimationFrame(tick);
-    };
-    tick();
-
-    const total = SCRIPT.length;
-    for (let i = 0; i < SCRIPT.length; i++) {
-      const [kind, txt] = SCRIPT[i];
-      const cls = CLS[kind] || 'l-info';
-      const isLong = txt.length > 6 && (kind === 'i' || kind === 'd' || kind === 'w' || kind === 'o');
-
-      if (isLong) {
-        for (let c = 0; c < txt.length; c++) {
-          const span = document.createElement('span');
-          span.className = cls;
-          span.textContent = txt[c];
-          body.appendChild(span);
-          if (body.textContent.length > 3500) {
-            body.textContent = body.textContent.slice(-2500);
-          }
-          const prog = ((i + c / txt.length) / total) * 100;
-          if (barEl) barEl.style.width = prog + '%';
-          await new Promise((r) => setTimeout(r, 6));
-        }
-      } else {
-        const span = document.createElement('span');
-        span.className = cls;
-        span.textContent = txt;
-        body.appendChild(span);
-        if (barEl) barEl.style.width = ((i + 1) / total) * 100 + '%';
-        await new Promise((r) => setTimeout(r, 24));
-      }
-      if (toolsEl) {
-        const p = i / total;
-        if (p > 0.4) toolsEl.textContent = '14';
-      }
-    }
-    // append caret
-    const caret = document.createElement('span');
-    caret.className = 'l-caret';
-    body.appendChild(caret);
-    if (statusEl) statusEl.textContent = 'done';
-    if (dotEl) dotEl.classList.add('is-done');
-  }
-
-  async function loop() {
-    while (true) {
-      await play();
-      await new Promise((r) => setTimeout(r, 10000));
-    }
-  }
-  if (body) loop();
-
-  /* ---------- SWARM DAG ---------- */
-  const NODES = [
-    { id: 'goal',    label: '🎯 migrate auth',       x: 270, y: 20,  w: 130, h: 44, cls: 'dag__node--root' },
-    { id: 'plan',    label: '🧭 Planner',           x: 270, y: 95,  w: 130, h: 38, cls: 'dag__node--plan' },
-    { id: 'agent-a', label: 'Agent A',              x: 30,  y: 180, w: 100, h: 60, cls: 'dag__node--agent', sub: 'routes 1–4' },
-    { id: 'agent-b', label: 'Agent B',              x: 160, y: 180, w: 100, h: 60, cls: 'dag__node--agent', sub: 'routes 5–8' },
-    { id: 'agent-c', label: 'Agent C',              x: 290, y: 180, w: 100, h: 60, cls: 'dag__node--agent', sub: 'routes 9–12' },
-    { id: 'agent-d', label: 'Agent D',              x: 420, y: 180, w: 100, h: 60, cls: 'dag__node--agent', sub: 'tests + docs' },
-    { id: 'done',    label: '🏁 Merged & reviewed', x: 265, y: 290, w: 140, h: 40, cls: 'dag__node--done' },
-  ];
-  const EDGES = [
-    ['goal', 'plan'],
-    ['plan', 'agent-a'], ['plan', 'agent-b'], ['plan', 'agent-c'], ['plan', 'agent-d'],
-    ['agent-a', 'done'], ['agent-b', 'done'], ['agent-c', 'done'], ['agent-d', 'done'],
-  ];
-
-  const dagEdges = document.getElementById('dag-edges');
-  const dagNodes = document.getElementById('dag-nodes');
-  const dagPkts  = document.getElementById('dag-pkts');
-  const overlay  = document.getElementById('swarmOverlay');
-  const runBtn   = document.getElementById('swarmRun');
-
-  const nodeById = (id) => NODES.find((n) => n.id === id);
-
-  function buildDag() {
-    if (!dagEdges) return;
-    dagEdges.innerHTML = '';
-    dagNodes.innerHTML = '';
-    EDGES.forEach(([f, t]) => {
-      const a = nodeById(f), b = nodeById(t);
-      const ax = a.x + a.w / 2, ay = a.y + a.h;
-      const bx = b.x + b.w / 2, by = b.y;
-      const cy = (ay + by) / 2;
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('d', `M ${ax} ${ay} C ${ax} ${cy}, ${bx} ${cy}, ${bx} ${by}`);
-      path.setAttribute('marker-end', 'url(#arr)');
-      dagEdges.appendChild(path);
-    });
-    NODES.forEach((n) => {
-      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.classList.add('dag__node');
-      if (n.cls) g.classList.add(n.cls);
-      const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      r.setAttribute('x', n.x); r.setAttribute('y', n.y);
-      r.setAttribute('width', n.w); r.setAttribute('height', n.h);
-      r.setAttribute('rx', 6);
-      g.appendChild(r);
-      const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      t.setAttribute('x', n.x + n.w / 2);
-      t.setAttribute('y', n.y + n.h / 2 - (n.sub ? 5 : 4));
-      t.setAttribute('text-anchor', 'middle');
-      t.textContent = n.label;
-      g.appendChild(t);
-      if (n.sub) {
-        const s = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        s.setAttribute('x', n.x + n.w / 2);
-        s.setAttribute('y', n.y + n.h / 2 + 11);
-        s.setAttribute('text-anchor', 'middle');
-        s.classList.add('dag__sub');
-        s.textContent = n.sub;
-        g.appendChild(s);
-      }
-      dagNodes.appendChild(g);
-    });
-  }
-  buildDag();
-
-  function sendPkt(fromId, toId) {
-    return new Promise((res) => {
-      const a = nodeById(fromId), b = nodeById(toId);
-      const ax = a.x + a.w / 2, ay = a.y + a.h;
-      const bx = b.x + b.w / 2, by = b.y;
-      const cy = (ay + by) / 2;
-      const path = `M ${ax} ${ay} C ${ax} ${cy}, ${bx} ${cy}, ${bx} ${by}`;
-      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      c.setAttribute('r', 4);
-      c.classList.add('pkt');
-      dagPkts.appendChild(c);
-      const anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-      anim.setAttribute('dur', '0.85s');
-      anim.setAttribute('fill', 'freeze');
-      anim.setAttribute('path', path);
-      c.appendChild(anim);
-      setTimeout(() => { c.remove(); res(); }, 850);
-    });
-  }
-
-  async function runSwarm() {
-    if (overlay) overlay.classList.add('is-hidden');
-    // reset
-    NODES.forEach((n) => {
-      const el = dagNodes.querySelector(`g:nth-child(${NODES.indexOf(n) + 1})`);
-      if (el) el.classList.remove('dag__node--active', 'dag__node--merged');
-    });
-    const doneNode = dagNodes.children[dagNodes.children.length - 1];
-    if (doneNode) {
-      const rect = doneNode.querySelector('rect');
-      rect.setAttribute('fill', 'rgba(163,230,53,.10)');
-      rect.setAttribute('stroke', '#A3E635');
-    }
-    dagPkts.innerHTML = '';
-
-    await new Promise((r) => setTimeout(r, 300));
-    dagNodes.children[1].classList.add('dag__node--active');
-    await sendPkt('goal', 'plan');
-
-    await new Promise((r) => setTimeout(r, 200));
-    const agents = ['agent-a', 'agent-b', 'agent-c', 'agent-d'];
-    agents.forEach((id) => {
-      const idx = NODES.findIndex((n) => n.id === id);
-      dagNodes.children[idx].classList.add('dag__node--active');
-    });
-    await Promise.all([
-      sendPkt('plan', 'agent-a'),
-      sendPkt('plan', 'agent-b'),
-      sendPkt('plan', 'agent-c'),
-      sendPkt('plan', 'agent-d'),
-    ]);
-
-    await new Promise((r) => setTimeout(r, 600));
-    agents.forEach((id) => {
-      const idx = NODES.findIndex((n) => n.id === id);
-      dagNodes.children[idx].classList.remove('dag__node--active');
-    });
-    doneNode.classList.add('dag__node--active');
-    await Promise.all([
-      sendPkt('agent-a', 'done'),
-      sendPkt('agent-b', 'done'),
-      sendPkt('agent-c', 'done'),
-      sendPkt('agent-d', 'done'),
-    ]);
-
-    await new Promise((r) => setTimeout(r, 300));
-    doneNode.classList.remove('dag__node--active');
-    doneNode.classList.add('dag__node--merged');
-    const dr = doneNode.querySelector('rect');
-    dr.setAttribute('fill', 'rgba(163,230,53,.22)');
-  }
-
-  if (runBtn) runBtn.addEventListener('click', runSwarm);
-  // also click anywhere on overlay to run
-  if (overlay) overlay.addEventListener('click', (e) => {
-    if (e.target !== runBtn) runSwarm();
-  });
-
-  // auto-run when scrolled into view (once)
-  let autoRan = false;
-  if ('IntersectionObserver' in window && overlay) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && !autoRan) {
-          autoRan = true;
-          setTimeout(runSwarm, 400);
-          io.disconnect();
-        }
-      });
-    }, { threshold: 0.35 });
-    io.observe(overlay.parentElement);
-  }
-
-  /* ---------- BENCHMARKS ---------- */
-  const BENCH = {
-    1: [
-      { label: 'Alphacode · lean',   mb: 27.8,  best: true,  self: false },
-      { label: 'Alphacode · std',    mb: 167.1, best: false, self: true },
-      { label: 'Codex CLI',          mb: 140.0, best: false, self: false },
-      { label: 'Cursor Agent',       mb: 214.9, best: false, self: false },
-      { label: 'Copilot CLI',        mb: 333.3, best: false, self: false },
-      { label: 'Claude Code',        mb: 386.6, best: false, self: false },
-    ],
-    10: [
-      { label: 'Alphacode · lean',   mb: 117.0,  best: true,  self: false },
-      { label: 'Alphacode · std',    mb: 260.8,  best: false, self: true },
-      { label: 'Codex CLI',          mb: 334.8,  best: false, self: false },
-      { label: 'Cursor Agent',       mb: 1632.4, best: false, self: false },
-      { label: 'Copilot CLI',        mb: 1756.2, best: false, self: false },
-      { label: 'Claude Code',        mb: 2300.6, best: false, self: false },
-    ],
-  };
-
-  document.querySelectorAll('.bench__bars').forEach((wrap) => {
-    const which = wrap.dataset.bench;
-    const rows = BENCH[which] || [];
-    const max = Math.max(...rows.map((r) => r.mb));
-
-    rows.forEach((r) => {
-      const row = document.createElement('div');
-      row.className = 'bench__row';
-      const pct = Math.max(2, (r.mb / max) * 100);
-      const cls = r.best ? 'is-best' : (r.self ? 'is-self' : '');
-      const labelCls = r.best ? 'is-best' : (r.self ? 'is-self' : '');
-      row.innerHTML = `
-        <span class="bench__label ${labelCls}">${r.label}</span>
-        <span class="bench__bar-wrap"><span class="bench__bar ${cls}" data-w="${pct}"></span></span>
-        <span class="bench__val"><b>${r.mb >= 1000 ? (r.mb/1000).toFixed(2)+' GB' : r.mb.toFixed(1)+' MB'}</b></span>
-      `;
-      wrap.appendChild(row);
-    });
-
-    const io = new IntersectionObserver((ents) => {
-      ents.forEach((e) => {
-        if (e.isIntersecting) {
-          wrap.querySelectorAll('.bench__bar').forEach((b, i) => {
-            setTimeout(() => { b.style.width = b.dataset.w + '%'; }, i * 60);
-          });
-          io.unobserve(wrap);
-        }
-      });
-    }, { threshold: 0.3 });
-    io.observe(wrap);
-  });
-
-  /* ---------- SCROLL REVEAL ---------- */
-  const targets = document.querySelectorAll(
-    '.section__head, .feat, .demo, .hero__copy > *, .install__card, .bench__card, .footer__inner > *'
-  );
-  targets.forEach((el) => el.classList.add('reveal'));
-  // stagger features
-  document.querySelectorAll('.feat').forEach((el, i) => el.setAttribute('data-d', String((i % 3) + 1)));
-  document.querySelectorAll('.hero__copy > *').forEach((el, i) => el.setAttribute('data-d', String(i + 1)));
-
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
+      entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('in');
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    targets.forEach((el) => io.observe(el));
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
   } else {
-    targets.forEach((el) => el.classList.add('in'));
+    revealEls.forEach(el => el.classList.add('in'));
   }
+
+  /* ------------------------------------------------------------
+     Install tabs + copy
+     ------------------------------------------------------------ */
+  const tabs   = $$('.install__tab');
+  const panels = $$('.install__panel');
+  const indicator = $('#installIndicator');
+
+  function moveIndicator(tab) {
+    if (!tab || !indicator) return;
+    const r = tab.getBoundingClientRect();
+    const parentR = tab.parentElement.getBoundingClientRect();
+    indicator.style.left = (r.left - parentR.left) + 'px';
+    indicator.style.width = r.width + 'px';
+  }
+
+  function selectTab(target) {
+    tabs.forEach(t => {
+      const active = t.dataset.platform === target;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', String(active));
+      t.tabIndex = active ? 0 : -1;
+    });
+    panels.forEach(p => {
+      p.hidden = p.dataset.platform !== target;
+    });
+    const t = tabs.find(t => t.dataset.platform === target);
+    if (t) moveIndicator(t);
+  }
+
+  tabs.forEach(t => {
+    t.addEventListener('click', () => selectTab(t.dataset.platform));
+    t.addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(t);
+      if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); tabs[(i + 1) % tabs.length].click(); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); tabs[(i - 1 + tabs.length) % tabs.length].click(); }
+    });
+  });
+  requestAnimationFrame(() => moveIndicator($('.install__tab.is-active')));
+  window.addEventListener('resize', () => {
+    const t = $('.install__tab.is-active');
+    if (t) moveIndicator(t);
+  });
+
+  $$('.code__copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy || '';
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch {}
+        ta.remove();
+      }
+      btn.classList.add('is-copied');
+      const orig = btn.textContent;
+      btn.textContent = 'copied';
+      setTimeout(() => {
+        btn.classList.remove('is-copied');
+        btn.textContent = orig;
+      }, 1400);
+    });
+  });
+
+  /* ------------------------------------------------------------
+     Animated hero demo (typed agent run)
+     ------------------------------------------------------------ */
+  const demoBody  = $('#demoBody');
+  const demoBar   = $('#demoBar');
+  const demoBarW  = $('#demoBarWrap');
+  const demoStatus= $('#demoStatus');
+  const demoTime  = $('#demoTime');
+  const demoTools = $('#demoTools');
+  const demoModel = $('#demoModel');
+  const demoFootDot = $('.demo__foot-dot');
+
+  if (demoBody) {
+    const steps = [
+      { p: 'alphacode', m: 'sonnet-4.5', text: '<span class="l-dim">›</span> <span class="l-info">scan repo, plan migration to OAuth 2.1</span>' },
+      { p: 'plan',      m: 'plan',       text: '<span class="l-violet">[planner]</span> <span class="l-info">decomposing goal…</span> <span class="l-dim">3 agents</span>' },
+      { p: 'agent-1',   m: 'haiku-4',    text: '<span class="l-warn">[auth/routes.ts]</span> <span class="l-info">refactor login → authorization code</span>' },
+      { p: 'agent-2',   m: 'sonnet-4.5', text: '<span class="l-warn">[auth/tokens.ts]</span> <span class="l-info">add PKCE, refresh-rotation</span>' },
+      { p: 'agent-3',   m: 'gpt-5-mini', text: '<span class="l-warn">[auth/db.ts]</span> <span class="l-info">add sessions + audit log</span>' },
+      { p: 'tests',     m: 'haiku-4',    text: '<span class="l-info">running</span> <span class="l-dim">cargo test --workspace</span> <span class="l-ok">✓ 142/142</span>' },
+      { p: 'review',    m: 'sonnet-4.5', text: '<span class="l-violet">[reviewer]</span> <span class="l-info">diff looks clean, no secrets leaked</span>' },
+      { p: 'done',      m: '—',          text: '<span class="l-ok l-bold">✓ ready to commit</span> <span class="l-dim">3 files · 142 tests passed · 0 leaked secrets</span>' },
+    ];
+
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const models = ['sonnet-4.5', 'haiku-4', 'gpt-5-mini', 'opus-4'];
+
+    function setStatus(s) { demoStatus.textContent = s; }
+    function setTime(t)   { demoTime.textContent = t.toFixed(1) + 's'; }
+    function setTools(n)  { demoTools.textContent = String(n); }
+    function setModel(m)  { demoModel.textContent = m; }
+
+    let stepIdx = 0;
+    let cancelled = false;
+
+    async function run() {
+      cancelled = false;
+      demoBody.innerHTML = '';
+      setStatus('running');
+      demoBar.style.width = '0%';
+      demoBarW && demoBarW.setAttribute('aria-valuenow', '0');
+      demoFootDot && demoFootDot.classList.remove('is-done');
+      setTools(0); setTime(0);
+
+      const start = performance.now();
+      const tick = setInterval(() => {
+        if (cancelled) return;
+        setTime((performance.now() - start) / 1000);
+      }, 50);
+
+      for (let i = 0; i < steps.length; i++) {
+        if (cancelled) break;
+        stepIdx = i;
+        const s = steps[i];
+        setModel(s.m);
+        const line = document.createElement('div');
+        line.innerHTML = `<span class="l-prompt">$</span> <span class="l-violet l-bold">${s.p}</span>  ${s.text}<span class="l-caret"></span>`;
+        demoBody.appendChild(line);
+        setTools(i + 1);
+        const pct = ((i + 1) / steps.length) * 100;
+        demoBar.style.width = pct + '%';
+        demoBarW && demoBarW.setAttribute('aria-valuenow', String(Math.round(pct)));
+        await sleep(900 + Math.random() * 500);
+        line.querySelector('.l-caret')?.remove();
+      }
+
+      clearInterval(tick);
+      setStatus('done');
+      demoFootDot && demoFootDot.classList.add('is-done');
+    }
+
+    function loop() {
+      run().then(() => sleep(6000)).then(() => {
+        if (!cancelled) loop();
+      });
+    }
+
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced) loop();
+
+    // Allow re-running by clicking on the terminal
+    demoBody.parentElement.addEventListener('click', () => {
+      if (cancelled) return;
+    });
+  }
+
+  /* ------------------------------------------------------------
+     Swarm DAG animation
+     ------------------------------------------------------------ */
+  const dagNodes = $('#dag-nodes');
+  const dagEdges = $('#dag-edges');
+  const dagPkts  = $('#dag-pkts');
+
+  if (dagNodes && dagEdges) {
+    const W = 600, H = 280;
+    const nodes = [
+      { id: 'root',   x:  40, y: 130, w: 110, h: 50, label: 'Goal',         sub: 'migrate → OAuth 2.1', kind: 'root' },
+      { id: 'plan',   x: 180, y: 130, w: 110, h: 50, label: 'Planner',      sub: 'sonnet-4.5',         kind: 'plan' },
+      { id: 'a1',     x: 340, y:  40, w: 100, h: 46, label: 'Agent · A',    sub: 'haiku-4',             kind: 'agent' },
+      { id: 'a2',     x: 340, y: 130, w: 100, h: 46, label: 'Agent · B',    sub: 'sonnet-4.5',          kind: 'agent' },
+      { id: 'a3',     x: 340, y: 220, w: 100, h: 46, label: 'Agent · C',    sub: 'gpt-5-mini',          kind: 'agent' },
+      { id: 'merge',  x: 480, y: 130, w:  90, h: 50, label: 'Reviewer',     sub: 'opus-4',              kind: 'merged' },
+    ];
+    const edges = [
+      ['root',  'plan'],
+      ['plan',  'a1'],
+      ['plan',  'a2'],
+      ['plan',  'a3'],
+      ['a1',    'merge'],
+      ['a2',    'merge'],
+      ['a3',    'merge'],
+    ];
+
+    const NS = 'http://www.w3.org/2000/svg';
+    const center = (n) => ({ x: n.x + n.w / 2, y: n.y + n.h / 2 });
+    const nodeById = Object.fromEntries(nodes.map(n => [n.id, n]));
+
+    // edges
+    edges.forEach(([from, to]) => {
+      const a = center(nodeById[from]);
+      const b = center(nodeById[to]);
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', `M${a.x} ${a.y} C ${a.x+40} ${a.y}, ${b.x-40} ${b.y}, ${b.x} ${b.y}`);
+      path.setAttribute('marker-end', 'url(#arr)');
+      dagEdges.appendChild(path);
+    });
+
+    // nodes
+    nodes.forEach(n => {
+      const g = document.createElementNS(NS, 'g');
+      g.classList.add('dag__node', `dag__node--${n.kind}`);
+      g.dataset.id = n.id;
+      const rect = document.createElementNS(NS, 'rect');
+      rect.setAttribute('x', n.x); rect.setAttribute('y', n.y);
+      rect.setAttribute('width', n.w); rect.setAttribute('height', n.h);
+      rect.setAttribute('rx', '6');
+      g.appendChild(rect);
+      const t1 = document.createElementNS(NS, 'text');
+      t1.setAttribute('x', n.x + n.w / 2);
+      t1.setAttribute('y', n.y + 22);
+      t1.setAttribute('text-anchor', 'middle');
+      t1.textContent = n.label;
+      g.appendChild(t1);
+      const t2 = document.createElementNS(NS, 'text');
+      t2.setAttribute('x', n.x + n.w / 2);
+      t2.setAttribute('y', n.y + 38);
+      t2.setAttribute('text-anchor', 'middle');
+      t2.classList.add('dag__sub');
+      t2.textContent = n.sub;
+      g.appendChild(t2);
+      dagNodes.appendChild(g);
+    });
+
+    const overlay  = $('#swarmOverlay');
+    const runBtn   = $('#swarmRun');
+    const reduced  = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    async function swarmRun() {
+      overlay?.classList.add('is-hidden');
+      const order = [
+        ['root'], ['plan'],
+        ['a1','a2','a3'],
+        ['a1','a2','a3'],
+        ['merge'],
+      ];
+      // reset
+      $$('#dag-nodes g').forEach(g => g.classList.remove('is-active', 'is-done'));
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+      for (const phase of order) {
+        $$('#dag-nodes g').forEach(g => g.classList.remove('is-active'));
+        phase.forEach(id => {
+          const g = $(`#dag-nodes g[data-id="${id}"]`);
+          if (g) g.classList.add('is-active');
+        });
+        // packets: send from each active node to merge
+        const targets = phase.filter(id => id !== 'merge' && id !== 'plan' && id !== 'root');
+        targets.forEach(id => {
+          const from = nodeById[id], to = nodeById['merge'];
+          if (!from || !to) return;
+          const c = document.createElementNS(NS, 'circle');
+          c.setAttribute('r', '3');
+          c.classList.add('pkt');
+          dagPkts.appendChild(c);
+          const startX = from.x + from.w;
+          const startY = from.y + from.h / 2;
+          const endX   = to.x;
+          const endY   = to.y + to.h / 2;
+          c.setAttribute('cx', startX); c.setAttribute('cy', startY);
+          const steps = 24;
+          for (let i = 1; i <= steps; i++) {
+            const t = i / steps;
+            const x = startX + (endX - startX) * t;
+            const y = startY + (endY - startY) * t;
+            requestAnimationFrame(() => {
+              c.setAttribute('cx', x); c.setAttribute('cy', y);
+            });
+          }
+          setTimeout(() => c.remove(), 600);
+        });
+        await sleep(reduced ? 50 : 700);
+        phase.forEach(id => {
+          const g = $(`#dag-nodes g[data-id="${id}"]`);
+          if (g && id !== 'root') g.classList.remove('is-active');
+          if (g && id !== 'root') g.classList.add('is-done');
+        });
+      }
+      await sleep(reduced ? 50 : 600);
+      setTimeout(() => overlay?.classList.remove('is-hidden'), reduced ? 0 : 1200);
+    }
+
+    runBtn?.addEventListener('click', () => swarmRun());
+    // Auto-run once on first visibility
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            io.disconnect();
+            if (!reduced) swarmRun();
+          }
+        });
+      }, { threshold: 0.3 });
+      io.observe($('#swarm'));
+    }
+  }
+
+  /* ------------------------------------------------------------
+     Benchmark bars
+     ------------------------------------------------------------ */
+  const BENCH_DATA = {
+    '1': [
+      { name: 'Alphacode',  val: 38,  best: true,  self: true  },
+      { name: 'Claude Code',val: 180 },
+      { name: 'Codex CLI',  val: 240 },
+      { name: 'Aider',      val: 310 },
+      { name: 'Cursor',     val: 520 },
+    ],
+    '10': [
+      { name: 'Alphacode',  val: 142, best: true,  self: true  },
+      { name: 'Claude Code',val: 1100 },
+      { name: 'Codex CLI',  val: 1400 },
+      { name: 'Aider',      val: 1850 },
+      { name: 'Cursor',     val: 3200 },
+    ],
+  };
+
+  $$('.bench__bars').forEach(host => {
+    const which = host.dataset.bench || '1';
+    const data = BENCH_DATA[which] || [];
+    const max = Math.max(...data.map(d => d.val));
+    data.forEach(d => {
+      const row = document.createElement('div');
+      row.className = 'bench__row';
+      const label = document.createElement('div');
+      label.className = 'bench__label' + (d.best ? ' is-best' : '') + (d.self ? ' is-self' : '');
+      label.textContent = d.name;
+      const wrap = document.createElement('div');
+      wrap.className = 'bench__bar-wrap';
+      const bar = document.createElement('div');
+      bar.className = 'bench__bar' + (d.best ? ' is-best' : '') + (d.self ? ' is-self' : '');
+      wrap.appendChild(bar);
+      const val = document.createElement('div');
+      val.className = 'bench__val';
+      val.innerHTML = `<b>${d.val}</b> MB`;
+      row.append(label, wrap, val);
+      host.appendChild(row);
+      // animate
+      requestAnimationFrame(() => {
+        const pct = (d.val / max) * 100;
+        bar.style.width = pct + '%';
+      });
+    });
+  });
+
+  /* ------------------------------------------------------------
+     Live repo stats (graceful fallback)
+     ------------------------------------------------------------ */
+  fetch('https://api.github.com/repos/dragonked2/alphacode', { headers: { 'Accept': 'application/vnd.github+json' }})
+    .then(r => r.ok ? r.json() : null)
+    .then(j => {
+      if (!j) return;
+      const stars = j.stargazers_count;
+      const version = (j.name || '') + ' · ' + (j.open_issues_count ?? 0) + ' open issues';
+      const ns = $('#navStars');
+      const hs = $('#heroVersion');
+      const sg = $('#statStars');
+      if (ns && stars != null) ns.textContent = '★ ' + stars;
+      if (sg && stars != null) sg.textContent = String(stars);
+      if (hs) hs.textContent = j.default_branch || hs.textContent;
+    })
+    .catch(() => {});
+
+  /* ------------------------------------------------------------
+     Provider search
+     ------------------------------------------------------------ */
+  const providerInput = $('#providerSearch');
+  const providerGrid  = $('#providerGrid');
+  const providerCount = $('#providerCount');
+  if (providerInput && providerGrid) {
+    const items = $$('.model', providerGrid);
+    const total = items.length;
+    providerCount && (providerCount.textContent = String(total));
+    providerInput.addEventListener('input', () => {
+      const q = providerInput.value.trim().toLowerCase();
+      let visible = 0;
+      items.forEach(el => {
+        const name = el.dataset.name || '';
+        const match = !q || name.includes(q);
+        el.classList.toggle('is-hidden', !match);
+        if (match) visible++;
+      });
+      providerCount && (providerCount.textContent = String(visible));
+    });
+    providerInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { providerInput.value = ''; providerInput.dispatchEvent(new Event('input')); }
+    });
+  }
+
+  /* ------------------------------------------------------------
+     Smooth anchor focus
+     ------------------------------------------------------------ */
+  $$('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length < 2) return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', id);
+      const focusable = el.querySelector('h1,h2,h3,a,button,input,select,textarea');
+      if (focusable) {
+        focusable.setAttribute('tabindex', '-1');
+        focusable.focus({ preventScroll: true });
+      }
+    });
+  });
 })();
