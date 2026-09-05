@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alphacode — the agentic CLI for your terminal</title>
+  <meta name="description" content="A free, open-source AI coding agent that lives in your terminal. Plan, edit, test, ship. MIT licensed. Built in Rust." />
+  <meta name="theme-color" content="#09090B" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__brand" aria-label="Alphacode home">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <rect width="22" height="22" rx="5" fill="white"/>
+          <path d="M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z" fill="#09090B"/>
+        </svg>
+        <span>Alphacode</span>
+      </a>
+      <nav class="nav__links">
+        <a href="#features">Features</a>
+        <a href="#swarm">Swarm</a>
+        <a href="#install">Install</a>
+        <a href="#bench">Benchmarks</a>
+      </nav>
+      <div class="nav__cta">
+        <a class="btn btn--ghost btn--sm" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a class="btn btn--primary btn--sm" href="#install">
+          <span>Install</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <div class="pill">
+            <span class="pill__dot"></span>
+            v1.0.7 · MIT · Built in Rust
+          </div>
+          <h1 class="hero__title">
+            The agentic CLI<br/>
+            for your <span class="hl">terminal.</span>
+          </h1>
+          <p class="hero__sub">
+            Alphacode reads your repo, picks the right model, edits files, runs tests,
+            and ships — with your permission at every risky step.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary btn--lg" href="#install">
+              <span>Install in 60 seconds</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener">
+              <span>Star on GitHub</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9 7.4.6-5.6 4.9 1.7 7.3L12 17.8 5.6 21.7l1.7-7.3L1.7 9.5l7.4-.6L12 2z"/></svg>
+            </a>
+          </div>
+          <div class="hero__trust">
+            <span>Works with</span>
+            <span class="hero__trust-list">Claude, GPT-4o/5, Gemini, Copilot, Cursor, Bedrock, OpenRouter</span>
+          </div>
+        </div>
+
+        <div class="demo">
+          <div class="demo__chrome">
+            <div class="demo__dots"><span></span><span></span><span></span></div>
+            <div class="demo__path">~/projects/horizon</div>
+            <div class="demo__model">sonnet-4.5</div>
+          </div>
+          <pre class="demo__body" id="demoBody"></pre>
+          <div class="demo__bar">
+            <div class="demo__bar-fill" id="demoBar"></div>
+          </div>
+          <div class="demo__foot">
+            <span class="demo__foot-dot"></span>
+            <span id="demoStatus">running</span>
+            <span class="demo__foot-sep"></span>
+            <span id="demoTime">0.0s</span>
+            <span class="demo__foot-sep"></span>
+            <span><b id="demoTools">0</b>/42 tools</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">— what it does</span>
+          <h2 class="section__title">Everything an agent should be.</h2>
+        </header>
+        <div class="features__grid">
+          <article class="feat">
+            <div class="feat__icon">⌘</div>
+            <h3>Plan, edit, verify</h3>
+            <p>Reads your codebase, plans steps, picks the best model, edits files, runs tests, and self-reviews before declaring anything done.</p>
+          </article>
+          <article class="feat">
+            <div class="feat__icon">⌥</div>
+            <h3>Any model, any time</h3>
+            <p>Claude, GPT, Gemini, Copilot, Cursor, Bedrock, OpenRouter, or any OpenAI-compatible endpoint. Switch mid-conversation with <code>Ctrl+T</code>.</p>
+          </article>
+          <article class="feat">
+            <div class="feat__icon">⚡</div>
+            <h3>Swarm mode</h3>
+            <p>Big jobs split into independent pieces, run by multiple agents in parallel, then merged and reviewed automatically.</p>
+          </article>
+          <article class="feat">
+            <div class="feat__icon">✓</div>
+            <h3>Safety built in</h3>
+            <p>Blocks catastrophic commands outright. Confirms before anything risky. Never sends your code anywhere by default.</p>
+          </article>
+          <article class="feat">
+            <div class="feat__icon">⌗</div>
+            <h3>40+ tools</h3>
+            <p>File editing, regex/AST search, shell, browser control, web fetch, memory, scheduling, diagrams, PDFs. No plugin surgery.</p>
+          </article>
+          <article class="feat">
+            <div class="feat__icon">↺</div>
+            <h3>Never lose work</h3>
+            <p>Sessions saved to disk. <code>alphacode --resume</code> reopens exactly where you left off — even after a crash.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SWARM -->
+    <section id="swarm" class="swarm">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">— swarm mode</span>
+          <h2 class="section__title">Big jobs, run in parallel.</h2>
+          <p class="section__lede">A planner agent decomposes your goal into independent DAG nodes. Multiple agents execute them concurrently — each with the right model — then results merge and self-review.</p>
+        </header>
+        <div class="swarm__board">
+          <svg viewBox="0 0 600 280" class="dag" aria-label="Swarm DAG">
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0 0 L10 5 L0 10 z" fill="rgba(255,255,255,.3)"/>
+              </marker>
+            </defs>
+            <g id="dag-edges" stroke="rgba(255,255,255,.14)" stroke-width="1.2" fill="none"></g>
+            <g id="dag-nodes"></g>
+            <g id="dag-pkts"></g>
+          </svg>
+          <div class="swarm__overlay" id="swarmOverlay">
+            <button class="swarm__play" id="swarmRun" aria-label="Run swarm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7z"/></svg>
+            </button>
+            <span class="swarm__play-label">Run swarm: "migrate auth to OAuth 2.1"</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTALL -->
+    <section id="install" class="install">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">— install</span>
+          <h2 class="section__title">One line. Verified, then on PATH.</h2>
+        </header>
+
+        <div class="install__card">
+          <div class="install__tabs" role="tablist">
+            <button class="install__tab is-active" data-platform="mac" role="tab" aria-selected="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 2c0 1.5-.6 3-1.7 4-1 1-2.4 1.7-3.7 1.6 0-1.5.7-3 1.7-4S15 1.9 16.4 2zM20 17.2c-.6 1.4-.9 2-1.7 3.2-1.1 1.6-2.7 3.6-4.6 3.6-1.7 0-2.1-1.1-4.5-1.1-2.4 0-2.9 1.1-4.5 1.1-1.9 0-3.4-1.8-4.5-3.5C-2 15.9-2 9.7 1.4 7.2 2.7 5.8 4.5 4.9 6.3 4.9c1.8 0 3 1.1 4.5 1.1 1.5 0 2.4-1.1 4.5-1.1 1.6 0 3.4.9 4.6 2.4-4.1 2.3-3.4 8.2-.3 10z"/></svg>
+              macOS / Linux
+            </button>
+            <button class="install__tab" data-platform="win" role="tab" aria-selected="false">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5l8-1v8H3zM12 4l9-1v9h-9zM3 13h8v8l-8-1zM12 13h9v9l-9-1z"/></svg>
+              Windows
+            </button>
+            <button class="install__tab" data-platform="src" role="tab" aria-selected="false">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6 2 12l6 6M16 6l6 6-6 6"/></svg>
+              Source
+            </button>
+            <span class="install__indicator" id="installIndicator"></span>
+          </div>
+
+          <div class="install__panels">
+            <div class="install__panel" data-platform="mac">
+              <div class="code">
+                <button class="code__copy" data-copy="curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash">copy</button>
+                <pre><code><span class="code__prompt">$</span> <span class="code__cmd">curl -fsSL</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh <span class="code__cmd">|</span> bash</code></pre>
+              </div>
+            </div>
+            <div class="install__panel" data-platform="win" hidden>
+              <div class="code">
+                <button class="code__copy" data-copy="iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex">copy</button>
+                <pre><code><span class="code__prompt">PS&gt;</span> <span class="code__cmd">iwr -useb</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 <span class="code__cmd">|</span> iex</code></pre>
+              </div>
+            </div>
+            <div class="install__panel" data-platform="src" hidden>
+              <div class="code">
+                <button class="code__copy" data-copy="git clone https://github.com/dragonked2/alphacode.git && cd alphacode && cargo build --release">copy</button>
+                <pre><code><span class="code__cmd">git clone</span> https://github.com/dragonked2/alphacode.git
+<span class="code__cmd">cd</span> alphacode
+<span class="code__cmd">cargo build --release</span></code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="install__verify">
+            <span class="install__verify-label">Then verify:</span>
+            <div class="install__verify-list">
+              <code><span class="install__verify-num">1</span>which alphacode</code>
+              <code><span class="install__verify-num">2</span>alphacode --version</code>
+              <code><span class="install__verify-num">3</span>alphacode doctor</code>
+              <code class="install__verify-go"><span class="install__verify-num">4</span>alphacode</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENCHMARKS -->
+    <section id="bench" class="bench">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">— benchmarks</span>
+          <h2 class="section__title">Lean by design. Measured, not just claimed.</h2>
+          <p class="section__lede">A coding agent can look fine with one session and balloon when you actually use it. RAM snapshots for one and ten concurrent sessions.</p>
+        </header>
+
+        <div class="bench__grid">
+          <div class="bench__card">
+            <div class="bench__caption"><span>RAM · 1 active session</span><span class="bench__unit">MB</span></div>
+            <div class="bench__bars" data-bench="1"></div>
+          </div>
+          <div class="bench__card">
+            <div class="bench__caption"><span>RAM · 10 active sessions</span><span class="bench__unit">MB</span></div>
+            <div class="bench__bars" data-bench="10"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <svg width="16" height="16" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+            <rect width="22" height="22" rx="5" fill="white"/>
+            <path d="M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z" fill="#09090B"/>
+          </svg>
+          <span>Alphacode</span>
+        </div>
+        <div class="footer__links">
+          <a href="https://github.com/dragonked2/alphacode">GitHub</a>
+          <a href="https://github.com/dragonked2/alphacode/releases">Releases</a>
+          <a href="https://github.com/dragonked2/alphacode/blob/main/LICENSE">License</a>
+          <a href="https://github.com/dragonked2/alphacode/blob/main/SECURITY.md">Security</a>
+        </div>
+        <div class="footer__meta">MIT · Rust · 2026</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
