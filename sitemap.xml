@@ -4,8 +4,13 @@
 
   <url>
        <loc>https://alphacli.github.io/</loc>
-       <lastmod>2026-09-05T23:18:58+00:00</lastmod>
+       <lastmod>2026-09-07T00:00:00+00:00</lastmod>
        <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://alphacli.github.io/mcp.html</loc>
+       <lastmod>2026-09-07T00:00:00+00:00</lastmod>
+       <priority>0.9000</priority>
   </url>
   <url>
        <loc>https://alphacli.github.io/docs/</loc>
