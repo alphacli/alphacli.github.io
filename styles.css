@@ -895,6 +895,14 @@ section { padding: 96px 0; }
   text-align: right;
 }
 .bench__val b { color: var(--text); font-weight: 600; }
+.bench__note {
+  margin: 24px 0 0;
+  font-size: 13px;
+  color: var(--text-mute);
+  max-width: 70ch;
+}
+.bench__note a { color: var(--text-dim); text-decoration: underline; text-decoration-color: var(--line-3); text-underline-offset: 2px; }
+.bench__note a:hover { color: var(--accent-hi); }
 
 /* ============================================================
    FAQ
