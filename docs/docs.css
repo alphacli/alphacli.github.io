@@ -196,6 +196,14 @@
 
 .docs__media { text-align: center; margin: 20px 0; }
 .docs__media img { max-width: 100%; height: auto; border-radius: var(--r); }
+.docs__media pre.mermaid,
+.docs__media svg {
+  max-width: 100%;
+  background: var(--bg-1);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  padding: 16px;
+}
 
 .docs hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
 
