@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>MCP Servers &mdash; Alphacode</title>
+  <meta name="description" content="How Alphacode handles MCP servers. Discover, register, authorize, and execute. Burp Suite MCP used as the canonical walkthrough." />
+  <meta name="keywords" content="alphacode, mcp, model context protocol, burp suite, burp mcp, ai agent, security testing, cli, rust" />
+  <meta name="author" content="Alphacli" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#09090B" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#FAFAF9" media="(prefers-color-scheme: light)" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="canonical" href="https://alphacli.github.io/mcp.html" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='5' fill='%2309090B'/%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z' fill='%23FAFAF9'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Alphacode" />
+  <meta property="og:title" content="MCP Servers &mdash; Alphacode" />
+  <meta property="og:description" content="How Alphacode handles MCP servers &mdash; Burp Suite MCP walkthrough included." />
+  <meta property="og:url" content="https://alphacli.github.io/mcp.html" />
+  <meta property="og:image" content="https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MCP Servers &mdash; Alphacode" />
+  <meta name="twitter:description" content="How Alphacode handles MCP servers &mdash; Burp Suite MCP walkthrough included." />
+  <meta name="twitter:image" content="https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mcp.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How Alphacode handles MCP servers",
+    "description": "Architecture, registration, authorization, and tool execution. Burp Suite MCP walkthrough included.",
+    "author": { "@type": "Organization", "name": "Alphacli", "url": "https://github.com/alphacli" },
+    "publisher": { "@type": "Organization", "name": "Alphacli" },
+    "mainEntityOfPage": "https://alphacli.github.io/mcp.html",
+    "keywords": "MCP, Model Context Protocol, Burp Suite, AI agent, security testing"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand" aria-label="Alphacode home">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <rect width="22" height="22" rx="5" fill="currentColor"/>
+          <path d="M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z" fill="var(--bg)"/>
+        </svg>
+        <span>Alphacode</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#models">Models</a>
+        <a href="index.html#install">Install</a>
+        <a href="mcp.html" aria-current="page">MCP</a>
+        <a href="docs/">Docs</a>
+      </nav>
+      <div class="nav__cta">
+        <a class="btn btn--ghost btn--sm" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn btn--primary btn--sm" href="index.html#install">Install</a>
+      </div>
+    </div>
+  </header>
+  <main id="main">
+    <section class="mcp-hero" aria-labelledby="mcp-title">
+      <div class="mcp-hero__bg" aria-hidden="true"></div>
+      <div class="mcp-hero__inner">
+        <div>
+          <div class="pill"><span class="pill__dot"></span><span><b>Documentation</b> &middot; MCP &middot; v1.0.23</span></div>
+          <h1 id="mcp-title">How Alphacode handles<br/><span class="hl">MCP servers.</span></h1>
+          <p class="lede">Model Context Protocol servers become first-class tools inside Alphacode. Discover them, register them, and let any agent call them with the same authorization and execution guarantees as built-ins. Burp Suite is the canonical example.</p>
+          <div class="hero__cta">
+            <a class="btn btn--primary btn--lg" href="#burp-walkthrough">See the Burp walkthrough</a>
+            <a class="btn btn--ghost btn--lg" href="#register">Register a server</a>
+          </div>
+        </div>
+        <div class="diagram" role="img" aria-label="Alphacode connects to an MCP server which talks to a target">
+          <div class="diagram__row">
+            <div class="diagram__node diagram__node--alpha"><strong>Alphacode</strong><span>the agent</span></div>
+            <div class="diagram__arrow" aria-hidden="true">&harr;</div>
+            <div class="diagram__node diagram__node--burp"><strong>MCP server</strong><span>e.g. Burp Suite</span></div>
+            <div class="diagram__arrow" aria-hidden="true">&rarr;</div>
+            <div class="diagram__node diagram__node--target"><strong>Target</strong><span>your app &middot; in-scope</span></div>
+          </div>
+          <div class="diagram__meta">
+            <span>transport: <b>stdio / HTTP</b></span>
+            <span>protocol: <b>JSON-RPC 2.0</b></span>
+            <span>auth: <b>inherited</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="features" aria-labelledby="what-title">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">&mdash; what is MCP?</span>
+          <h2 id="what-title" class="section__title">A standard pipe between agents and tools.</h2>
+          <p class="section__lede">The Model Context Protocol (MCP) is an open standard for connecting AI agents to external tools. Instead of every assistant inventing its own plugin format, MCP defines one JSON-RPC contract any server can speak.</p>
+        </header>
+        <div class="mcp-grid mcp-reveal">
+          <article class="mcp-card">
+            <div class="mcp-card__icon" aria-hidden="true">&#9881;</div>
+            <h3>Tools</h3>
+            <p>Functions the agent can call. Each tool declares a name, a JSON Schema for arguments, and a description. The agent decides when to invoke them based on the user's goal.</p>
+          </article>
+          <article class="mcp-card">
+            <div class="mcp-card__icon" aria-hidden="true">&#128196;</div>
+            <h3>Resources</h3>
+            <p>Structured data the server exposes &mdash; files, documents, proxy history, scope lists. The agent reads them like local files, but they live behind the MCP boundary.</p>
+          </article>
+          <article class="mcp-card">
+            <div class="mcp-card__icon" aria-hidden="true">&#9733;</div>
+            <h3>Prompts</h3>
+            <p>Reusable prompt templates the server offers for common workflows (e.g. "replay this request", "scan for IDORs"). Agents can prefill them or surface them as slash commands.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="features" aria-labelledby="how-title">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">&mdash; how Alphacode handles MCP</span>
+          <h2 id="how-title" class="section__title">Four primitives. One integration.</h2>
+          <p class="section__lede">When you connect an MCP server, Alphacode does four things and then gets out of the way. The agent uses the tools exactly like it uses built-ins.</p>
+        </header>
+        <div class="mcp-grid mcp-reveal">
+          <article class="mcp-card">
+            <div class="mcp-card__icon" aria-hidden="true">&#9650;</div>
+            <h3>1. Spawn</h3>
+            <p>Launches the server process (stdio) or connects to its HTTP endpoint, with the env vars and args you registered. Lifecycle is managed automatically.</p>
+          </article>
+          <article class="mcp-card">
+            <div class="mcp-card__icon" aria-hidden="true">&#9670;</div>
+            <h3>2. Discover</h3>
+            <p>Sends <code>tools/list</code>, <code>resources/list</code>, and <code>prompts/list</code>. Every tool the server exposes is introspected, typed, and registered as a first-class agent tool.</p>
+          </article>
+          <article class="mcp-card">
+            <div class="mcp-card__icon" aria-hidden="true">&#9632;</div>
+            <h3>3. Authorize</h3>
+            <p>Authorization context is inherited from your session. No separate prompt, no extra menu. If the target is in-scope, MCP-mediated calls are in-scope.</p>
+          </article>
+          <article class="mcp-card">
+            <div class="mcp-card__icon" aria-hidden="true">&#9655;</div>
+            <h3>4. Execute</h3>
+            <p>Each tool call is routed over JSON-RPC. Errors flow back as tool errors. Evidence is captured the same way as native tools, with secrets redacted.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="features" aria-labelledby="why-title">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">&mdash; why it matters</span>
+          <h2 id="why-title" class="section__title">Burp is powerful. The agent makes it <em>composable</em>.</h2>
+        </header>
+        <div class="why mcp-reveal">
+          <div class="why__copy">
+            <h3>Tools become part of the workflow.</h3>
+            <p>Burp Suite already does request replay, scope management, and active scanning better than anything you can build in an afternoon. But by itself it doesn't reason. It waits for you to click.</p>
+            <p>When Burp is exposed through MCP, every one of its tools is available to an Alphacode reasoning loop. The agent can fetch <code>proxy_history</code>, mutate a request, replay it via Intruder-style insertion points, parse the response, and decide what to test next &mdash; all in a single chain.</p>
+            <p>The same is true for any MCP server. Filesystem, Git, browser, database, Grafana, Sentry, custom internal tools. Each one becomes a verb the agent can use.</p>
+          </div>
+          <div class="why__list">
+            <div class="why__item"><div class="why__num">1</div><div><strong>No plugin surgery</strong><span>MCP is a stable, versioned protocol. Servers upgrade independently of Alphacode.</span></div></div>
+            <div class="why__item"><div class="why__num">2</div><div><strong>Tool calls look like tool calls</strong><span>The agent treats Burp's <code>send_http1_request</code> the same as <code>bash</code>, <code>browser</code>, or <code>webfetch</code>.</span></div></div>
+            <div class="why__item"><div class="why__num">3</div><div><strong>Evidence captured automatically</strong><span>Request, response, status, headers, and timing are stored alongside native tool calls.</span></div></div>
+            <div class="why__item"><div class="why__num">4</div><div><strong>Failures surface as failures</strong><span>Proxy errors, scan errors, dropped connections &mdash; all come back as tool errors the agent can debug and retry.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="burp-walkthrough" class="features" aria-labelledby="burp-title">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">&mdash; Burp Suite MCP walkthrough</span>
+          <h2 id="burp-title" class="section__title">From zero to first scan in five steps.</h2>
+          <p class="section__lede">Burp Suite exposes an MCP server through its extensions API. The bridge speaks JSON-RPC over stdio, so registration is one config block. After that, every Burp capability is a tool call.</p>
+        </header>
+        <div class="steps mcp-reveal">
+          <article class="step"><div class="step__num">1</div><h4>Run Burp</h4><p>Start Burp Suite Pro or Community. Install the MCP extension from the BApp Store.</p></article>
+          <article class="step"><div class="step__num">2</div><h4>Register the server</h4><p>Add an entry to <code>mcp_config.json</code> under your project folder.</p><code>mcp connect burp -- java -jar burp-mcp-bridge.jar</code></article>
+          <article class="step"><div class="step__num">3</div><h4>Tools appear</h4><p>Alphacode introspects the server. Burp's tools show up alongside <code>bash</code>, <code>browser</code>, and friends.</p></article>
+          <article class="step"><div class="step__num">4</div><h4>Describe the goal</h4><p>Tell the agent what to find. It picks the right Burp tool, mutates requests, parses responses, and reasons through results.</p></article>
+        </div>
+        <div class="flow mcp-reveal" aria-label="How a typical Burp MCP call flows">
+          <div class="flow__row">
+            <div class="flow__col"><strong>You say</strong><code>"probe staging.example.com for IDORs on the orders endpoint"</code></div>
+            <div class="flow__arrow" aria-hidden="true">&rarr;</div>
+            <div class="flow__col"><strong>Agent plans</strong><code>set_scope then loop send_http1_request with mutated ids</code></div>
+          </div>
+          <div class="flow__row">
+            <div class="flow__col"><strong>Burp runs</strong><code>Replay through proxy, capture status/body/headers, flag anomalies</code></div>
+            <div class="flow__arrow" aria-hidden="true">&rarr;</div>
+            <div class="flow__col"><strong>Agent decides</strong><code>401 to 403 escalation; chain create_scan; verify with auth-bypass probe</code></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="register" class="features" aria-labelledby="reg-title">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">&mdash; registering a server</span>
+          <h2 id="reg-title" class="section__title">One file. Three transports.</h2>
+          <p class="section__lede">MCP servers are declared in <code>mcp_config.json</code>. Alphacode loads it from the project folder, then from <code>~/.alphacode</code>, merging the two.</p>
+        </header>
+        <div class="code mcp-reveal">
+          <pre><code><span class="code__prompt">$</span> <span class="code__cmd">cat</span> mcp_config.json
+<span class="code__dim">{</span>
+  <span class="code__cmd">"mcpServers"</span>: <span class="code__dim">{</span>
+    <span class="code__cmd">"burp"</span>: <span class="code__dim">{</span>
+      <span class="code__cmd">"command"</span>: <span class="code__cmd">"java"</span>,
+      <span class="code__cmd">"args"</span>: <span class="code__dim">[</span><span class="code__cmd">"-jar"</span>, <span class="code__cmd">"/opt/burp/burp-mcp-bridge.jar"</span><span class="code__dim">]</span>,
+      <span class="code__cmd">"env"</span>: <span class="code__dim">{</span> <span class="code__cmd">"BURP_API_KEY"</span>: <span class="code__cmd">"***"</span> <span class="code__dim">}</span>
+    <span class="code__dim">}</span>,
+    <span class="code__cmd">"filesystem"</span>: <span class="code__dim">{</span>
+      <span class="code__cmd">"command"</span>: <span class="code__cmd">"npx"</span>,
+      <span class="code__cmd">"args"</span>: <span class="code__dim">[</span><span class="code__cmd">"-y"</span>, <span class="code__cmd">"@modelcontextprotocol/server-filesystem"</span>, <span class="code__cmd">"/srv/repos"</span><span class="code__dim">]</span>
+    <span class="code__dim">}</span>,
+    <span class="code__cmd">"remote"</span>: <span class="code__dim">{</span>
+      <span class="code__cmd">"url"</span>: <span class="code__cmd">"http://localhost:8765/mcp"</span>
+    <span class="code__dim">}</span>
+  <span class="code__dim">}</span>
+<span class="code__dim">}</span></code></pre>
+        </div>
+      </div>
+    </section>
+    <section class="features" aria-labelledby="tools-title">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">&mdash; common Burp MCP tools</span>
+          <h2 id="tools-title" class="section__title">What Burp exposes.</h2>
+          <p class="section__lede">Tools you'll see after <code>mcp connect burp</code>. The agent picks them just like built-ins.</p>
+        </header>
+        <table class="tools-table mcp-reveal">
+          <thead><tr><th>Tool</th><th>What it does</th><th>Typical use</th></tr></thead>
+          <tbody>
+            <tr><td><code>send_http1_request</code></td><td>Replay or forge a single HTTP/1 request through Burp's proxy.</td><td>Mutating headers, body, cookies, auth tokens.</td></tr>
+            <tr><td><code>send_http2_request</code></td><td>Same for HTTP/2.</td><td>Testing HPACK quirks and h2c downgrades.</td></tr>
+            <tr><td><code>get_proxy_history</code></td><td>Pull captured traffic from the proxy log.</td><td>Post-session analysis, finding missed endpoints.</td></tr>
+            <tr><td><code>define_insertion_point</code></td><td>Mark positions in a request for Intruder-style payloads.</td><td>Fuzzing a header value or JSON field.</td></tr>
+            <tr><td><code>configure_payload_processing</code></td><td>Encode, prefix, or transform payloads mid-attack.</td><td>WAF bypass, case folding, double URL encoding.</td></tr>
+            <tr><td><code>create_scan</code></td><td>Kick off an active vulnerability scan.</td><td>Broad coverage after manual recon.</td></tr>
+            <tr><td><code>get_scan_status</code></td><td>Poll scan progress and findings.</td><td>Wait for completion, then triage results.</td></tr>
+            <tr><td><code>set_scope</code></td><td>Push URL scope into Burp.</td><td>Tell Burp which targets are in-bounds for the audit.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="features" aria-labelledby="faq-title">
+      <div class="container">
+        <header class="section__head">
+          <span class="section__eyebrow">&mdash; frequently asked</span>
+          <h2 id="faq-title" class="section__title">Questions, answered.</h2>
+        </header>
+        <div class="faq-list mcp-reveal">
+          <details open>
+            <summary>Does Alphacode add a second authorization layer for MCP tools?</summary>
+            <div><p>No. MCP-mediated calls inherit your session's authorization. If the target is in-scope per your testing context, the agent can call any tool that operates on it.</p></div>
+          </details>
+          <details>
+            <summary>What if Burp crashes mid-session?</summary>
+            <div><p>The agent sees the tool error, retries with backoff, and surfaces the failure in the session log. You can <code>mcp reload</code> to restart the server without losing the session.</p></div>
+          </details>
+          <details>
+            <summary>Can I run multiple MCP servers at once?</summary>
+            <div><p>Yes. Register as many as you want in <code>mcp_config.json</code>. Their tools merge into one namespace, with names prefixed by the server (e.g. <code>burp.send_http1_request</code>) when collisions occur.</p></div>
+          </details>
+          <details>
+            <summary>Do MCP servers see my secrets?</summary>
+            <div><p>Only the ones you pass via <code>env</code> or that appear in tool arguments. The agent redacts known secret patterns (bearer tokens, API keys) in logs automatically.</p></div>
+          </details>
+          <details>
+            <summary>Are MCP tool calls recorded for evidence?</summary>
+            <div><p>Yes. Every call captures request, response, status, headers, and timing &mdash; same as built-in tools. Evidence is written to the session log under your working directory.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      <div class="mcp-cta mcp-reveal">
+        <h2>Connect a server. Then tell the agent what to find.</h2>
+        <p>One config block turns Burp &mdash; or any MCP server &mdash; into tools the agent can compose. No new plugin format, no second authorization flow.</p>
+        <div class="mcp-cta__row">
+          <a class="btn btn--primary btn--lg" href="index.html#install">Install Alphacode</a>
+          <a class="btn btn--ghost btn--lg" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">Read the source</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="mcp.js" defer></script>
+</body>
+</html>
