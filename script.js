@@ -260,14 +260,14 @@
         ['merge'],
       ];
       // reset
-      $$('#dag-nodes g').forEach(g => g.classList.remove('is-active', 'is-done'));
+      $$('#dag-nodes g').forEach(g => g.classList.remove('dag__node--active', 'dag__node--merged'));
       const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
       for (const phase of order) {
-        $$('#dag-nodes g').forEach(g => g.classList.remove('is-active'));
+        $$('#dag-nodes g').forEach(g => g.classList.remove('dag__node--active'));
         phase.forEach(id => {
           const g = $(`#dag-nodes g[data-id="${id}"]`);
-          if (g) g.classList.add('is-active');
+          if (g) g.classList.add('dag__node--active');
         });
         // packets: send from each active node to merge
         const targets = phase.filter(id => id !== 'merge' && id !== 'plan' && id !== 'root');
@@ -297,8 +297,8 @@
         await sleep(reduced ? 50 : 700);
         phase.forEach(id => {
           const g = $(`#dag-nodes g[data-id="${id}"]`);
-          if (g && id !== 'root') g.classList.remove('is-active');
-          if (g && id !== 'root') g.classList.add('is-done');
+          if (g && id !== 'root') g.classList.remove('dag__node--active');
+          if (g && id !== 'root') g.classList.add('dag__node--merged');
         });
       }
       await sleep(reduced ? 50 : 600);
@@ -322,21 +322,30 @@
 
   /* ------------------------------------------------------------
      Benchmark bars
+     Figures sourced from the measured snapshots in /docs/ (see
+     "Memory usage — historical snapshots" for methodology and the
+     legacy-snapshot caveat: these are directional, not live numbers).
      ------------------------------------------------------------ */
   const BENCH_DATA = {
     '1': [
-      { name: 'Alphacode',  val: 38,  best: true,  self: true  },
-      { name: 'Claude Code',val: 180 },
-      { name: 'Codex CLI',  val: 240 },
-      { name: 'Aider',      val: 310 },
-      { name: 'Cursor',     val: 520 },
+      { name: 'Alphacode',         val: 27.8,  best: true, self: true },
+      { name: 'Codex CLI',         val: 140.0 },
+      { name: 'pi',                val: 144.4 },
+      { name: 'Cursor Agent',      val: 214.9 },
+      { name: 'Antigravity CLI',   val: 243.7 },
+      { name: 'OpenCode',          val: 371.5 },
+      { name: 'GitHub Copilot CLI',val: 333.3 },
+      { name: 'Claude Code',       val: 386.6 },
     ],
     '10': [
-      { name: 'Alphacode',  val: 142, best: true,  self: true  },
-      { name: 'Claude Code',val: 1100 },
-      { name: 'Codex CLI',  val: 1400 },
-      { name: 'Aider',      val: 1850 },
-      { name: 'Cursor',     val: 3200 },
+      { name: 'Alphacode',         val: 117.0, best: true, self: true },
+      { name: 'Codex CLI',         val: 334.8 },
+      { name: 'pi',                val: 833.0 },
+      { name: 'Antigravity CLI',   val: 1021.2 },
+      { name: 'Cursor Agent',      val: 1632.4 },
+      { name: 'GitHub Copilot CLI',val: 1756.5 },
+      { name: 'Claude Code',       val: 2300.6 },
+      { name: 'OpenCode',          val: 3237.2 },
     ],
   };
 
@@ -370,19 +379,27 @@
 
   /* ------------------------------------------------------------
      Live repo stats (graceful fallback)
+     Stars/issues come from the repo endpoint; version comes from
+     the latest release tag, not the default branch name.
      ------------------------------------------------------------ */
   fetch('https://api.github.com/repos/dragonked2/alphacode', { headers: { 'Accept': 'application/vnd.github+json' }})
     .then(r => r.ok ? r.json() : null)
     .then(j => {
       if (!j) return;
       const stars = j.stargazers_count;
-      const version = (j.name || '') + ' · ' + (j.open_issues_count ?? 0) + ' open issues';
       const ns = $('#navStars');
-      const hs = $('#heroVersion');
       const sg = $('#statStars');
       if (ns && stars != null) ns.textContent = '★ ' + stars;
       if (sg && stars != null) sg.textContent = String(stars);
-      if (hs) hs.textContent = j.default_branch || hs.textContent;
+    })
+    .catch(() => {});
+
+  fetch('https://api.github.com/repos/dragonked2/alphacode/releases/latest', { headers: { 'Accept': 'application/vnd.github+json' }})
+    .then(r => r.ok ? r.json() : null)
+    .then(j => {
+      if (!j || !j.tag_name) return;
+      const normalized = /^v/i.test(j.tag_name) ? j.tag_name : ('v' + j.tag_name);
+      $$('.js-version').forEach(el => { el.textContent = normalized; });
     })
     .catch(() => {});
 
