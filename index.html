@@ -110,7 +110,7 @@
         <div class="hero__copy">
           <div class="pill">
             <span class="pill__dot"></span>
-            <span><b id="heroVersion">v1.0.17</b> · MIT · Built in Rust</span>
+            <span><b id="heroVersion" class="js-version">v1.0.24</b> · MIT · Built in Rust</span>
           </div>
 
           <h1 id="hero-title" class="hero__title">
@@ -414,7 +414,7 @@
         <header class="section__head">
           <span class="section__eyebrow">— benchmarks</span>
           <h2 class="section__title">Lean by design. Measured, not just claimed.</h2>
-          <p class="section__lede">A coding agent can look fine with one session and balloon when you actually use it. RAM snapshots for one and ten concurrent sessions.</p>
+          <p class="section__lede">A coding agent can look fine with one session and balloon when you actually use it. RAM snapshots for one and ten concurrent sessions, measured against Codex CLI, Claude Code, Cursor Agent, GitHub Copilot CLI, Antigravity CLI, OpenCode, and pi.</p>
         </header>
 
         <div class="bench__grid">
@@ -427,6 +427,8 @@
             <div class="bench__bars" data-bench="10" aria-label="Memory use with ten sessions"></div>
           </div>
         </div>
+
+        <p class="bench__note">Legacy benchmark snapshots, kept for historical comparison — Alphacode has improved further since these were measured. See <a href="docs/#memory-usage--historical-snapshots">full methodology and current numbers</a> in the docs.</p>
       </div>
     </section>
 
@@ -460,7 +462,7 @@
         </details>
         <details class="faq__item">
           <summary>How is this different from Claude Code or Codex CLI?</summary>
-          <p>It's MIT, model-agnostic, swarm-capable, and Rust-fast. Pick the comparison that matters to you.</p>
+          <p>It's MIT, model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and other terminal agents in our own measurements. See <a href="#bench">benchmarks</a> above, or the full methodology in the <a href="docs/#memory-usage--historical-snapshots">docs</a>.</p>
         </details>
       </div>
     </section>
