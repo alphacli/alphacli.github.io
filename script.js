@@ -211,6 +211,22 @@
       demoFootDot && demoFootDot.classList.add('is-done');
     }
 
+    function renderStatic() {
+      demoBody.innerHTML = '';
+      steps.forEach(s => {
+        const line = document.createElement('div');
+        line.innerHTML = `<span class="l-prompt">$</span> <span class="l-violet l-bold">${s.p}</span>  ${s.text}`;
+        demoBody.appendChild(line);
+      });
+      setModel(steps[steps.length - 1].m);
+      setTools(steps.length);
+      demoBar.style.width = '100%';
+      demoBarW && demoBarW.setAttribute('aria-valuenow', '100');
+      setStatus('done');
+      setTime(6.4);
+      demoFootDot && demoFootDot.classList.add('is-done');
+    }
+
     function loop() {
       run().then(() => sleep(6000)).then(() => {
         if (!cancelled) loop();
@@ -218,7 +234,11 @@
     }
 
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduced) loop();
+    if (reduced) {
+      renderStatic();
+    } else {
+      loop();
+    }
 
     // Allow re-running by clicking on the terminal
     demoBody.parentElement.addEventListener('click', () => {
@@ -348,17 +368,30 @@
         });
       }
       await sleep(reduced ? 50 : 600);
-      setTimeout(() => overlay?.classList.remove('is-hidden'), reduced ? 0 : 1200);
+      if (!reduced) {
+        setTimeout(() => overlay?.classList.remove('is-hidden'), 1200);
+      }
     }
 
-    runBtn?.addEventListener('click', () => swarmRun());
-    // Auto-run once on first visibility
+    runBtn?.addEventListener('click', () => {
+      overlay?.classList.add('is-hidden');
+      swarmRun().then(() => {
+        // A manual replay click always restores the "run again" overlay,
+        // even under reduced motion, since the user asked for it explicitly.
+        if (reduced) overlay?.classList.remove('is-hidden');
+      });
+    });
+    // Auto-run once on first visibility (swarmRun already adapts its pacing
+    // via the `reduced` flag above, so it's safe to always call). Under
+    // reduced motion this settles the diagram into its final merged state
+    // without animation and leaves the overlay hidden — there is nothing
+    // to "replay" since the transition itself was skipped.
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           if (e.isIntersecting) {
             io.disconnect();
-            if (!reduced) swarmRun();
+            swarmRun();
           }
         });
       }, { threshold: 0.3 });

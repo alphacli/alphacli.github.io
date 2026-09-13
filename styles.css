@@ -636,6 +636,8 @@ section { padding: 96px 0; }
   min-height: 360px;
 }
 .dag { width: 100%; height: auto; display: block; }
+#dag-edges path { stroke: var(--line-3); }
+.dag__arrowhead { fill: var(--text-mute); }
 .dag__node rect {
   fill: var(--bg-2);
   stroke: var(--line-2);
