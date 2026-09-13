@@ -15,6 +15,8 @@
   <link rel="canonical" href="https://alphacli.github.io/" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='5' fill='%2309090B'/%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z' fill='%23FAFAF9'/%3E%3C/svg%3E" />
+  <link rel="mask-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z'/%3E%3C/svg%3E" color="#A78BFA" />
+  <link rel="manifest" href="site.webmanifest" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -57,6 +59,54 @@
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
   </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Alphacode really free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. MIT-licensed. You pay for the model API you point it at (or run a local one). No telemetry, no accounts, no upsells." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it send my code anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only to the model provider you configure. The CLI is local. Nothing leaves your machine unless a model call needs context." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which models work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any OpenAI-compatible HTTP endpoint. Tested with Claude (Anthropic), GPT-4o/5 (OpenAI), Gemini, Copilot, Cursor, Bedrock, and OpenRouter." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does swarm mode work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A planner turns your goal into a task DAG. Workers — each with their own model — execute independent nodes in parallel. A reviewer node merges and verifies the diff." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use it on a remote box with no GUI?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pure terminal. Pipe-friendly. Plays well with tmux, screen, and SSH." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is this different from Claude Code or Codex CLI?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's MIT, model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and other terminal agents in our own measurements." }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Alphacode",
+    "url": "https://alphacli.github.io/"
+  }
+  </script>
 </head>
 <body>
 
@@ -72,7 +122,7 @@
         <span>Alphacode</span>
       </a>
 
-      <nav class="nav__links" aria-label="Primary">
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
         <a href="#features">Features</a>
         <a href="#swarm">Swarm</a>
         <a href="#models">Models</a>
@@ -93,6 +143,10 @@
           <span>Install</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
+          <svg class="icon-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
       </div>
     </div>
   </header>

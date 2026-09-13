@@ -30,13 +30,18 @@
     }
     h1 { font-size: 56px; margin: 0 0 8px; letter-spacing: -.04em; font-weight: 600; }
     p  { font-size: 15px; color: #A1A1AA; margin: 0 0 24px; line-height: 1.5; }
+    .links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
     a {
       display: inline-block; padding: 9px 14px;
       border: 1px solid #FAFAFA; color: #09090B; background: #FAFAFA;
       border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none;
     }
+    a.secondary {
+      background: transparent; color: #FAFAFA; border-color: rgba(255,255,255,.2);
+    }
     @media (prefers-color-scheme: light) {
       a { background: #09090B; color: #FAFAFA; border-color: #09090B; }
+      a.secondary { background: transparent; color: #09090B; border-color: rgba(0,0,0,.15); }
     }
   </style>
 </head>
@@ -44,8 +49,12 @@
   <div class="box">
     <div class="code">404 / route_not_found</div>
     <h1>Not found.</h1>
-    <p>Whatever you were looking for isn't here. The site is a single page — try the home page.</p>
-    <a href="/">Back to home</a>
+    <p>Whatever you were looking for isn't here. Try the home page, the docs, or the MCP guide.</p>
+    <div class="links">
+      <a href="/">Home</a>
+      <a class="secondary" href="/docs/">Docs</a>
+      <a class="secondary" href="/mcp.html">MCP</a>
+    </div>
   </div>
 </body>
 </html>

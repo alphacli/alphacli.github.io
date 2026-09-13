@@ -13,6 +13,8 @@
   <meta name="color-scheme" content="dark light" />
   <link rel="canonical" href="https://alphacli.github.io/mcp.html" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='5' fill='%2309090B'/%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z' fill='%23FAFAF9'/%3E%3C/svg%3E" />
+  <link rel="mask-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z'/%3E%3C/svg%3E" color="#A78BFA" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" />
@@ -22,6 +24,9 @@
   <meta property="og:description" content="How Alphacode handles MCP servers &mdash; Burp Suite MCP walkthrough included." />
   <meta property="og:url" content="https://alphacli.github.io/mcp.html" />
   <meta property="og:image" content="https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="640" />
+  <meta property="og:image:alt" content="Alphacode — MCP servers documentation" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="MCP Servers &mdash; Alphacode" />
@@ -41,6 +46,51 @@
     "keywords": "MCP, Model Context Protocol, Burp Suite, AI agent, security testing"
   }
   </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Alphacode", "item": "https://alphacli.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "MCP Servers", "item": "https://alphacli.github.io/mcp.html" }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does Alphacode add a second authorization layer for MCP tools?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. MCP-mediated calls inherit your session's authorization. If the target is in-scope per your testing context, the agent can call any tool that operates on it." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if Burp crashes mid-session?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The agent sees the tool error, retries with backoff, and surfaces the failure in the session log. You can mcp reload to restart the server without losing the session." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I run multiple MCP servers at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Register as many as you want in mcp_config.json. Their tools merge into one namespace, with names prefixed by the server when collisions occur." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do MCP servers see my secrets?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only the ones you pass via env or that appear in tool arguments. The agent redacts known secret patterns in logs automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are MCP tool calls recorded for evidence?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every call captures request, response, status, headers, and timing — same as built-in tools. Evidence is written to the session log under your working directory." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -53,8 +103,9 @@
         </svg>
         <span>Alphacode</span>
       </a>
-      <nav class="nav__links" aria-label="Primary">
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
         <a href="index.html#features">Features</a>
+        <a href="index.html#swarm">Swarm</a>
         <a href="index.html#models">Models</a>
         <a href="index.html#install">Install</a>
         <a href="mcp.html" aria-current="page">MCP</a>
@@ -63,6 +114,10 @@
       <div class="nav__cta">
         <a class="btn btn--ghost btn--sm" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="btn btn--primary btn--sm" href="index.html#install">Install</a>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
+          <svg class="icon-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
       </div>
     </div>
   </header>
@@ -292,6 +347,28 @@
       </div>
     </div>
   </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <svg width="16" height="16" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <rect width="22" height="22" rx="5" fill="currentColor"/>
+          <path d="M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z" fill="var(--bg)"/>
+        </svg>
+        <span>Alphacode</span>
+        <span class="footer__by">by <a href="https://github.com/alphacli">Alphacli</a></span>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="https://github.com/dragonked2/alphacode">GitHub</a>
+        <a href="https://github.com/dragonked2/alphacode/releases">Releases</a>
+        <a href="https://github.com/dragonked2/alphacode/blob/main/LICENSE">License</a>
+        <a href=".well-known/security.txt">security.txt</a>
+      </nav>
+      <div class="footer__meta">MIT · Rust · 2026</div>
+    </div>
+  </footer>
+
   <script src="mcp.js" defer></script>
 </body>
 </html>
