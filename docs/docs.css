@@ -145,9 +145,11 @@
   line-height: 1.65;
   color: var(--text);
   box-shadow: var(--shadow-sm);
+  tab-size: 2;
 }
 .docs__code code { background: transparent; border: 0; padding: 0; color: inherit; font-size: inherit; }
 
+/* Keep wide reference tables readable without forcing the whole page to scroll. */
 .docs__table {
   display: block;
   width: 100%;
@@ -188,7 +190,6 @@
 
 .docs__list { padding-left: 24px; margin: 12px 0 20px; }
 .docs__list li { margin: 4px 0; color: var(--text-2); }
-
 .docs__quote {
   margin: 20px 0;
   padding: 14px 18px;
@@ -199,7 +200,6 @@
   font-style: italic;
 }
 .docs__quote p { margin: 0; }
-
 .docs__media { text-align: center; margin: 20px 0; }
 .docs__media img { max-width: 100%; height: auto; border-radius: var(--r); }
 .docs__media pre.mermaid,
@@ -210,15 +210,46 @@
   border-radius: var(--r-lg);
   padding: 16px;
 }
-
 .docs hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
-
 .docs__footer {
   margin-top: 48px;
   padding-top: 24px;
   border-top: 1px solid var(--line);
   color: var(--text-dim);
   font-size: 14px;
+}
+
+/* Generated README HTML contains details blocks wrapped in paragraphs. Reset
+   those wrappers so disclosure controls remain valid and visually consistent. */
+.docs__body > p:has(> details),
+.docs__body > p:has(> table),
+.docs__body > p:has(> div) { display: contents; }
+.docs__body details {
+  margin: 16px 0 20px;
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--bg-1);
+  overflow: hidden;
+}
+.docs__body details > summary {
+  cursor: pointer;
+  padding: 13px 16px;
+  color: var(--text);
+  font-weight: 600;
+  list-style-position: inside;
+}
+.docs__body details > summary:hover { background: var(--bg-2); }
+.docs__body details > :not(summary) { margin-left: 16px; margin-right: 16px; }
+.docs__body details > :last-child { margin-bottom: 16px; }
+.docs__body blockquote p { color: inherit; }
+
+@media (max-width: 640px) {
+  .docs__body { font-size: 15px; }
+  .docs__h2 { font-size: 23px; margin-top: 40px; }
+  .docs__code { padding: 13px 14px; font-size: 12px; }
+  .docs__table { font-size: 13px; }
+  .docs__table th, .docs__table td { padding: 8px 10px; }
 }
 
 @media (prefers-color-scheme: light) {
