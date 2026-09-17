@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Alphacode — the agentic CLI for your terminal</title>
 
-  <meta name="description" content="Alphacode is a free, open-source AI coding agent that lives in your terminal. 50+ model providers. Plan, edit, test, ship — with permission at every risky step. MIT licensed, built in Rust." />
-  <meta name="keywords" content="alphacode, cli, ai coding agent, terminal, rust, llm, anthropic, claude, openai, gpt, gemini, deepseek, mistral, groq, xai, ollama, lmstudio, openrouter, swarm, coding assistant, developer tools" />
+  <meta name="description" content="Alphacode is a free, open-source AI coding agent that lives in your terminal. 50+ model providers. Plan, edit, test, ship — with permission at every risky step." />
+  <meta name="keywords" content="alphacode, cli, ai coding agent, terminal, rust, llm, anthropic, claude, openai, gpt, gemini, deepseek, mistral, groq, xai, ollama, lmstudio, openrouter, swarm, coding agent" />
   <meta name="author" content="Alphacli" />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#09090B" media="(prefers-color-scheme: dark)" />
@@ -14,8 +14,8 @@
   <meta name="color-scheme" content="dark light" />
   <link rel="canonical" href="https://alphacli.github.io/" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='5' fill='%2309090B'/%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z' fill='%23FAFAF9'/%3E%3C/svg%3E" />
-  <link rel="mask-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z'/%3E%3C/svg%3E" color="#A78BFA" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='5' fill='%2309090B'/%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z' fill='white'/%3E%3C/svg%3E" />
+  <link rel="mask-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z' fill='black'/%3E%3C/svg%3E" />
   <link rel="manifest" href="site.webmanifest" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,7 +54,7 @@
     "description": "An agentic AI coding CLI for the terminal. Plan, edit, test, ship.",
     "url": "https://alphacli.github.io/",
     "downloadUrl": "https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh",
-    "softwareVersion": "1.0.17",
+    "softwareVersion": "1.0.52",
     "softwareRequirements": "Rust 1.74+ (build from source); curl/wget or PowerShell for the installer",
     "license": "https://github.com/dragonked2/alphacode/blob/main/LICENSE",
     "author": { "@type": "Organization", "name": "Alphacli", "url": "https://github.com/alphacli" },
@@ -95,7 +95,7 @@
       {
         "@type": "Question",
         "name": "How is this different from Claude Code or Codex CLI?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It's MIT, model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and other terminal agents in our own measurements." }
+        "acceptedAnswer": { "@type": "Answer", "text": "It's MIT, model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and similar terminal agents." }
       }
     ]
   }
@@ -137,13 +137,13 @@
 
       <div class="nav__cta">
         <a class="btn btn--ghost btn--sm" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer" aria-label="View Alphacode on GitHub">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.9 1.1.1-.9.5-1.4.8-1.7-2.7-.3-5.6-1.3-5.6-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.3-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.9 5.6-5.6 5.9.5.4.8 1.2.8 2.5v3.7c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg>
           <span>GitHub</span>
-          <span class="nav__stars" id="navStars" aria-hidden="true">★ 21</span>
+          <span class="nav__stars" id="navStars" aria-hidden="true">★ 75</span>
         </a>
         <a class="btn btn--primary btn--sm" href="#install">
           <span>Install</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
         <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
           <svg class="icon-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -166,7 +166,7 @@
         <div class="hero__copy">
           <div class="pill">
             <span class="pill__dot"></span>
-            <span><b id="heroVersion" class="js-version">v1.0.24</b> · MIT · Built in Rust</span>
+            <span><b id="heroVersion" class="js-version">v1.0.52</b> · MIT · Built in Rust</span>
           </div>
 
           <h1 id="hero-title" class="hero__title">
@@ -182,7 +182,7 @@
           <div class="hero__cta">
             <a class="btn btn--primary btn--lg" href="#install">
               <span>Install in 60 seconds</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
             <a class="btn btn--ghost btn--lg" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9 7.4.6-5.6 4.9 1.7 7.3L12 17.8 5.6 21.7l1.7-7.3L1.7 9.5l7.4-.6L12 2z"/></svg>
@@ -233,7 +233,7 @@
     <section class="stats" aria-label="Project metrics">
       <div class="container stats__inner">
         <div class="stat">
-          <div class="stat__num" id="statStars">21</div>
+          <div class="stat__num" id="statStars">75</div>
           <div class="stat__lbl">GitHub stars</div>
         </div>
         <div class="stat">
@@ -303,7 +303,7 @@
         <header class="section__head">
           <span class="section__eyebrow">— swarm mode</span>
           <h2 class="section__title">Big jobs, run in parallel.</h2>
-          <p class="section__lede">A planner agent decomposes your goal into independent DAG nodes. Multiple agents execute them concurrently — each with the right model — then results merge and self-review.</p>
+          <p class="section__lede">A planner agent decomposes your goal into independent DAG nodes. Multiple agents execute them concurrently — each with the right model — then results merge and review automatically.</p>
         </header>
         <div class="swarm__board">
           <svg viewBox="0 0 600 280" class="dag" role="img" aria-label="Swarm DAG animation">
@@ -414,7 +414,7 @@
         <div class="install__card">
           <div class="install__tabs" role="tablist" aria-label="Install method">
             <button class="install__tab is-active" data-platform="mac" role="tab" aria-selected="true" tabindex="0">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 2c0 1.5-.6 3-1.7 4-1 1-2.4 1.7-3.7 1.6 0-1.5.7-3 1.7-4S15 1.9 16.4 2zM20 17.2c-.6 1.4-.9 2-1.7 3.2-1.1 1.6-2.7 3.6-4.6 3.6-1.7 0-2.1-1.1-4.5-1.1-2.4 0-2.9 1.1-4.5 1.1-1.9 0-3.4-1.8-4.5-3.5C-2 15.9-2 9.7 1.4 7.2 2.7 5.8 4.5 4.9 6.3 4.9c1.8 0 3 1.1 4.5 1.1 1.5 0 2.4-1.1 4.5-1.1 1.6 0 3.4.9 4.6 2.4-4.1 2.3-3.4 8.2-.3 10z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 2c0 1.5-.6 3-1.7 4-1 1-2.4 1.7-3.7 1.6 0-1.5.7-3 1.7-4S15 1.9 16.4 2zM20 17.2c-1.1 2.6-3.2 4.4-5.1 4.5-1.1.1-1.8-.4-2.7-.4-.9 0-1.9.4-2.8.4C7.1 21.7 5 19.8 5 17c0-2.2 1.4-3.2 3-4.1.8-.5 1.6-.9 2.4-.9 1 0 1.9.6 2.8.6.8 0 1.9-.7 3-.6.6 0 2.3.3 3.5 1.8-.1.1-2.1 1.2-2.1 3.5z"/></svg>
               macOS / Linux
             </button>
             <button class="install__tab" data-platform="win" role="tab" aria-selected="false" tabindex="-1">
@@ -431,19 +431,19 @@
           <div class="install__panels">
             <div class="install__panel" data-platform="mac" role="tabpanel">
               <div class="code">
-                <button class="code__copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash" aria-label="Copy install command">copy</button>
-                <pre><code><span class="code__prompt">$</span> <span class="code__cmd">curl -fsSL</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh <span class="code__cmd">|</span> bash</code></pre>
+                <button class="code__copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash" aria-label="Copy install command">Copy</button>
+                <pre><code><span class="code__prompt">$</span> <span class="code__cmd">curl -fsSL</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh <span class="code__pipe">|</span> <span class="code__cmd">bash</span></code></pre>
               </div>
             </div>
             <div class="install__panel" data-platform="win" role="tabpanel" hidden>
               <div class="code">
-                <button class="code__copy" type="button" data-copy="iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex" aria-label="Copy install command">copy</button>
-                <pre><code><span class="code__prompt">PS&gt;</span> <span class="code__cmd">iwr -useb</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 <span class="code__cmd">|</span> iex</code></pre>
+                <button class="code__copy" type="button" data-copy="iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex" aria-label="Copy install command">Copy</button>
+                <pre><code><span class="code__prompt">PS&gt;</span> <span class="code__cmd">iwr -useb</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 <span class="code__pipe">|</span> <span class="code__cmd">iex</span></code></pre>
               </div>
             </div>
             <div class="install__panel" data-platform="src" role="tabpanel" hidden>
               <div class="code">
-                <button class="code__copy" type="button" data-copy="git clone https://github.com/dragonked2/alphacode.git && cd alphacode && cargo build --release" aria-label="Copy install command">copy</button>
+                <button class="code__copy" type="button" data-copy="git clone https://github.com/dragonked2/alphacode.git && cd alphacode && cargo build --release" aria-label="Copy install command">Copy</button>
                 <pre><code><span class="code__cmd">git clone</span> https://github.com/dragonked2/alphacode.git
 <span class="code__cmd">cd</span> alphacode
 <span class="code__cmd">cargo build --release</span></code></pre>
@@ -470,7 +470,7 @@
         <header class="section__head">
           <span class="section__eyebrow">— benchmarks</span>
           <h2 class="section__title">Lean by design. Measured, not just claimed.</h2>
-          <p class="section__lede">A coding agent can look fine with one session and balloon when you actually use it. RAM snapshots for one and ten concurrent sessions, measured against Codex CLI, Claude Code, Cursor Agent, GitHub Copilot CLI, Antigravity CLI, OpenCode, and pi.</p>
+          <p class="section__lede">A coding agent can look fine with one session and balloon when you actually use it. RAM snapshots for one and ten concurrent sessions, measured against Codex CLI, Cursor Agent, Claude Code, and others.</p>
         </header>
 
         <div class="bench__grid">
@@ -484,7 +484,7 @@
           </div>
         </div>
 
-        <p class="bench__note">Legacy benchmark snapshots, kept for historical comparison — Alphacode has improved further since these were measured. See <a href="docs/#memory-usage--historical-snapshots">full methodology and current numbers</a> in the docs.</p>
+        <p class="bench__note">Legacy benchmark snapshots, kept for historical comparison — Alphacode has improved further since these were measured. See <a href="docs/#memory-usage--historical-snapshots">methodology</a> and <a href="docs/#safety--how-alphacode-protects-your-computer">safety model</a> for the source details.</p>
       </div>
     </section>
 
@@ -518,7 +518,7 @@
         </details>
         <details class="faq__item">
           <summary>How is this different from Claude Code or Codex CLI?</summary>
-          <p>It's MIT, model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and other terminal agents in our own measurements. See <a href="#bench">benchmarks</a> above, or the full methodology in the <a href="docs/#memory-usage--historical-snapshots">docs</a>.</p>
+          <p>It's MIT, model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and other terminal agents.</p>
         </details>
       </div>
     </section>
@@ -531,7 +531,7 @@
         <div class="cta__row">
           <a class="btn btn--primary btn--lg" href="#install">
             <span>Install</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
           <a class="btn btn--ghost btn--lg" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">
             <span>Read the source</span>
