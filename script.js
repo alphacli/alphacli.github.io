@@ -7,6 +7,50 @@
 
   const $  = (s, p = document) => p.querySelector(s);
   const $$ = (s, p = document) => Array.from(p.querySelectorAll(s));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ------------------------------------------------------------
+     Scroll progress bar + sticky nav elevation + back-to-top
+     ------------------------------------------------------------ */
+  (() => {
+    let progress = $('.progress');
+    if (!progress) {
+      progress = document.createElement('div');
+      progress.className = 'progress';
+      progress.setAttribute('aria-hidden', 'true');
+      document.body.prepend(progress);
+    }
+    let totop = $('.totop');
+    if (!totop) {
+      totop = document.createElement('button');
+      totop.className = 'totop';
+      totop.type = 'button';
+      totop.setAttribute('aria-label', 'Back to top');
+      totop.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+      document.body.appendChild(totop);
+      totop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+      });
+    }
+    const navEl2 = $('.nav');
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const doc = document.documentElement;
+        const scrollTop = window.scrollY || doc.scrollTop;
+        const max = doc.scrollHeight - doc.clientHeight;
+        const pct = max > 0 ? (scrollTop / max) * 100 : 0;
+        progress.style.width = pct + '%';
+        navEl2 && navEl2.classList.toggle('is-scrolled', scrollTop > 8);
+        totop.classList.toggle('is-visible', scrollTop > 480);
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
 
   /* ------------------------------------------------------------
      Mobile nav toggle
@@ -39,6 +83,30 @@
       if (window.innerWidth > 880) closeNav();
     });
   }
+
+  /* ------------------------------------------------------------
+     Scroll-spy: highlight the nav link for the section in view
+     ------------------------------------------------------------ */
+  (() => {
+    const navLinkEls = $$('.nav__links a[href^="#"]');
+    if (!navLinkEls.length || !('IntersectionObserver' in window)) return;
+    const sections = navLinkEls
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+    if (!sections.length) return;
+    const byId = new Map(navLinkEls.map(a => [a.getAttribute('href').slice(1), a]));
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const link = byId.get(e.target.id);
+        if (!link) return;
+        if (e.isIntersecting) {
+          navLinkEls.forEach(a => a.removeAttribute('aria-current'));
+          link.setAttribute('aria-current', 'page');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    sections.forEach(s => spy.observe(s));
+  })();
 
   /* ------------------------------------------------------------
      Scroll reveal

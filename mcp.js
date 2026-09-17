@@ -5,6 +5,57 @@
   'use strict';
   const $  = (s, p = document) => p.querySelector(s);
   const $$ = (s, p = document) => Array.from(p.querySelectorAll(s));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Scroll progress bar + sticky nav elevation + back-to-top */
+  (() => {
+    const progress = document.createElement('div');
+    progress.className = 'progress';
+    progress.setAttribute('aria-hidden', 'true');
+    document.body.prepend(progress);
+
+    const totop = document.createElement('button');
+    totop.className = 'totop';
+    totop.type = 'button';
+    totop.setAttribute('aria-label', 'Back to top');
+    totop.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+    document.body.appendChild(totop);
+    totop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+    });
+
+    const navEl2 = $('.nav');
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const doc = document.documentElement;
+        const scrollTop = window.scrollY || doc.scrollTop;
+        const max = doc.scrollHeight - doc.clientHeight;
+        const pct = max > 0 ? (scrollTop / max) * 100 : 0;
+        progress.style.width = pct + '%';
+        navEl2 && navEl2.classList.toggle('is-scrolled', scrollTop > 8);
+        totop.classList.toggle('is-visible', scrollTop > 480);
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  /* Smooth anchor focus for same-page hash links */
+  $$('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length < 2) return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', id);
+    });
+  });
 
   /* Mobile nav toggle */
   const navEl = $('.nav');
