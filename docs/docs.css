@@ -17,12 +17,13 @@
 
 .docs__sidebar {
   position: sticky;
-  top: 76px;
+  top: calc(var(--nav-h) + 16px);
   align-self: start;
-  max-height: calc(100vh - 96px);
+  max-height: calc(100vh - var(--nav-h) - 32px);
   overflow-y: auto;
   padding-right: 24px;
   border-right: 1px solid var(--line);
+  scrollbar-width: thin;
 }
 @media (max-width: 960px) {
   .docs__sidebar {
@@ -46,14 +47,14 @@
   font-weight: 500;
 }
 
-.toc { display: flex; flex-direction: column; gap: 2px; }
+.toc { display: flex; flex-direction: column; gap: 1px; }
 .toc__item {
   font-size: 13px;
   color: var(--text-dim);
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
   border-left: 2px solid transparent;
-  transition: color .15s, background .15s, border-color .15s;
+  transition: color .15s var(--ease), background .15s var(--ease), border-color .15s var(--ease);
   line-height: 1.4;
 }
 .toc__item:hover { color: var(--text); background: var(--bg-1); }
@@ -62,6 +63,7 @@
   color: var(--text);
   background: var(--bg-1);
   border-left-color: var(--accent);
+  font-weight: 500;
 }
 
 .docs__article { min-width: 0; max-width: 100%; padding: 0 8px 0 32px; }
@@ -93,19 +95,19 @@
 .docs__h1 { font-size: 36px; font-weight: 600; letter-spacing: -.03em; margin: 48px 0 16px; padding-top: 16px; border-top: 1px solid var(--line); }
 .docs__h2 {
   font-size: 26px;
-  font-weight: 600;
+  font-weight: 620;
   letter-spacing: -.02em;
   margin: 56px 0 16px;
   padding-top: 24px;
   border-top: 1px solid var(--line);
-  scroll-margin-top: 76px;
+  scroll-margin-top: calc(var(--nav-h) + 16px);
 }
 .docs__h3 {
   font-size: 18px;
   font-weight: 600;
   margin: 32px 0 12px;
   color: var(--text);
-  scroll-margin-top: 76px;
+  scroll-margin-top: calc(var(--nav-h) + 16px);
 }
 .docs__h4 { font-size: 15px; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
 .docs__h5 { font-size: 14px; font-weight: 600; margin: 20px 0 6px; color: var(--text); }
@@ -142,6 +144,7 @@
   font-size: 13px;
   line-height: 1.65;
   color: var(--text);
+  box-shadow: var(--shadow-sm);
 }
 .docs__code code { background: transparent; border: 0; padding: 0; color: inherit; font-size: inherit; }
 
