@@ -1,5 +1,5 @@
 /* ============================================================
-   Alphacode — site script v6
+   AlphaCode — site script v7 "phosphor"
    ============================================================ */
 
 (() => {
@@ -111,10 +111,10 @@
   /* ------------------------------------------------------------
      Scroll reveal
      ------------------------------------------------------------ */
-  const revealEls = $$('.feat, .stat, .model, .install__card, .bench__card, .swarm__board, .faq__item, .section__head');
+  const revealEls = $$('.feat, .stat, .model, .install__card, .bench__card, .swarm__board, .faq__item, .section__head, .free__item');
   revealEls.forEach((el, i) => {
     el.classList.add('reveal');
-    el.setAttribute('data-d', String((i % 3) + 1));
+    if (!el.hasAttribute('data-d')) el.setAttribute('data-d', String((i % 3) + 1));
   });
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -209,7 +209,10 @@
   });
 
   /* ------------------------------------------------------------
-     Animated hero demo (typed agent run)
+     Animated hero boot sequence — install → first task, on the
+     free lane, with no API key. This IS the free-AI pitch, so
+     the very first lines make that explicit rather than assuming
+     the visitor will infer it from a generic demo.
      ------------------------------------------------------------ */
   const demoBody  = $('#demoBody');
   const demoBar   = $('#demoBar');
@@ -222,29 +225,24 @@
 
   if (demoBody) {
     const steps = [
-      { p: 'alphacode', m: 'sonnet-4.5', text: '<span class="l-dim">›</span> <span class="l-info">scan repo, plan migration to OAuth 2.1</span>' },
-      { p: 'plan',      m: 'plan',       text: '<span class="l-violet">[planner]</span> <span class="l-info">decomposing goal…</span> <span class="l-dim">3 agents</span>' },
-      { p: 'agent-1',   m: 'haiku-4',    text: '<span class="l-warn">[auth/routes.ts]</span> <span class="l-info">refactor login → authorization code</span>' },
-      { p: 'agent-2',   m: 'sonnet-4.5', text: '<span class="l-warn">[auth/tokens.ts]</span> <span class="l-info">add PKCE, refresh-rotation</span>' },
-      { p: 'agent-3',   m: 'gpt-5-mini', text: '<span class="l-warn">[auth/db.ts]</span> <span class="l-info">add sessions + audit log</span>' },
-      { p: 'tests',     m: 'haiku-4',    text: '<span class="l-info">running</span> <span class="l-dim">cargo test --workspace</span> <span class="l-ok">✓ 142/142</span>' },
-      { p: 'review',    m: 'sonnet-4.5', text: '<span class="l-violet">[reviewer]</span> <span class="l-info">diff looks clean, no secrets leaked</span>' },
-      { p: 'done',      m: '—',          text: '<span class="l-ok l-bold">✓ ready to commit</span> <span class="l-dim">3 files · 142 tests passed · 0 leaked secrets</span>' },
+      { p: 'alphacode', m: 'free lane', text: '<span class="l-dim">›</span> <span class="l-info">launching — no API key found, no key needed</span>' },
+      { p: 'provider',  m: 'free lane', text: '<span class="l-free">✓ free model provider ready</span> <span class="l-dim">$0 · 0 setup steps</span>' },
+      { p: 'you',       m: 'free lane', text: '<span class="l-info">"scan repo, plan migration to OAuth 2.1"</span>' },
+      { p: 'plan',      m: 'free lane', text: '<span class="l-warn">[planner]</span> <span class="l-info">decomposing goal…</span> <span class="l-dim">3 agents</span>' },
+      { p: 'agent-1',   m: 'free lane', text: '<span class="l-warn">[auth/routes.ts]</span> <span class="l-info">refactor login → authorization code</span>' },
+      { p: 'agent-2',   m: 'free lane', text: '<span class="l-warn">[auth/tokens.ts]</span> <span class="l-info">add PKCE, refresh-rotation</span>' },
+      { p: 'tests',     m: 'free lane', text: '<span class="l-info">running</span> <span class="l-dim">cargo test --workspace</span> <span class="l-ok">✓ 142/142</span>' },
+      { p: 'done',      m: 'free lane', text: '<span class="l-ok l-bold">✓ ready to commit</span> <span class="l-dim">2 files · 142 tests · $0 spent</span>' },
     ];
 
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-    const models = ['sonnet-4.5', 'haiku-4', 'gpt-5-mini', 'opus-4'];
 
     function setStatus(s) { demoStatus.textContent = s; }
     function setTime(t)   { demoTime.textContent = t.toFixed(1) + 's'; }
     function setTools(n)  { demoTools.textContent = String(n); }
     function setModel(m)  { demoModel.textContent = m; }
 
-    let stepIdx = 0;
-    let cancelled = false;
-
     async function run() {
-      cancelled = false;
       demoBody.innerHTML = '';
       setStatus('running');
       demoBar.style.width = '0%';
@@ -254,23 +252,20 @@
 
       const start = performance.now();
       const tick = setInterval(() => {
-        if (cancelled) return;
         setTime((performance.now() - start) / 1000);
       }, 50);
 
       for (let i = 0; i < steps.length; i++) {
-        if (cancelled) break;
-        stepIdx = i;
         const s = steps[i];
         setModel(s.m);
         const line = document.createElement('div');
-        line.innerHTML = `<span class="l-prompt">$</span> <span class="l-violet l-bold">${s.p}</span>  ${s.text}<span class="l-caret"></span>`;
+        line.innerHTML = `<span class="l-prompt">$</span> <span class="l-bold">${s.p}</span>  ${s.text}<span class="l-caret"></span>`;
         demoBody.appendChild(line);
         setTools(i + 1);
         const pct = ((i + 1) / steps.length) * 100;
         demoBar.style.width = pct + '%';
         demoBarW && demoBarW.setAttribute('aria-valuenow', String(Math.round(pct)));
-        await sleep(900 + Math.random() * 500);
+        await sleep(850 + Math.random() * 450);
         line.querySelector('.l-caret')?.remove();
       }
 
@@ -283,35 +278,30 @@
       demoBody.innerHTML = '';
       steps.forEach(s => {
         const line = document.createElement('div');
-        line.innerHTML = `<span class="l-prompt">$</span> <span class="l-violet l-bold">${s.p}</span>  ${s.text}`;
+        line.innerHTML = `<span class="l-prompt">$</span> <span class="l-bold">${s.p}</span>  ${s.text}`;
         demoBody.appendChild(line);
       });
-      setModel(steps[steps.length - 1].m);
+      setModel('free lane');
       setTools(steps.length);
       demoBar.style.width = '100%';
       demoBarW && demoBarW.setAttribute('aria-valuenow', '100');
       setStatus('done');
-      setTime(6.4);
+      setTime(5.8);
       demoFootDot && demoFootDot.classList.add('is-done');
     }
 
+    let cancelled = false;
     function loop() {
       run().then(() => sleep(6000)).then(() => {
         if (!cancelled) loop();
       });
     }
 
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
+    if (reducedMotion) {
       renderStatic();
     } else {
       loop();
     }
-
-    // Allow re-running by clicking on the terminal
-    demoBody.parentElement.addEventListener('click', () => {
-      if (cancelled) return;
-    });
   }
 
   /* ------------------------------------------------------------
@@ -322,14 +312,13 @@
   const dagPkts  = $('#dag-pkts');
 
   if (dagNodes && dagEdges) {
-    const W = 600, H = 280;
     const nodes = [
       { id: 'root',   x:  40, y: 130, w: 110, h: 50, label: 'Goal',         sub: 'migrate → OAuth 2.1', kind: 'root' },
-      { id: 'plan',   x: 180, y: 130, w: 110, h: 50, label: 'Planner',      sub: 'sonnet-4.5',         kind: 'plan' },
-      { id: 'a1',     x: 340, y:  40, w: 100, h: 46, label: 'Agent · A',    sub: 'haiku-4',             kind: 'agent' },
-      { id: 'a2',     x: 340, y: 130, w: 100, h: 46, label: 'Agent · B',    sub: 'sonnet-4.5',          kind: 'agent' },
-      { id: 'a3',     x: 340, y: 220, w: 100, h: 46, label: 'Agent · C',    sub: 'gpt-5-mini',          kind: 'agent' },
-      { id: 'merge',  x: 480, y: 130, w:  90, h: 50, label: 'Reviewer',     sub: 'opus-4',              kind: 'merged' },
+      { id: 'plan',   x: 180, y: 130, w: 110, h: 50, label: 'Planner',      sub: 'free lane',           kind: 'plan' },
+      { id: 'a1',     x: 340, y:  40, w: 100, h: 46, label: 'Agent · A',    sub: 'free lane',           kind: 'agent' },
+      { id: 'a2',     x: 340, y: 130, w: 100, h: 46, label: 'Agent · B',    sub: 'free lane',           kind: 'agent' },
+      { id: 'a3',     x: 340, y: 220, w: 100, h: 46, label: 'Agent · C',    sub: 'free lane',           kind: 'agent' },
+      { id: 'merge',  x: 480, y: 130, w:  90, h: 50, label: 'Reviewer',     sub: 'free lane',           kind: 'merged' },
     ];
     const edges = [
       ['root',  'plan'],
@@ -345,7 +334,6 @@
     const center = (n) => ({ x: n.x + n.w / 2, y: n.y + n.h / 2 });
     const nodeById = Object.fromEntries(nodes.map(n => [n.id, n]));
 
-    // edges
     edges.forEach(([from, to]) => {
       const a = center(nodeById[from]);
       const b = center(nodeById[to]);
@@ -355,7 +343,6 @@
       dagEdges.appendChild(path);
     });
 
-    // nodes
     nodes.forEach(n => {
       const g = document.createElementNS(NS, 'g');
       g.classList.add('dag__node', `dag__node--${n.kind}`);
@@ -363,7 +350,7 @@
       const rect = document.createElementNS(NS, 'rect');
       rect.setAttribute('x', n.x); rect.setAttribute('y', n.y);
       rect.setAttribute('width', n.w); rect.setAttribute('height', n.h);
-      rect.setAttribute('rx', '6');
+      rect.setAttribute('rx', '2');
       g.appendChild(rect);
       const t1 = document.createElementNS(NS, 'text');
       t1.setAttribute('x', n.x + n.w / 2);
@@ -393,7 +380,6 @@
         ['a1','a2','a3'],
         ['merge'],
       ];
-      // reset
       $$('#dag-nodes g').forEach(g => g.classList.remove('dag__node--active', 'dag__node--merged'));
       const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -403,7 +389,6 @@
           const g = $(`#dag-nodes g[data-id="${id}"]`);
           if (g) g.classList.add('dag__node--active');
         });
-        // packets: send from each active node to merge
         const targets = phase.filter(id => id !== 'merge' && id !== 'plan' && id !== 'root');
         targets.forEach(id => {
           const from = nodeById[id], to = nodeById['merge'];
@@ -444,16 +429,9 @@
     runBtn?.addEventListener('click', () => {
       overlay?.classList.add('is-hidden');
       swarmRun().then(() => {
-        // A manual replay click always restores the "run again" overlay,
-        // even under reduced motion, since the user asked for it explicitly.
         if (reduced) overlay?.classList.remove('is-hidden');
       });
     });
-    // Auto-run once on first visibility (swarmRun already adapts its pacing
-    // via the `reduced` flag above, so it's safe to always call). Under
-    // reduced motion this settles the diagram into its final merged state
-    // without animation and leaves the overlay hidden — there is nothing
-    // to "replay" since the transition itself was skipped.
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
@@ -469,13 +447,10 @@
 
   /* ------------------------------------------------------------
      Benchmark bars
-     Figures sourced from the measured snapshots in /docs/ (see
-     "Memory usage — historical snapshots" for methodology and the
-     legacy-snapshot caveat: these are directional, not live numbers).
      ------------------------------------------------------------ */
   const BENCH_DATA = {
     '1': [
-      { name: 'Alphacode',         val: 27.8,  best: true, self: true },
+      { name: 'AlphaCode',         val: 27.8,  best: true, self: true },
       { name: 'Codex CLI',         val: 140.0 },
       { name: 'pi',                val: 144.4 },
       { name: 'Cursor Agent',      val: 214.9 },
@@ -485,7 +460,7 @@
       { name: 'Claude Code',       val: 386.6 },
     ],
     '10': [
-      { name: 'Alphacode',         val: 117.0, best: true, self: true },
+      { name: 'AlphaCode',         val: 117.0, best: true, self: true },
       { name: 'Codex CLI',         val: 334.8 },
       { name: 'pi',                val: 833.0 },
       { name: 'Antigravity CLI',   val: 1021.2 },
@@ -516,7 +491,6 @@
       val.innerHTML = `<b>${d.val}</b> MB`;
       row.append(label, wrap, val);
       host.appendChild(row);
-      // animate
       requestAnimationFrame(() => {
         const pct = (d.val / max) * 100;
         bar.style.width = pct + '%';
@@ -526,8 +500,6 @@
 
   /* ------------------------------------------------------------
      Live repo stats (graceful fallback)
-     Stars/issues come from the repo endpoint; version comes from
-     the latest release tag, not the default branch name.
      ------------------------------------------------------------ */
   fetch('https://api.github.com/repos/dragonked2/alphacode', { headers: { 'Accept': 'application/vnd.github+json' }})
     .then(r => r.ok ? r.json() : null)
