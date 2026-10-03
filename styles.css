@@ -954,3 +954,25 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
   .boot__body .l-caret, .hero__kicker .dot, .nav__brand .cursor { animation: none !important; }
   * { transition-duration: 0s !important; animation-duration: 0s !important; }
 }
+
+
+/* ---------- UX polish layer ---------- */
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+::selection { background: var(--amber); color: var(--bg); }
+h1, h2, h3, .section__title, .hero__title { text-wrap: balance; }
+p, .section__lede, .hero__sub { text-wrap: pretty; }
+.nav__stars:empty { display: none; }
+.btn, .install__tab, .code__copy, .nav__toggle, .faq__item summary { min-height: 40px; }
+.btn { transition: transform .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease; }
+.btn--primary:hover { box-shadow: 0 6px 24px var(--amber-glow); transform: translateY(-1px); }
+.feat, .free__item, .model, .bench__card { transition: border-color .2s ease, transform .2s ease, background-color .2s ease; }
+.feat:hover, .free__item:hover, .bench__card:hover { border-color: var(--line-3); transform: translateY(-2px); }
+.model:hover { border-color: var(--line-3); }
+.faq__item summary { cursor: pointer; }
+.faq__item summary:hover { color: var(--amber-hi); }
+.features, .swarm, .models, .install, .bench, .faq { content-visibility: auto; contain-intrinsic-size: auto 720px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.code { max-width: 100%; }
+.code pre { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media print { .nav, .gutter, .boot, .swarm, .cta { display: none !important; } body { background: #fff; color: #000; } }
