@@ -8,12 +8,12 @@
   <meta name="description" content="Free, open-source AI coding agent for your terminal. Built in Rust, MIT licensed, with a free model built in (no API key). Add Claude, GPT, Gemini or 50+ providers anytime." />
   <meta name="author" content="Alphacli" />
   <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#0B0C0A" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#F6F5EE" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0A0A12" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F7F6FF" media="(prefers-color-scheme: light)" />
   <meta name="color-scheme" content="dark light" />
   <link rel="canonical" href="https://alphacli.github.io/" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='3' fill='%230B0C0A'/%3E%3Cpath d='M5 6 L10 11 L5 16' stroke='%23FFB454' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 16 L17 16' stroke='%23FFB454' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='3' fill='%230B0C0A'/%3E%3Cpath d='M5 6 L10 11 L5 16' stroke='%238B7CFF' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 16 L17 16' stroke='%238B7CFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
   <link rel="mask-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M5 6 L10 11 L5 16M12 16 L17 16' stroke='black' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
   <link rel="manifest" href="site.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
@@ -21,7 +21,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -44,7 +44,7 @@
   <meta name="twitter:site" content="@alphacli" />
   <meta name="twitter:image:alt" content="AlphaCode, the free open-source AI coding agent for your terminal" />
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20261003" />
 
   <script type="application/ld+json">
   {
@@ -144,7 +144,7 @@
         <a class="btn btn--ghost btn--sm" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer" aria-label="View AlphaCode on GitHub">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.9 1.1.1-.9.5-1.4.8-1.7-2.7-.3-5.6-1.3-5.6-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.3-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.9 5.6-5.6 5.9.5.4.8 1.2.8 2.5v3.7c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg>
           <span>GitHub</span>
-          <span class="nav__stars" id="navStars" aria-hidden="true"></span>
+          <span class="nav__stars" id="navStars">★ Star</span>
         </a>
         <a class="btn btn--primary btn--sm" href="#install">
           <span>Install free</span>
@@ -238,8 +238,8 @@
           <div class="stat__lbl">to start — no key needed</div>
         </div>
         <div class="stat">
-          <div class="stat__num" id="statStars">–</div>
-          <div class="stat__lbl">GitHub stars</div>
+          <div class="stat__num" id="statStars">Open</div>
+          <div class="stat__lbl">source on GitHub</div>
         </div>
         <div class="stat">
           <div class="stat__num">40+</div>
@@ -385,32 +385,32 @@
         <div class="models__grid" id="providerGrid" role="list">
           <div class="model is-free" data-name="gmi cloud free built in no key" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>GMI Cloud — free, built in</div>
           <div class="model is-free" data-name="experiential labs free" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>Experiential Labs — free lane</div>
-          <div class="model" data-name="anthropic claude" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>Anthropic / Claude</div>
-          <div class="model" data-name="anthropic api claude" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>Anthropic API</div>
+          <div class="model" data-name="anthropic claude" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Anthropic / Claude</div>
+          <div class="model" data-name="anthropic api claude" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Anthropic API</div>
           <div class="model" data-name="openai gpt chatgpt" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>OpenAI</div>
           <div class="model" data-name="openai api gpt platform" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>OpenAI API</div>
           <div class="model" data-name="google gemini" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Google Gemini</div>
           <div class="model" data-name="gemini api google" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Gemini API</div>
           <div class="model" data-name="github copilot" role="listitem"><span class="model__dot" style="--c:#C6C4B3"></span>GitHub Copilot</div>
           <div class="model" data-name="cursor" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Cursor</div>
-          <div class="model" data-name="aws bedrock" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>AWS Bedrock</div>
+          <div class="model" data-name="aws bedrock" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>AWS Bedrock</div>
           <div class="model" data-name="azure openai microsoft" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Azure OpenAI</div>
           <div class="model" data-name="openrouter" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>OpenRouter</div>
           <div class="model" data-name="deepseek" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>DeepSeek</div>
           <div class="model" data-name="xai grok" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>xAI (Grok)</div>
-          <div class="model" data-name="mistral" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>Mistral</div>
+          <div class="model" data-name="mistral" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Mistral</div>
           <div class="model" data-name="groq" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>Groq</div>
           <div class="model" data-name="perplexity sonar" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Perplexity</div>
           <div class="model" data-name="together ai" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Together AI</div>
           <div class="model" data-name="fireworks ai" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>Fireworks</div>
           <div class="model" data-name="deep infra" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Deep Infra</div>
-          <div class="model" data-name="hugging face inference" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>Hugging Face</div>
+          <div class="model" data-name="hugging face inference" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Hugging Face</div>
           <div class="model" data-name="cohere" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>Cohere</div>
-          <div class="model" data-name="moonshot kimi" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>Moonshot AI · Kimi</div>
-          <div class="model" data-name="kimi code" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>Kimi Code</div>
+          <div class="model" data-name="moonshot kimi" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Moonshot AI · Kimi</div>
+          <div class="model" data-name="kimi code" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Kimi Code</div>
           <div class="model" data-name="z.ai zhipu" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Z.AI</div>
-          <div class="model" data-name="alibaba qwen dashscope" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>Alibaba Cloud Coding Plan</div>
-          <div class="model" data-name="xiaomi mimo" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>Xiaomi MiMo</div>
+          <div class="model" data-name="alibaba qwen dashscope" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Alibaba Cloud Coding Plan</div>
+          <div class="model" data-name="xiaomi mimo" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Xiaomi MiMo</div>
           <div class="model" data-name="minimax" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>MiniMax</div>
           <div class="model" data-name="antigravity" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Antigravity</div>
           <div class="model" data-name="ollama local" role="listitem"><span class="model__dot" style="--c:#EDECE3"></span>Ollama</div>
@@ -421,18 +421,18 @@
           <div class="model" data-name="baseten" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Baseten</div>
           <div class="model" data-name="cerebras" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Cerebras</div>
           <div class="model" data-name="nvidia nim" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>NVIDIA NIM</div>
-          <div class="model" data-name="chutes" role="listitem"><span class="model__dot" style="--c:#C98328"></span>Chutes</div>
+          <div class="model" data-name="chutes" role="listitem"><span class="model__dot" style="--c:#6E56CF"></span>Chutes</div>
           <div class="model" data-name="nebius token factory" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Nebius Token Factory</div>
           <div class="model" data-name="scaleway" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Scaleway</div>
           <div class="model" data-name="stackit" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>STACKIT</div>
-          <div class="model" data-name="cortecs" role="listitem"><span class="model__dot" style="--c:#C98328"></span>Cortecs</div>
+          <div class="model" data-name="cortecs" role="listitem"><span class="model__dot" style="--c:#6E56CF"></span>Cortecs</div>
           <div class="model" data-name="comtegra gpu" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Comtegra GPU Cloud</div>
           <div class="model" data-name="fpt ai marketplace" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>FPT AI Marketplace</div>
           <div class="model" data-name="firmware" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Firmware</div>
           <div class="model" data-name="302.ai" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>302.AI</div>
           <div class="model" data-name="zerog" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>ZeroG</div>
           <div class="model" data-name="celeris" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>Celeris</div>
-          <div class="model" data-name="agentrouter" role="listitem"><span class="model__dot" style="--c:#FFB454"></span>AgentRouter</div>
+          <div class="model" data-name="agentrouter" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>AgentRouter</div>
           <div class="model" data-name="tokenrouter" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>TokenRouter</div>
           <div class="model" data-name="dragonmeta" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Dragonmeta</div>
           <div class="model" data-name="alphacode subscription" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>AlphaCode Subscription</div>
@@ -636,6 +636,6 @@
 
   </main>
 
-  <script src="script.js" defer></script>
+  <script src="script.js?v=20261003" defer></script>
 </body>
 </html>

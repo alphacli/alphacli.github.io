@@ -501,17 +501,22 @@
   /* ------------------------------------------------------------
      Live repo stats (graceful fallback)
      ------------------------------------------------------------ */
-  fetch('https://api.github.com/repos/dragonked2/alphacode', { headers: { 'Accept': 'application/vnd.github+json' }})
-    .then(r => r.ok ? r.json() : null)
-    .then(j => {
-      if (!j) return;
-      const stars = j.stargazers_count;
-      const ns = $('#navStars');
-      const sg = $('#statStars');
-      if (ns && stars != null) ns.textContent = '★ ' + stars;
-      if (sg && stars != null) sg.textContent = String(stars);
-    })
-    .catch(() => {});
+  (function () {
+    const ns = $('#navStars'), sg = $('#statStars'), lbl = sg && sg.nextElementSibling;
+    const show = n => {
+      if (ns) ns.textContent = '\u2605 ' + n;
+      if (sg) sg.textContent = String(n);
+      if (lbl) lbl.textContent = 'GitHub stars';
+      try { localStorage.setItem('ac_stars', n); } catch (e) {}
+    };
+    try { const c = localStorage.getItem('ac_stars'); if (c) show(c); } catch (e) {}
+    fetch('https://api.github.com/repos/dragonked2/alphacode')
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(d => d.stargazers_count)
+      .catch(() => fetch('https://img.shields.io/github/stars/dragonked2/alphacode.json').then(r => r.json()).then(d => d.value))
+      .then(n => { if (n !== undefined && n !== null && n !== '') show(n); })
+      .catch(() => {});
+  })();
 
   fetch('https://api.github.com/repos/dragonked2/alphacode/releases/latest', { headers: { 'Accept': 'application/vnd.github+json' }})
     .then(r => r.ok ? r.json() : null)
