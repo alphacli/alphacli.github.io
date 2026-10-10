@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
@@ -7,23 +7,26 @@
 
   <meta name="description" content="Free, open-source AI coding agent for your terminal. Built in Rust, MIT licensed, with a free model built in (no API key). Add Claude, GPT, Gemini or 50+ providers anytime." />
   <meta name="author" content="Alphacli" />
-  <meta name="robots" content="index,follow" />
+  <meta name="application-name" content="AlphaCode" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="theme-color" content="#0A0A12" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#F7F6FF" media="(prefers-color-scheme: light)" />
   <meta name="color-scheme" content="dark light" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="canonical" href="https://alphacli.github.io/" />
+  <link rel="alternate" hreflang="en" href="https://alphacli.github.io/" />
+  <link rel="alternate" hreflang="x-default" href="https://alphacli.github.io/" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='3' fill='%230B0C0A'/%3E%3Cpath d='M5 6 L10 11 L5 16' stroke='%238B7CFF' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 16 L17 16' stroke='%238B7CFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
-  <link rel="mask-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M5 6 L10 11 L5 16M12 16 L17 16' stroke='black' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
-  <link rel="manifest" href="site.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='3' fill='%230B0C0A'/%3E%3Cpath d='M5 6 L10 11 L5 16' stroke='%238B7CFF' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 16 L17 16' stroke='%238B7CFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="stylesheet" href="/styles.css?v=20261010" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AlphaCode" />
@@ -33,87 +36,84 @@
   <meta property="og:image" content="https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48" />
   <meta property="og:image:width" content="1280" />
   <meta property="og:image:height" content="640" />
-  <meta property="og:image:alt" content="AlphaCode, the free open-source AI coding agent for your terminal" />
   <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="AlphaCode, the free open-source AI coding agent for your terminal" />
   <meta property="og:locale" content="en_US" />
-
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@alphacli" />
   <meta name="twitter:title" content="AlphaCode — the free AI coding agent for your terminal" />
   <meta name="twitter:description" content="No API key needed. A free AI model is built in — install and start coding immediately. Free, open-source, MIT, built in Rust." />
   <meta name="twitter:image" content="https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48" />
-  <meta name="twitter:site" content="@alphacli" />
   <meta name="twitter:image:alt" content="AlphaCode, the free open-source AI coding agent for your terminal" />
 
-  <link rel="stylesheet" href="styles.css?v=20261003" />
+  <style>
+    html{scroll-behavior:smooth}
+    section[id]{scroll-margin-top:84px}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    .demo-video{padding:clamp(56px,9vw,112px) 0}
+    .demo-video__frame{max-width:960px;margin:32px auto 0;border:1px solid var(--border,rgba(139,124,255,.28));border-radius:14px;overflow:hidden;background:#05050a;box-shadow:0 24px 80px -24px rgba(139,124,255,.35)}
+    .demo-video__frame video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#05050a}
+    .demo-video__meta{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center;max-width:960px;margin:16px auto 0;font-size:.9rem;color:var(--text-mute,#8c8b78)}
+    .demo-video__meta a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+    .demo-video__chapters{display:flex;flex-wrap:wrap;gap:8px;max-width:960px;margin:16px auto 0;padding:0;list-style:none}
+    .demo-video__chapters button{font:inherit;font-size:.85rem;padding:6px 12px;border-radius:999px;border:1px solid var(--border,rgba(139,124,255,.28));background:transparent;color:inherit;cursor:pointer}
+    .demo-video__chapters button:hover,.demo-video__chapters button:focus-visible{border-color:#8B7CFF;outline:none}
+  </style>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "AlphaCode",
-    "operatingSystem": "macOS, Linux, Windows",
-    "applicationCategory": "DeveloperApplication",
-    "applicationSubCategory": "AI Coding Agent",
-    "description": "A free, open-source, terminal-native AI coding agent. Ships with a free built-in AI model provider, so no API key is required to start. Plan, edit, test, ship.",
-    "url": "https://alphacli.github.io/",
-    "downloadUrl": "https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh",
-    "softwareVersion": "1.0.68",
-    "softwareRequirements": "None to start — a free model provider is built in. Rust 1.91+ only if building from source.",
-    "license": "https://github.com/dragonked2/alphacode/blob/main/LICENSE",
-    "isAccessibleForFree": true,
-    "sameAs": ["https://github.com/dragonked2/alphacode"],
-    "author": { "@type": "Organization", "name": "Alphacli", "url": "https://github.com/alphacli" },
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "Is AlphaCode really free? Do I need an API key?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. AlphaCode is MIT-licensed and ships with a free, built-in AI model provider that works immediately after install — no API key, account, or payment required to start. Connect your own Claude, GPT, Gemini, or other provider key later if you want to, but it's never required." }
+        "@type": "SoftwareApplication",
+        "@id": "https://alphacli.github.io/#software",
+        "name": "AlphaCode",
+        "operatingSystem": "macOS, Linux, Windows",
+        "applicationCategory": "DeveloperApplication",
+        "applicationSubCategory": "AI Coding Agent",
+        "description": "A free, open-source, terminal-native AI coding agent. Ships with a free built-in AI model provider, so no API key is required to start. Plan, edit, test, ship.",
+        "url": "https://alphacli.github.io/",
+        "image": "https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48",
+        "downloadUrl": "https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh",
+        "softwareVersion": "1.0.76",
+        "softwareRequirements": "None to start — a free model provider is built in. Rust 1.91+ only if building from source.",
+        "license": "https://github.com/dragonked2/alphacode/blob/main/LICENSE",
+        "isAccessibleForFree": true,
+        "sameAs": ["https://github.com/dragonked2/alphacode"],
+        "author": { "@type": "Organization", "name": "Alphacli", "url": "https://github.com/alphacli" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
       },
       {
-        "@type": "Question",
-        "name": "Does it send my code anywhere?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Only to the model provider that's active — the free built-in lane, or one you configure. The CLI itself is local. Nothing leaves your machine unless a model call needs context." }
+        "@type": "WebSite",
+        "@id": "https://alphacli.github.io/#website",
+        "name": "AlphaCode",
+        "alternateName": ["Alphacode", "alphacli"],
+        "url": "https://alphacli.github.io/",
+        "inLanguage": "en"
       },
       {
-        "@type": "Question",
-        "name": "Which models work?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The free built-in provider works out of the box. Beyond that, any OpenAI-compatible HTTP endpoint — tested with Claude (Anthropic), GPT-4o/5 (OpenAI), Gemini, Copilot, Cursor, Bedrock, and OpenRouter." }
+        "@type": "VideoObject",
+        "@id": "https://alphacli.github.io/#demo-video",
+        "name": "How to install and use AlphaCode",
+        "description": "A walkthrough of installing AlphaCode, the free open-source AI coding agent, and giving it your first task in the terminal.",
+        "thumbnailUrl": "https://alphacli.github.io/assets/alphacode-demo-poster.jpg",
+        "uploadDate": "2026-10-10",
+        "contentUrl": "https://alphacli.github.io/assets/alphacode-demo.mp4",
+        "embedUrl": "https://alphacli.github.io/#demo",
+        "inLanguage": "en"
       },
       {
-        "@type": "Question",
-        "name": "How does swarm mode work?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A planner turns your goal into a task DAG. Workers — each with their own model — execute independent nodes in parallel. A reviewer node merges and verifies the diff." }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I use it on a remote box with no GUI?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pure terminal. Pipe-friendly. Plays well with tmux, screen, and SSH." }
-      },
-      {
-        "@type": "Question",
-        "name": "How is this different from Claude Code or Codex CLI?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It's MIT, includes a free model so you can start with zero setup, is model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and similar terminal agents." }
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is AlphaCode really free? Do I need an API key?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AlphaCode is MIT-licensed and ships with a free, built-in AI model provider that works immediately after install — no API key, account, or payment required to start. Connect your own Claude, GPT, Gemini, or other provider key later if you want to, but it's never required." } },
+          { "@type": "Question", "name": "Does it send my code anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "Only to the model provider that's active — the free built-in lane, or one you configure. The CLI itself is local. Nothing leaves your machine unless a model call needs context." } },
+          { "@type": "Question", "name": "Which models work?", "acceptedAnswer": { "@type": "Answer", "text": "The free built-in provider works out of the box. Beyond that, any OpenAI-compatible HTTP endpoint — tested with Claude (Anthropic), GPT-4o/5 (OpenAI), Gemini, Copilot, Cursor, Bedrock, and OpenRouter." } },
+          { "@type": "Question", "name": "How does swarm mode work?", "acceptedAnswer": { "@type": "Answer", "text": "A planner turns your goal into a task DAG. Workers — each with their own model — execute independent nodes in parallel. A reviewer node merges and verifies the diff." } },
+          { "@type": "Question", "name": "Can I use it on a remote box with no GUI?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pure terminal. Pipe-friendly. Plays well with tmux, screen, and SSH." } },
+          { "@type": "Question", "name": "How is this different from Claude Code or Codex CLI?", "acceptedAnswer": { "@type": "Answer", "text": "It's MIT, includes a free model so you can start with zero setup, is model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and other terminal agents (see the benchmarks section for methodology)." } }
+        ]
       }
     ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "AlphaCode",
-    "alternateName": ["Alphacode", "alphacli"],
-    "url": "https://alphacli.github.io/",
-    "inLanguage": "en"
   }
   </script>
 </head>
@@ -124,20 +124,21 @@
 
   <header class="nav" role="banner">
     <div class="nav__inner">
-      <a href="#" class="nav__brand" aria-label="AlphaCode home">
+      <a href="/" class="nav__brand" aria-label="AlphaCode home">
         <span class="p">$</span><span>alphacode</span><span class="cursor" aria-hidden="true"></span>
       </a>
 
       <nav class="nav__links" id="navLinks" aria-label="Primary">
         <a href="#free">Free AI</a>
+        <a href="#demo">Video</a>
         <a href="#features">Features</a>
         <a href="#swarm">Swarm</a>
         <a href="#models">Models</a>
         <a href="#install">Install</a>
         <a href="#bench">Benchmarks</a>
         <a href="#faq">FAQ</a>
-        <a href="mcp.html">MCP</a>
-        <a href="docs/">Docs</a>
+        <a href="/mcp.html">MCP</a>
+        <a href="/docs/">Docs</a>
       </nav>
 
       <div class="nav__cta">
@@ -187,24 +188,16 @@
             <span>Install — free, 60 seconds</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
-          <a class="btn btn--ghost btn--lg" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.9 7.4.6-5.6 4.9 1.7 7.3L12 17.8 5.6 21.7l1.7-7.3L1.7 9.5l7.4-.6L12 2z"/></svg>
-            <span>Star on GitHub</span>
+          <a class="btn btn--ghost btn--lg" href="#demo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg>
+            <span>Watch the walkthrough</span>
           </a>
         </div>
 
         <div class="hero__trust">
           <span>Upgrade anytime to</span>
           <span class="hero__trust-list">
-            <span class="chip">Claude</span>
-            <span class="chip">GPT-4o/5</span>
-            <span class="chip">Gemini</span>
-            <span class="chip">DeepSeek</span>
-            <span class="chip">Mistral</span>
-            <span class="chip">xAI</span>
-            <span class="chip">Groq</span>
-            <span class="chip">Ollama</span>
-            <span class="chip">+46 more</span>
+            <span class="chip">Claude</span><span class="chip">GPT-4o/5</span><span class="chip">Gemini</span><span class="chip">DeepSeek</span><span class="chip">Mistral</span><span class="chip">xAI</span><span class="chip">Groq</span><span class="chip">Ollama</span><span class="chip">+46 more</span>
           </span>
         </div>
 
@@ -215,7 +208,7 @@
             <div class="boot__badge" id="demoModel">free lane</div>
           </div>
           <pre class="boot__body" id="demoBody" aria-live="off"></pre>
-          <div class="demo__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="demoBarWrap">
+          <div class="demo__bar" role="progressbar" aria-label="Demo progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="demoBarWrap">
             <div class="demo__bar-fill" id="demoBar"></div>
           </div>
           <div class="demo__foot">
@@ -233,26 +226,42 @@
     <!-- STATS -->
     <section class="stats" aria-label="Project metrics">
       <div class="container stats__inner">
-        <div class="stat">
-          <div class="stat__num is-free">$0</div>
-          <div class="stat__lbl">to start — no key needed</div>
+        <div class="stat"><div class="stat__num is-free">$0</div><div class="stat__lbl">to start — no key needed</div></div>
+        <div class="stat"><div class="stat__num" id="statStars">Open</div><div class="stat__lbl">source on GitHub</div></div>
+        <div class="stat"><div class="stat__num">40+</div><div class="stat__lbl">built-in tools</div></div>
+        <div class="stat"><div class="stat__num">54</div><div class="stat__lbl">model providers</div></div>
+        <div class="stat"><div class="stat__num">MIT</div><div class="stat__lbl">license</div></div>
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section id="demo" class="demo-video" aria-labelledby="demo-title">
+      <div class="container">
+        <header class="section__head">
+          <p class="prompt-label"><span class="p">$</span> <span class="cmd">alphacode --demo</span></p>
+          <h2 class="section__title" id="demo-title">Install and first task, start to finish.</h2>
+          <p class="section__lede">A short walkthrough: install AlphaCode, open a project, and watch it plan, edit and verify a real change — no API key involved.</p>
+        </header>
+
+        <figure class="demo-video__frame" style="margin-inline:auto">
+          <video id="demoVideo" controls playsinline preload="metadata" poster="/assets/alphacode-demo-poster.jpg" width="1280" height="720" aria-describedby="demo-desc">
+            <source src="/assets/alphacode-demo.mp4" type="video/mp4" />
+            <p>Your browser can't play this video. <a href="/assets/alphacode-demo.mp4">Download the MP4</a> or <a href="https://github.com/dragonked2/alphacode#readme">read the quick start on GitHub</a>.</p>
+          </video>
+        </figure>
+
+        <div class="demo-video__meta">
+          <span id="demo-desc">How to install and use AlphaCode — the free, open-source AI coding agent for your terminal.</span>
+          <a href="/assets/alphacode-demo.mp4" download>Download MP4</a>
         </div>
-        <div class="stat">
-          <div class="stat__num" id="statStars">Open</div>
-          <div class="stat__lbl">source on GitHub</div>
-        </div>
-        <div class="stat">
-          <div class="stat__num">40+</div>
-          <div class="stat__lbl">built-in tools</div>
-        </div>
-        <div class="stat">
-          <div class="stat__num">54</div>
-          <div class="stat__lbl">model providers</div>
-        </div>
-        <div class="stat">
-          <div class="stat__num">MIT</div>
-          <div class="stat__lbl">license</div>
-        </div>
+
+        <ul class="demo-video__chapters" id="videoChapters" aria-label="Jump to chapter" hidden>
+          <!-- Edit the timestamps (seconds) to match your video -->
+          <li><button type="button" data-t="0">Install</button></li>
+          <li><button type="button" data-t="20">Verify</button></li>
+          <li><button type="button" data-t="35">First task</button></li>
+          <li><button type="button" data-t="75">Switch models</button></li>
+        </ul>
       </div>
     </section>
 
@@ -266,26 +275,10 @@
         </header>
 
         <div class="free__grid">
-          <article class="free__item reveal">
-            <div class="k">$0</div>
-            <h3>Free by default</h3>
-            <p>A built-in AI provider is included and pre-configured. Nothing to sign up for, nothing to pay before your first task.</p>
-          </article>
-          <article class="free__item reveal" data-d="1">
-            <div class="k">→</div>
-            <h3>No API key to start</h3>
-            <p>Install, launch <code>alphacode</code>, describe what you need. The free lane answers immediately.</p>
-          </article>
-          <article class="free__item reveal" data-d="2">
-            <div class="k">⇧</div>
-            <h3>Upgrade when you want</h3>
-            <p>Connect Claude, GPT, Gemini, Copilot, or 50+ others any time with <kbd>Ctrl</kbd>+<kbd>T</kbd> — no reinstall, same workflow.</p>
-          </article>
-          <article class="free__item reveal" data-d="3">
-            <div class="k">◇</div>
-            <h3>Nothing held back</h3>
-            <p>Swarm mode, desktop control, 40+ tools, browser automation — all available on the free lane, not a limited trial.</p>
-          </article>
+          <article class="free__item reveal"><div class="k">$0</div><h3>Free by default</h3><p>A built-in AI provider is included and pre-configured. Nothing to sign up for, nothing to pay before your first task.</p></article>
+          <article class="free__item reveal" data-d="1"><div class="k">→</div><h3>No API key to start</h3><p>Install, launch <code>alphacode</code>, describe what you need. The free lane answers immediately.</p></article>
+          <article class="free__item reveal" data-d="2"><div class="k">⇧</div><h3>Upgrade when you want</h3><p>Connect Claude, GPT, Gemini, Copilot, or 50+ others any time with <kbd>Ctrl</kbd>+<kbd>T</kbd> — no reinstall, same workflow.</p></article>
+          <article class="free__item reveal" data-d="3"><div class="k">◇</div><h3>Nothing held back</h3><p>Swarm mode, desktop control, 40+ tools, browser automation — all available on the free lane, not a limited trial.</p></article>
         </div>
 
         <div class="free__cmd">
@@ -305,36 +298,12 @@
           <h2 class="section__title">Everything an agent should be.</h2>
         </header>
         <div class="features__grid">
-          <article class="feat">
-            <div class="feat__num">01</div>
-            <h3>Plan, edit, verify</h3>
-            <p>Reads your codebase, plans steps, picks the best model, edits files, runs tests, and self-reviews before declaring anything done.</p>
-          </article>
-          <article class="feat">
-            <div class="feat__num">02</div>
-            <h3>Free AI, or any model</h3>
-            <p>Start on the free built-in lane. Add Claude, GPT, Gemini, Copilot, Cursor, Bedrock, OpenRouter, or any OpenAI-compatible endpoint. Switch with <kbd>Ctrl</kbd>+<kbd>T</kbd>.</p>
-          </article>
-          <article class="feat">
-            <div class="feat__num">03</div>
-            <h3>Swarm mode</h3>
-            <p>Big jobs split into independent pieces, run by multiple agents in parallel, then merged and reviewed automatically.</p>
-          </article>
-          <article class="feat">
-            <div class="feat__num">04</div>
-            <h3>Safety built in</h3>
-            <p>Blocks catastrophic commands outright. Confirms before anything risky. Never sends your code anywhere by default.</p>
-          </article>
-          <article class="feat">
-            <div class="feat__num">05</div>
-            <h3>40+ tools</h3>
-            <p>File editing, regex/AST search, shell, browser control, web fetch, memory, scheduling, diagrams, PDFs. No plugin surgery.</p>
-          </article>
-          <article class="feat">
-            <div class="feat__num">06</div>
-            <h3>Never lose work</h3>
-            <p>Sessions saved to disk. <code>alphacode --resume</code> reopens exactly where you left off — even after a crash.</p>
-          </article>
+          <article class="feat"><div class="feat__num">01</div><h3>Plan, edit, verify</h3><p>Reads your codebase, plans steps, picks the best model, edits files, runs tests, and self-reviews before declaring anything done.</p></article>
+          <article class="feat"><div class="feat__num">02</div><h3>Free AI, or any model</h3><p>Start on the free built-in lane. Add Claude, GPT, Gemini, Copilot, Cursor, Bedrock, OpenRouter, or any OpenAI-compatible endpoint. Switch with <kbd>Ctrl</kbd>+<kbd>T</kbd>.</p></article>
+          <article class="feat"><div class="feat__num">03</div><h3>Swarm mode</h3><p>Big jobs split into independent pieces, run by multiple agents in parallel, then merged and reviewed automatically.</p></article>
+          <article class="feat"><div class="feat__num">04</div><h3>Safety built in</h3><p>Blocks catastrophic commands outright. Confirms before anything risky. Never sends your code anywhere by default.</p></article>
+          <article class="feat"><div class="feat__num">05</div><h3>40+ tools</h3><p>File editing, regex/AST search, shell, browser control, web fetch, memory, scheduling, diagrams, PDFs. No plugin surgery.</p></article>
+          <article class="feat"><div class="feat__num">06</div><h3>Never lose work</h3><p>Sessions saved to disk. <code>alphacode --resume</code> reopens exactly where you left off — even after a crash.</p></article>
         </div>
       </div>
     </section>
@@ -350,9 +319,7 @@
         <div class="swarm__board">
           <svg viewBox="0 0 600 280" class="dag" role="img" aria-label="Swarm DAG animation">
             <defs>
-              <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M0 0 L10 5 L0 10 z" class="dag__arrowhead"/>
-              </marker>
+              <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="dag__arrowhead"/></marker>
             </defs>
             <g id="dag-edges" stroke-width="1.2" fill="none"></g>
             <g id="dag-nodes"></g>
@@ -378,71 +345,49 @@
         </header>
 
         <div class="models__toolbar">
-          <input type="search" id="providerSearch" class="models__search" placeholder="Search 54 providers…" aria-label="Filter providers" autocomplete="off" spellcheck="false" />
-          <span class="models__count" id="providerCount">54</span>
+          <input type="search" id="providerSearch" class="models__search" placeholder="Search providers…" aria-label="Filter providers" autocomplete="off" spellcheck="false" />
+          <span class="models__count" id="providerCount" aria-live="polite">54</span>
         </div>
 
-        <div class="models__grid" id="providerGrid" role="list">
-          <div class="model is-free" data-name="gmi cloud free built in no key" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>Alphax — free, built in</div>
-          <div class="model is-free" data-name="experiential labs free" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>Experiential Labs</div>
-          <div class="model" data-name="anthropic claude" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Anthropic / Claude</div>
-          <div class="model" data-name="anthropic api claude" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Anthropic API</div>
-          <div class="model" data-name="openai gpt chatgpt" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>OpenAI</div>
-          <div class="model" data-name="openai api gpt platform" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>OpenAI API</div>
-          <div class="model" data-name="google gemini" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Google Gemini</div>
-          <div class="model" data-name="gemini api google" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Gemini API</div>
-          <div class="model" data-name="github copilot" role="listitem"><span class="model__dot" style="--c:#C6C4B3"></span>GitHub Copilot</div>
-          <div class="model" data-name="cursor" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Cursor</div>
-          <div class="model" data-name="aws bedrock" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>AWS Bedrock</div>
-          <div class="model" data-name="azure openai microsoft" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Azure OpenAI</div>
-          <div class="model" data-name="openrouter" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>OpenRouter</div>
-          <div class="model" data-name="deepseek" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>DeepSeek</div>
-          <div class="model" data-name="xai grok" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>xAI (Grok)</div>
-          <div class="model" data-name="mistral" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Mistral</div>
-          <div class="model" data-name="groq" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>Groq</div>
-          <div class="model" data-name="perplexity sonar" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Perplexity</div>
-          <div class="model" data-name="together ai" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Together AI</div>
-          <div class="model" data-name="fireworks ai" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>Fireworks</div>
-          <div class="model" data-name="deep infra" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Deep Infra</div>
-          <div class="model" data-name="hugging face inference" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Hugging Face</div>
-          <div class="model" data-name="cohere" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>Cohere</div>
-          <div class="model" data-name="moonshot kimi" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Moonshot AI · Kimi</div>
-          <div class="model" data-name="kimi code" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Kimi Code</div>
-          <div class="model" data-name="z.ai zhipu" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Z.AI</div>
-          <div class="model" data-name="alibaba qwen dashscope" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Alibaba Cloud Coding Plan</div>
-          <div class="model" data-name="xiaomi mimo" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>Xiaomi MiMo</div>
-          <div class="model" data-name="minimax" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>MiniMax</div>
-          <div class="model" data-name="antigravity" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Antigravity</div>
-          <div class="model" data-name="ollama local" role="listitem"><span class="model__dot" style="--c:#EDECE3"></span>Ollama</div>
-          <div class="model" data-name="lm studio local" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>LM Studio</div>
-          <div class="model" data-name="openai compatible custom" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>OpenAI-compatible (any)</div>
-          <div class="model" data-name="opencode zen" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>OpenCode Zen</div>
-          <div class="model" data-name="opencode go" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>OpenCode Go</div>
-          <div class="model" data-name="baseten" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Baseten</div>
-          <div class="model" data-name="cerebras" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Cerebras</div>
-          <div class="model" data-name="nvidia nim" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>NVIDIA NIM</div>
-          <div class="model" data-name="chutes" role="listitem"><span class="model__dot" style="--c:#6E56CF"></span>Chutes</div>
-          <div class="model" data-name="nebius token factory" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Nebius Token Factory</div>
-          <div class="model" data-name="scaleway" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>Scaleway</div>
-          <div class="model" data-name="stackit" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>STACKIT</div>
-          <div class="model" data-name="cortecs" role="listitem"><span class="model__dot" style="--c:#6E56CF"></span>Cortecs</div>
-          <div class="model" data-name="comtegra gpu" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Comtegra GPU Cloud</div>
-          <div class="model" data-name="fpt ai marketplace" role="listitem"><span class="model__dot" style="--c:#8FBC6B"></span>FPT AI Marketplace</div>
-          <div class="model" data-name="firmware" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Firmware</div>
-          <div class="model" data-name="302.ai" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>302.AI</div>
-          <div class="model" data-name="zerog" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>ZeroG</div>
-          <div class="model" data-name="celeris" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>Celeris</div>
-          <div class="model" data-name="agentrouter" role="listitem"><span class="model__dot" style="--c:#8B7CFF"></span>AgentRouter</div>
-          <div class="model" data-name="tokenrouter" role="listitem"><span class="model__dot" style="--c:#6FA8C9"></span>TokenRouter</div>
-          <div class="model" data-name="dragonmeta" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Dragonmeta</div>
-          <div class="model" data-name="alphacode subscription" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>AlphaCode Subscription</div>
-          <div class="model" data-name="google gmail" role="listitem"><span class="model__dot" style="--c:#E5707A"></span>Google / Gmail</div>
-          <div class="model" data-name="auto import" role="listitem"><span class="model__dot" style="--c:#8C8B78"></span>Auto Import</div>
-        </div>
+        <div class="models__grid" id="providerGrid" role="list"></div>
+        <noscript><p class="models__more">Anthropic Claude, OpenAI, Google Gemini, GitHub Copilot, Cursor, AWS Bedrock, Azure OpenAI, OpenRouter, DeepSeek, xAI, Mistral, Groq, Ollama, LM Studio and many more — plus any OpenAI-compatible endpoint.</p></noscript>
+        <script>
+          /* Provider list — rendered before script.js runs so its search/count logic sees the nodes. */
+          (function () {
+            var G = '#8FBC6B', P = '#8B7CFF', B = '#6FA8C9', R = '#E5707A', M = '#8C8B78', V = '#6E56CF';
+            var list = [
+              ['Alphax — free, built in', G, 'gmi cloud free built in no key', 1], ['Experiential Labs', G, 'experiential labs free', 1],
+              ['Anthropic / Claude', P, 'anthropic claude'], ['Anthropic API', P, 'anthropic api claude'],
+              ['OpenAI', B, 'openai gpt chatgpt'], ['OpenAI API', B, 'openai api gpt platform'],
+              ['Google Gemini', B, 'google gemini'], ['Gemini API', B, 'gemini api google'],
+              ['GitHub Copilot', '#C6C4B3', 'github copilot'], ['Cursor', M, 'cursor'],
+              ['AWS Bedrock', P, 'aws bedrock'], ['Azure OpenAI', B, 'azure openai microsoft'],
+              ['OpenRouter', G, 'openrouter'], ['DeepSeek', B, 'deepseek'], ['xAI (Grok)', M, 'xai grok'],
+              ['Mistral', P, 'mistral'], ['Groq', R, 'groq'], ['Perplexity', B, 'perplexity sonar'],
+              ['Together AI', B, 'together ai'], ['Fireworks', R, 'fireworks ai'], ['Deep Infra', M, 'deep infra'],
+              ['Hugging Face', P, 'hugging face inference'], ['Cohere', G, 'cohere'],
+              ['Moonshot AI · Kimi', P, 'moonshot kimi'], ['Kimi Code', P, 'kimi code'], ['Z.AI', B, 'z.ai zhipu'],
+              ['Alibaba Cloud Coding Plan', P, 'alibaba qwen dashscope'], ['Xiaomi MiMo', P, 'xiaomi mimo'],
+              ['MiniMax', G, 'minimax'], ['Antigravity', M, 'antigravity'], ['Ollama', '#EDECE3', 'ollama local'],
+              ['LM Studio', M, 'lm studio local'], ['OpenAI-compatible (any)', M, 'openai compatible custom'],
+              ['OpenCode Zen', G, 'opencode zen'], ['OpenCode Go', G, 'opencode go'], ['Baseten', B, 'baseten'],
+              ['Cerebras', B, 'cerebras'], ['NVIDIA NIM', G, 'nvidia nim'], ['Chutes', V, 'chutes'],
+              ['Nebius Token Factory', B, 'nebius token factory'], ['Scaleway', B, 'scaleway'], ['STACKIT', R, 'stackit'],
+              ['Cortecs', V, 'cortecs'], ['Comtegra GPU Cloud', M, 'comtegra gpu'], ['FPT AI Marketplace', G, 'fpt ai marketplace'],
+              ['Firmware', M, 'firmware'], ['302.AI', R, '302.ai'], ['ZeroG', M, 'zerog'], ['Celeris', R, 'celeris'],
+              ['AgentRouter', P, 'agentrouter'], ['TokenRouter', B, 'tokenrouter'], ['Dragonmeta', M, 'dragonmeta'],
+              ['AlphaCode Subscription', M, 'alphacode subscription'], ['Google / Gmail', R, 'google gmail'], ['Auto Import', M, 'auto import']
+            ];
+            var grid = document.getElementById('providerGrid');
+            grid.innerHTML = list.map(function (p) {
+              return '<div class="model' + (p[3] ? ' is-free' : '') + '" data-name="' + p[2] + '" role="listitem"><span class="model__dot" style="--c:' + p[1] + '"></span>' + p[0] + '</div>';
+            }).join('');
+            var n = document.getElementById('providerCount'); if (n) n.textContent = list.length;
+            var s = document.getElementById('providerSearch'); if (s) s.placeholder = 'Search ' + list.length + ' providers…';
+          })();
+        </script>
 
-        <p class="models__more">
-          Don't see yours? Point <code>api_base</code> at any OpenAI-compatible endpoint and you're done.
-        </p>
+        <p class="models__more">Don't see yours? Point <code>api_base</code> at any OpenAI-compatible endpoint and you're done.</p>
       </div>
     </section>
 
@@ -456,15 +401,15 @@
 
         <div class="install__card">
           <div class="install__tabs" role="tablist" aria-label="Install method">
-            <button class="install__tab is-active" data-platform="mac" role="tab" aria-selected="true" tabindex="0">
+            <button class="install__tab is-active" id="tab-mac" data-platform="mac" role="tab" aria-selected="true" aria-controls="panel-mac" tabindex="0">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 2c0 1.5-.6 3-1.7 4-1 1-2.4 1.7-3.7 1.6 0-1.5.7-3 1.7-4S15 1.9 16.4 2zM20 17.2c-1.1 2.6-3.2 4.4-5.1 4.5-1.1.1-1.8-.4-2.7-.4-.9 0-1.9.4-2.8.4C7.1 21.7 5 19.8 5 17c0-2.2 1.4-3.2 3-4.1.8-.5 1.6-.9 2.4-.9 1 0 1.9.6 2.8.6.8 0 1.9-.7 3-.6.6 0 2.3.3 3.5 1.8-.1.1-2.1 1.2-2.1 3.5z"/></svg>
               macOS / Linux
             </button>
-            <button class="install__tab" data-platform="win" role="tab" aria-selected="false" tabindex="-1">
+            <button class="install__tab" id="tab-win" data-platform="win" role="tab" aria-selected="false" aria-controls="panel-win" tabindex="-1">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5l8-1v8H3zM12 4l9-1v9h-9zM3 13h8v8l-8-1zM12 13h9v9l-9-1z"/></svg>
               Windows
             </button>
-            <button class="install__tab" data-platform="src" role="tab" aria-selected="false" tabindex="-1">
+            <button class="install__tab" id="tab-src" data-platform="src" role="tab" aria-selected="false" aria-controls="panel-src" tabindex="-1">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 6 2 12l6 6M16 6l6 6-6 6"/></svg>
               Source
             </button>
@@ -472,19 +417,19 @@
           </div>
 
           <div class="install__panels">
-            <div class="install__panel" data-platform="mac" role="tabpanel">
+            <div class="install__panel" id="panel-mac" data-platform="mac" role="tabpanel" aria-labelledby="tab-mac">
               <div class="code">
                 <button class="code__copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash" aria-label="Copy install command">Copy</button>
                 <pre><code><span class="code__prompt">$</span> <span class="code__cmd">curl -fsSL</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh <span class="code__pipe">|</span> <span class="code__cmd">bash</span></code></pre>
               </div>
             </div>
-            <div class="install__panel" data-platform="win" role="tabpanel" hidden>
+            <div class="install__panel" id="panel-win" data-platform="win" role="tabpanel" aria-labelledby="tab-win" hidden>
               <div class="code">
                 <button class="code__copy" type="button" data-copy="iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex" aria-label="Copy install command">Copy</button>
                 <pre><code><span class="code__prompt">PS&gt;</span> <span class="code__cmd">iwr -useb</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 <span class="code__pipe">|</span> <span class="code__cmd">iex</span></code></pre>
               </div>
             </div>
-            <div class="install__panel" data-platform="src" role="tabpanel" hidden>
+            <div class="install__panel" id="panel-src" data-platform="src" role="tabpanel" aria-labelledby="tab-src" hidden>
               <div class="code">
                 <button class="code__copy" type="button" data-copy="git clone https://github.com/dragonked2/alphacode.git && cd alphacode && cargo build --release" aria-label="Copy install command">Copy</button>
                 <pre><code><span class="code__cmd">git clone</span> https://github.com/dragonked2/alphacode.git
@@ -505,7 +450,7 @@
           </div>
         </div>
 
-        <p class="install__free-note"><span aria-hidden="true">→</span> <span>No step here asks for a key. <b>The free provider is ready the moment install finishes.</b></span></p>
+        <p class="install__free-note"><span aria-hidden="true">→</span> <span>No step here asks for a key. <b>The free provider is ready the moment install finishes.</b> Prefer to read the script first? <a href="https://github.com/dragonked2/alphacode/blob/main/scripts/install.sh" target="_blank" rel="noopener noreferrer">View install.sh</a>.</span></p>
       </div>
     </section>
 
@@ -521,15 +466,15 @@
         <div class="bench__grid">
           <div class="bench__card">
             <div class="bench__caption"><span>RAM · 1 active session</span><span class="bench__unit">MB</span></div>
-            <div class="bench__bars" data-bench="1" aria-label="Memory use with one session"></div>
+            <div class="bench__bars" data-bench="1" role="img" aria-label="Memory use with one session"></div>
           </div>
           <div class="bench__card">
             <div class="bench__caption"><span>RAM · 10 active sessions</span><span class="bench__unit">MB</span></div>
-            <div class="bench__bars" data-bench="10" aria-label="Memory use with ten sessions"></div>
+            <div class="bench__bars" data-bench="10" role="img" aria-label="Memory use with ten sessions"></div>
           </div>
         </div>
 
-        <p class="bench__note">Legacy benchmark snapshots, kept for historical comparison — AlphaCode has improved further since these were measured. See <a href="docs/#memory-usage--historical-snapshots">methodology</a> and <a href="docs/#safety--how-alphacode-protects-your-computer">safety model</a> for the source details.</p>
+        <p class="bench__note">Legacy benchmark snapshots, kept for historical comparison — AlphaCode has improved further since these were measured. See the <a href="/docs/#memory-usage--historical-snapshots">methodology</a> and the <a href="/docs/#safety--how-alphacode-protects-your-computer">safety model</a> for details.</p>
       </div>
     </section>
 
@@ -541,30 +486,12 @@
           <h2 class="section__title">Questions, answered.</h2>
         </header>
 
-        <details class="faq__item" open>
-          <summary>Is AlphaCode really free? Do I need an API key?</summary>
-          <p>Yes. AlphaCode is MIT-licensed and ships with a free, built-in AI model provider that works immediately after install — no API key, account, or payment required to start. Connect your own Claude, GPT, Gemini, or other provider key later if you want to, but it's never required.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Does it send my code anywhere?</summary>
-          <p>Only to the model provider that's active — the free built-in lane, or one you configure. The CLI itself is local. Nothing leaves your machine unless a model call needs context.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Which models work?</summary>
-          <p>The free built-in provider works out of the box. Beyond that, any OpenAI-compatible HTTP endpoint — tested with Claude (Anthropic), GPT-4o/5 (OpenAI), Gemini, Copilot, Cursor, Bedrock, and OpenRouter.</p>
-        </details>
-        <details class="faq__item">
-          <summary>How does swarm mode work?</summary>
-          <p>A planner turns your goal into a task DAG. Workers — each with their own model — execute independent nodes in parallel. A reviewer node merges and verifies the diff.</p>
-        </details>
-        <details class="faq__item">
-          <summary>Can I use it on a remote box with no GUI?</summary>
-          <p>Yes. Pure terminal. Pipe-friendly. Plays well with tmux, screen, and SSH.</p>
-        </details>
-        <details class="faq__item">
-          <summary>How is this different from Claude Code or Codex CLI?</summary>
-          <p>It's MIT, includes a free model so you can start with zero setup, is model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and other terminal agents.</p>
-        </details>
+        <details class="faq__item" open><summary>Is AlphaCode really free? Do I need an API key?</summary><p>Yes. AlphaCode is MIT-licensed and ships with a free, built-in AI model provider that works immediately after install — no API key, account, or payment required to start. Connect your own Claude, GPT, Gemini, or other provider key later if you want to, but it's never required.</p></details>
+        <details class="faq__item"><summary>Does it send my code anywhere?</summary><p>Only to the model provider that's active — the free built-in lane, or one you configure. The CLI itself is local. Nothing leaves your machine unless a model call needs context.</p></details>
+        <details class="faq__item"><summary>Which models work?</summary><p>The free built-in provider works out of the box. Beyond that, any OpenAI-compatible HTTP endpoint — tested with Claude (Anthropic), GPT-4o/5 (OpenAI), Gemini, Copilot, Cursor, Bedrock, and OpenRouter.</p></details>
+        <details class="faq__item"><summary>How does swarm mode work?</summary><p>A planner turns your goal into a task DAG. Workers — each with their own model — execute independent nodes in parallel. A reviewer node merges and verifies the diff.</p></details>
+        <details class="faq__item"><summary>Can I use it on a remote box with no GUI?</summary><p>Yes. Pure terminal. Pipe-friendly. Plays well with tmux, screen, and SSH.</p></details>
+        <details class="faq__item"><summary>How is this different from Claude Code or Codex CLI?</summary><p>It's MIT, includes a free model so you can start with zero setup, is model-agnostic across 54 providers, swarm-capable, and Rust-fast — using roughly 3–14x less memory than Claude Code, Codex CLI, Cursor Agent, and other terminal agents (see the benchmarks section for methodology).</p></details>
       </div>
     </section>
 
@@ -574,13 +501,10 @@
         <h2 class="cta__title">Try it on a real repo. No key required.</h2>
         <p class="cta__sub">Open any project, run <code>alphacode</code>, and describe what you want changed — the free model answers right away.</p>
         <div class="cta__row">
-          <a class="btn btn--primary btn--lg" href="#install">
-            <span>Install free</span>
+          <a class="btn btn--primary btn--lg" href="#install"><span>Install free</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
-          <a class="btn btn--ghost btn--lg" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">
-            <span>Read the source</span>
-          </a>
+          <a class="btn btn--ghost btn--lg" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer"><span>Star on GitHub</span></a>
         </div>
       </div>
     </section>
@@ -590,52 +514,66 @@
       <div class="footer__inner">
         <div class="footer__top">
           <div>
-            <a href="#" class="footer__brand" aria-label="AlphaCode home">
-              <span class="p">$</span><span>alphacode</span>
-            </a>
+            <a href="/" class="footer__brand" aria-label="AlphaCode home"><span class="p">$</span><span>alphacode</span></a>
             <p class="footer__tagline">The free AI coding agent for your terminal. No key needed to start. Open-source, model-agnostic, built in Rust.</p>
           </div>
-          <div class="footer__col">
+          <nav class="footer__col" aria-label="Product">
             <h4>Product</h4>
             <ul>
               <li><a href="#free">Free AI</a></li>
+              <li><a href="#demo">Video walkthrough</a></li>
               <li><a href="#features">Features</a></li>
               <li><a href="#swarm">Swarm mode</a></li>
               <li><a href="#models">Models</a></li>
               <li><a href="#bench">Benchmarks</a></li>
-              <li><a href="mcp.html">MCP servers</a></li>
+              <li><a href="/mcp.html">MCP servers</a></li>
             </ul>
-          </div>
-          <div class="footer__col">
+          </nav>
+          <nav class="footer__col" aria-label="Resources">
             <h4>Resources</h4>
             <ul>
               <li><a href="#install">Install</a></li>
-              <li><a href="docs/">Documentation</a></li>
+              <li><a href="/docs/">Documentation</a></li>
               <li><a href="#faq">FAQ</a></li>
-              <li><a href="https://github.com/dragonked2/alphacode/releases">Releases</a></li>
+              <li><a href="https://github.com/dragonked2/alphacode/releases" target="_blank" rel="noopener noreferrer">Releases</a></li>
             </ul>
-          </div>
-          <div class="footer__col">
+          </nav>
+          <nav class="footer__col" aria-label="Project">
             <h4>Project</h4>
             <ul>
               <li><a href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">GitHub</a></li>
               <li><a href="https://github.com/dragonked2/alphacode/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a></li>
               <li><a href="https://github.com/dragonked2/alphacode/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a></li>
-              <li><a href=".well-known/security.txt">security.txt</a></li>
+              <li><a href="/.well-known/security.txt">security.txt</a></li>
             </ul>
-          </div>
+          </nav>
         </div>
         <div class="footer__bottom">
-          <div class="footer__meta">
-            <span>MIT</span><span class="dot">·</span><span>Rust</span><span class="dot">·</span><span>2026</span>
-          </div>
-          <div class="footer__by">Built by <a href="https://github.com/alphacli">Alphacli</a></div>
+          <div class="footer__meta"><span>MIT</span><span class="dot">·</span><span>Rust</span><span class="dot">·</span><span>2026</span></div>
+          <div class="footer__by">Built by <a href="https://github.com/alphacli" target="_blank" rel="noopener noreferrer">Alphacli</a></div>
         </div>
       </div>
     </footer>
 
   </main>
 
-  <script src="script.js?v=20261003" defer></script>
+  <script>
+    /* Video: reveal chapter buttons only once the file loads; seek on click. */
+    (function () {
+      var v = document.getElementById('demoVideo'), c = document.getElementById('videoChapters');
+      if (!v || !c) return;
+      v.addEventListener('loadedmetadata', function () {
+        c.hidden = false;
+        c.querySelectorAll('button').forEach(function (b) {
+          if (+b.dataset.t > v.duration) b.parentNode.remove();
+        });
+      });
+      c.addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        v.currentTime = +b.dataset.t; v.play();
+      });
+    })();
+  </script>
+  <script src="/script.js?v=20261010" defer></script>
 </body>
 </html>
