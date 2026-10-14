@@ -971,7 +971,7 @@ p, .section__lede, .hero__sub { text-wrap: pretty; }
 .model:hover { border-color: var(--line-3); }
 .faq__item summary { cursor: pointer; }
 .faq__item summary:hover { color: var(--amber-hi); }
-.features, .swarm, .models, .install, .bench, .faq { content-visibility: auto; contain-intrinsic-size: auto 720px; }
+
 a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
 .code { max-width: 100%; }
 .code pre { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -1115,3 +1115,24 @@ p{text-wrap:pretty}
 .ce5707a{--c:#e5707a}
 .cedece3{--c:#edece3}
 .c6e56cf{--c:#6e56cf}
+
+/* ---- v10.1 fixes: nav overflow, hero scale, anchor accuracy ---- */
+html{scroll-padding-top:84px}
+section[id]{scroll-margin-top:84px}
+.nav__inner{gap:16px;flex-wrap:nowrap}
+.nav__brand{flex:0 0 auto}
+.nav__links{display:flex;flex:1 1 auto;justify-content:center;gap:2px;min-width:0}
+.nav__links a{white-space:nowrap;font-size:13.5px;padding:6px 10px}
+.nav__links a::before{content:none!important}
+.nav__cta{flex:0 0 auto;display:flex;align-items:center;gap:8px}
+.nav__cta .btn{white-space:nowrap}
+@media (max-width:1180px){.nav__links a.nav__opt{display:none}}
+.hero__title{font-size:clamp(2.1rem,5.2vw,3.9rem);line-height:1.08;max-width:18ch;margin-inline:auto;hyphens:none;word-break:normal}
+.hero__title .nw{white-space:nowrap}
+.hero__sub{font-size:clamp(1rem,1.5vw,1.15rem);max-width:62ch;margin-inline:auto}
+/* anchor offset: padding on html only (margin + padding were stacking to 168px) */
+html{scroll-padding-top:64px}
+section[id]{scroll-margin-top:0}
+@media (max-width:1500px){.nav__links a.nav__opt{display:none}}
+.nav__brand{margin-right:12px}
+.nav__links{overflow:hidden}

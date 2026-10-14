@@ -563,7 +563,8 @@
       const el = document.querySelector(id);
       if (!el) return;
       e.preventDefault();
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      setTimeout(() => el.scrollIntoView({ block: 'start' }), 700); /* re-align after lazy layout settles */
       history.replaceState(null, '', id);
       const focusable = el.querySelector('h1,h2,h3,a,button,input,select,textarea');
       if (focusable) {
