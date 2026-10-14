@@ -1,0 +1,19 @@
+# AlphaCode
+
+> AlphaCode is a free, open-source (MIT) AI coding agent written in Rust that runs in your terminal. It can read a codebase, edit files, run tests, automate Firefox and control desktop apps. A built-in free AI provider means no API key is required to start; 54 model providers (Claude, GPT, Gemini, DeepSeek, Mistral, Ollama and any OpenAI-compatible endpoint) can be added later.
+
+## Key facts
+- License: MIT. Language: Rust. Platforms: Windows, macOS, Linux.
+- 40+ built-in tools, swarm mode (parallel multi-agent execution), MCP server support, resumable sessions.
+- Install (macOS/Linux): curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash
+- Install (Windows): iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex
+
+## Pages
+- [Home](https://alphacli.github.io/): overview, features, providers, install, benchmarks, FAQ
+- [Documentation](https://alphacli.github.io/docs/): install, quick start, commands, troubleshooting, safety model
+- [MCP servers guide](https://alphacli.github.io/mcp/): how AlphaCode discovers, authorizes and runs MCP servers
+
+## Source
+- [GitHub repository](https://github.com/dragonked2/alphacode)
+- [Releases](https://github.com/dragonked2/alphacode/releases)
+- [Security policy](https://github.com/dragonked2/alphacode/blob/main/SECURITY.md)
