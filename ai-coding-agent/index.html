@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>What Is an AI Coding Agent? A Practical Guide | AlphaCode</title>
-  <meta name="description" content="What an AI coding agent is, how it differs from chat and autocomplete, and how to start with a free open-source one." />
+  <meta name="description" content="What an AI coding agent is, how it differs from chat and autocomplete, and how to start with a free open-source one. A plain-English guide." />
   <meta name="keywords" content="what is an AI coding agent, AI coding agent, AI coding assistant, agentic coding, terminal AI, LLM, open source" />
   <meta name="author" content="Alphacli" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
@@ -12,6 +12,9 @@
   <meta name="theme-color" content="#FAFAFE" media="(prefers-color-scheme: light)" />
   <meta name="color-scheme" content="dark light" />
   <link rel="canonical" href="https://alphacli.github.io/ai-coding-agent/" />
+  <link rel="alternate" hreflang="en" href="https://alphacli.github.io/ai-coding-agent/" />
+  <link rel="alternate" hreflang="x-default" href="https://alphacli.github.io/ai-coding-agent/" />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
@@ -19,21 +22,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" /></noscript>
-  <link rel="stylesheet" href="/styles.css?v=20261017" />
-  <link rel="stylesheet" href="/theme.css?v=20261017" />
+  <link rel="stylesheet" href="/styles.css?v=20261019" />
+  <link rel="stylesheet" href="/theme.css?v=20261019" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="AlphaCode" />
   <meta property="og:title" content="What Is an AI Coding Agent? A Practical Guide | AlphaCode" />
-  <meta property="og:description" content="What an AI coding agent is, how it differs from chat and autocomplete, and how to start with a free open-source one." />
+  <meta property="og:description" content="What an AI coding agent is, how it differs from chat and autocomplete, and how to start with a free open-source one. A plain-English guide." />
   <meta property="og:url" content="https://alphacli.github.io/ai-coding-agent/" />
-  <meta property="og:image" content="https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48" />
-  <meta property="og:image:width" content="1280" />
-  <meta property="og:image:height" content="640" />
+  <meta property="og:image" content="https://alphacli.github.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="AlphaCode, a free open-source AI coding agent for the terminal" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="What Is an AI Coding Agent? A Practical Guide | AlphaCode" />
-  <meta name="twitter:description" content="What an AI coding agent is, how it differs from chat and autocomplete, and how to start with a free open-source one." />
-  <meta name="twitter:image" content="https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48" />
+  <meta name="twitter:description" content="What an AI coding agent is, how it differs from chat and autocomplete, and how to start with a free open-source one. A plain-English guide." />
+  <meta name="twitter:image" content="https://alphacli.github.io/og-image.png" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -42,12 +45,12 @@
       "@type": "TechArticle",
       "@id": "https://alphacli.github.io/ai-coding-agent/#article",
       "headline": "What Is an AI Coding Agent?",
-      "description": "What an AI coding agent is, how it differs from chat and autocomplete, and how to start with a free open-source one.",
+      "description": "What an AI coding agent is, how it differs from chat and autocomplete, and how to start with a free open-source one. A plain-English guide.",
       "inLanguage": "en",
-      "datePublished": "2026-10-14",
-      "dateModified": "2026-10-14",
+      "datePublished": "2026-10-15",
+      "dateModified": "2026-10-15",
       "mainEntityOfPage": "https://alphacli.github.io/ai-coding-agent/",
-      "image": "https://repository-images.githubusercontent.com/1353408336/f8246045-7e2e-4625-8eb9-0dade2400e48",
+      "image": "https://alphacli.github.io/og-image.png",
       "author": {
         "@type": "Organization",
         "name": "Alphacli",
@@ -119,6 +122,7 @@
   ]
 }
   </script>
+  <link rel="stylesheet" href="/community.css?v=20261019" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -128,11 +132,13 @@
       <nav class="nav__links" id="navLinks" aria-label="Primary">
         <a href="/#features">Features</a><a href="/#models">Providers</a><a href="/#install">Install</a><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/#faq">FAQ</a>
         <div class="nav__drawer">
+          <a class="btn  btn--discord" href="https://discord.gg/zhXGvgZzf2" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.8ZM8 15.5c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.7 8 10.7s2.2 1.1 2.2 2.4S9.2 15.5 8 15.5Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg><span>Join our Discord</span></a>
           <a class="btn btn--ghost" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.9 1.1.1-.9.5-1.4.8-1.7-2.7-.3-5.6-1.3-5.6-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.3-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.9 5.6-5.6 5.9.5.4.8 1.2.8 2.5v3.7c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg><span>Star on GitHub</span></a>
           <a class="btn btn--primary" href="/#install"><span>Install free</span></a>
         </div>
       </nav>
       <div class="nav__cta">
+        <a class="btn btn--sm btn--discord" href="https://discord.gg/zhXGvgZzf2" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord community"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.8ZM8 15.5c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.7 8 10.7s2.2 1.1 2.2 2.4S9.2 15.5 8 15.5Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"/></svg><span>Discord</span></a>
         <a class="btn btn--sm btn--ghost" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer" aria-label="AlphaCode on GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.9 1.1.1-.9.5-1.4.8-1.7-2.7-.3-5.6-1.3-5.6-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.3-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.9 5.6-5.6 5.9.5.4.8 1.2.8 2.5v3.7c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg><span>GitHub</span><span class="nav__stars" id="navStars">★ Star</span></a>
         <a class="btn btn--sm btn--primary" href="/#install"><span>Install<span class="nav__free"> free</span></span></a>
         <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
@@ -221,6 +227,7 @@ alphacode</code></pre>
           <nav class="footer__col" aria-label="Project">
             <p class="footer__h">Project</p>
             <ul>
+              <li><a href="https://discord.gg/zhXGvgZzf2" target="_blank" rel="noopener noreferrer">Discord community</a></li>
               <li><a href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">GitHub</a></li>
               <li><a href="https://github.com/dragonked2/alphacode/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a></li>
               <li><a href="https://github.com/dragonked2/alphacode/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a></li>
@@ -234,6 +241,8 @@ alphacode</code></pre>
         </div>
       </div>
     </footer>
-  <script src="/script.js?v=20261017" defer></script>
+  <script src="/script.js?v=20261019" defer></script>
+  <script src="/community.js?v=20261019" defer></script>
+  <script src="/app.js?v=20261019" defer></script>
 </body>
 </html>

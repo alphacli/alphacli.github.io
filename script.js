@@ -269,6 +269,7 @@
           demoBar.style.width = pct + '%';
           demoBarW && demoBarW.setAttribute('aria-valuenow', String(Math.round(pct)));
           await sleep(850 + Math.random() * 450);
+          while (window.acDemoPaused) await sleep(200);
           line.querySelector('.l-caret')?.remove();
         }
 
@@ -476,7 +477,7 @@
 
     $$('.bench__bars').forEach(host => {
       const which = host.dataset.bench || '1';
-      const data = BENCH_DATA[which] || [];
+      const data = (BENCH_DATA[which] || []).slice().sort((a, b) => a.val - b.val);
       const max = Math.max(...data.map(d => d.val));
       data.forEach(d => {
         const row = document.createElement('div');
@@ -569,7 +570,6 @@
       if (!el) return;
       e.preventDefault();
       el.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
-      setTimeout(() => el.scrollIntoView({ block: 'start' }), 700); /* re-align after lazy layout settles */
       history.replaceState(null, '', id);
       const focusable = el.querySelector('h1,h2,h3,a,button,input,select,textarea');
       if (focusable) {

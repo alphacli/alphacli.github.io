@@ -18,6 +18,7 @@ This repo only contains static site assets. CLI source lives in
 - `docs/index.html` — full README, rendered with sidebar TOC
 - `404.html` — fallback for Pages
 - `robots.txt`, `sitemap.xml`, `.well-known/security.txt` — SEO + disclosure
+- `community.css`, `community.js` — Discord popup, floating join pill, community buttons
 - `LICENSE` — MIT (inherited from Alphacode)
 - `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`
 - `.github/` — Dependabot, issue + PR templates
