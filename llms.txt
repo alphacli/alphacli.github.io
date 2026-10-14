@@ -11,6 +11,7 @@
 ## Pages
 - [Home](https://alphacli.github.io/): overview, features, providers, install, benchmarks, FAQ
 - [Documentation](https://alphacli.github.io/docs/): install, quick start, commands, troubleshooting, safety model
+- [What is an AI coding agent?](https://alphacli.github.io/ai-coding-agent/): plain-English guide to AI coding agents and how to start free
 - [MCP servers guide](https://alphacli.github.io/mcp/): how AlphaCode discovers, authorizes and runs MCP servers
 
 ## Source

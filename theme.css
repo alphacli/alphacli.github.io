@@ -196,3 +196,37 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 .nav__links .nav__drawer .btn--primary{color:#0A0B12}
 .nav__links .nav__drawer .btn:hover{background:var(--panel-2)}
 .nav__links .nav__drawer .btn--primary:hover{background:var(--grad)}
+
+/* ---------- accessibility floors: legible text + 48px tap targets ---------- */
+.boot__path,.boot__badge,.demo__foot,.demo__foot *,.bench__unit,.bench__val,.bench__val *,.install__verify-list code,.footer__meta,.footer__meta *,.stat__lbl,.chip,.model{font-size:12.5px}
+.btn,.install__tab,.code__copy,.models__search,.swarm__play,.nav__brand{min-height:48px}
+.btn--sm{min-height:44px}
+.nav__toggle{width:48px;height:48px}
+.install__tab{padding-inline:18px}
+.install__verify-list code{padding:12px 14px}
+.footer__col ul{gap:0}
+.footer__col a,.footer__brand{display:inline-flex;align-items:center;min-height:48px}
+.footer__by a{display:inline-flex;align-items:center;min-height:48px;padding-inline:4px}
+.demo-video__meta a,.demo-video__frame figcaption a{display:inline-flex;align-items:center;min-height:48px}
+p a,.install__free-note a,.bench__note a,.section__lede a,.models__more a,li>a:not(.btn){padding-block:12px;margin-block:-12px}
+.nav__links>a{min-height:44px;display:inline-flex;align-items:center}
+@media (max-width:640px){body{font-size:16px}.feat p,.free__item p,.faq__item p{font-size:1rem}}
+
+/* ---------- article / guide pages ---------- */
+.prose{padding-block:48px 80px}
+.prose .crumbs{font:500 13px var(--mono);color:var(--text-mute);margin-bottom:20px;display:flex;gap:8px;flex-wrap:wrap}
+.prose .crumbs a{color:var(--text-dim);text-decoration:none;padding-block:12px;margin-block:-12px}
+.prose h1{font-size:clamp(2rem,4.6vw,3rem);line-height:1.1;font-weight:800;margin:0 0 20px}
+.prose__lede{font-size:1.15rem;color:var(--text-2)}
+.prose h2{font-size:clamp(1.4rem,2.6vw,1.8rem);margin:44px 0 12px;font-weight:800}
+.prose p,.prose li{font-size:1.04rem;line-height:1.75;color:var(--text-2)}
+.prose li{margin-bottom:6px}
+.prose a:not(.btn){color:var(--amber-hi);text-decoration:underline;text-underline-offset:3px}
+.prose pre{background:var(--panel);border:1px solid var(--line-2);border-radius:var(--r);padding:18px 20px;overflow-x:auto;font-size:13.5px}
+.prose .faq__item{margin-top:12px}
+.how .models__more{margin-top:28px}
+.bench__caption,.bench__caption *{font-size:12.5px}
+.swarm__play{min-width:48px}
+.skip{min-height:48px;display:inline-flex;align-items:center}
+.footer__col a{min-width:48px}
+p a,.install__free-note a,.bench__note a,.section__lede a,.models__more a{padding-block:16px;margin-block:-16px}

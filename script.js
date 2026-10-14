@@ -208,324 +208,329 @@
     });
   });
 
-  /* ------------------------------------------------------------
-     Animated hero boot sequence — install → first task, on the
-     free lane, with no API key. This IS the free-AI pitch, so
-     the very first lines make that explicit rather than assuming
-     the visitor will infer it from a generic demo.
-     ------------------------------------------------------------ */
-  const demoBody  = $('#demoBody');
-  const demoBar   = $('#demoBar');
-  const demoBarW  = $('#demoBarWrap');
-  const demoStatus= $('#demoStatus');
-  const demoTime  = $('#demoTime');
-  const demoTools = $('#demoTools');
-  const demoModel = $('#demoModel');
-  const demoFootDot = $('.demo__foot-dot');
+  /* Non-critical work (demo, swarm, bench, GitHub stats) runs when the browser is idle → better INP/TBT */
+  const idle = (fn) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 300));
+  idle(() => {
+    /* ------------------------------------------------------------
+       Animated hero boot sequence — install → first task, on the
+       free lane, with no API key. This IS the free-AI pitch, so
+       the very first lines make that explicit rather than assuming
+       the visitor will infer it from a generic demo.
+       ------------------------------------------------------------ */
+    const demoBody  = $('#demoBody');
+    const demoBar   = $('#demoBar');
+    const demoBarW  = $('#demoBarWrap');
+    const demoStatus= $('#demoStatus');
+    const demoTime  = $('#demoTime');
+    const demoTools = $('#demoTools');
+    const demoModel = $('#demoModel');
+    const demoFootDot = $('.demo__foot-dot');
 
-  if (demoBody) {
-    const steps = [
-      { p: 'alphacode', m: 'free lane', text: '<span class="l-dim">›</span> <span class="l-info">launching — no API key found, no key needed</span>' },
-      { p: 'provider',  m: 'free lane', text: '<span class="l-free">✓ free model provider ready</span> <span class="l-dim">$0 · 0 setup steps</span>' },
-      { p: 'you',       m: 'free lane', text: '<span class="l-info">"scan repo, plan migration to OAuth 2.1"</span>' },
-      { p: 'plan',      m: 'free lane', text: '<span class="l-warn">[planner]</span> <span class="l-info">decomposing goal…</span> <span class="l-dim">3 agents</span>' },
-      { p: 'agent-1',   m: 'free lane', text: '<span class="l-warn">[auth/routes.ts]</span> <span class="l-info">refactor login → authorization code</span>' },
-      { p: 'agent-2',   m: 'free lane', text: '<span class="l-warn">[auth/tokens.ts]</span> <span class="l-info">add PKCE, refresh-rotation</span>' },
-      { p: 'tests',     m: 'free lane', text: '<span class="l-info">running</span> <span class="l-dim">cargo test --workspace</span> <span class="l-ok">✓ 142/142</span>' },
-      { p: 'done',      m: 'free lane', text: '<span class="l-ok l-bold">✓ ready to commit</span> <span class="l-dim">2 files · 142 tests · $0 spent</span>' },
-    ];
-
-    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-
-    function setStatus(s) { demoStatus.textContent = s; }
-    function setTime(t)   { demoTime.textContent = t.toFixed(1) + 's'; }
-    function setTools(n)  { demoTools.textContent = String(n); }
-    function setModel(m)  { demoModel.textContent = m; }
-
-    async function run() {
-      demoBody.innerHTML = '';
-      setStatus('running');
-      demoBar.style.width = '0%';
-      demoBarW && demoBarW.setAttribute('aria-valuenow', '0');
-      demoFootDot && demoFootDot.classList.remove('is-done');
-      setTools(0); setTime(0);
-
-      const start = performance.now();
-      const tick = setInterval(() => {
-        setTime((performance.now() - start) / 1000);
-      }, 50);
-
-      for (let i = 0; i < steps.length; i++) {
-        const s = steps[i];
-        setModel(s.m);
-        const line = document.createElement('div');
-        line.innerHTML = `<span class="l-prompt">$</span> <span class="l-bold">${s.p}</span>  ${s.text}<span class="l-caret"></span>`;
-        demoBody.appendChild(line);
-        setTools(i + 1);
-        const pct = ((i + 1) / steps.length) * 100;
-        demoBar.style.width = pct + '%';
-        demoBarW && demoBarW.setAttribute('aria-valuenow', String(Math.round(pct)));
-        await sleep(850 + Math.random() * 450);
-        line.querySelector('.l-caret')?.remove();
-      }
-
-      clearInterval(tick);
-      setStatus('done');
-      demoFootDot && demoFootDot.classList.add('is-done');
-    }
-
-    function renderStatic() {
-      demoBody.innerHTML = '';
-      steps.forEach(s => {
-        const line = document.createElement('div');
-        line.innerHTML = `<span class="l-prompt">$</span> <span class="l-bold">${s.p}</span>  ${s.text}`;
-        demoBody.appendChild(line);
-      });
-      setModel('free lane');
-      setTools(steps.length);
-      demoBar.style.width = '100%';
-      demoBarW && demoBarW.setAttribute('aria-valuenow', '100');
-      setStatus('done');
-      setTime(5.8);
-      demoFootDot && demoFootDot.classList.add('is-done');
-    }
-
-    let cancelled = false;
-    function loop() {
-      run().then(() => sleep(6000)).then(() => {
-        if (!cancelled) loop();
-      });
-    }
-
-    if (reducedMotion) {
-      renderStatic();
-    } else {
-      loop();
-    }
-  }
-
-  /* ------------------------------------------------------------
-     Swarm DAG animation
-     ------------------------------------------------------------ */
-  const dagNodes = $('#dag-nodes');
-  const dagEdges = $('#dag-edges');
-  const dagPkts  = $('#dag-pkts');
-
-  if (dagNodes && dagEdges) {
-    const nodes = [
-      { id: 'root',   x:  40, y: 130, w: 110, h: 50, label: 'Goal',         sub: 'migrate → OAuth 2.1', kind: 'root' },
-      { id: 'plan',   x: 180, y: 130, w: 110, h: 50, label: 'Planner',      sub: 'free lane',           kind: 'plan' },
-      { id: 'a1',     x: 340, y:  40, w: 100, h: 46, label: 'Agent · A',    sub: 'free lane',           kind: 'agent' },
-      { id: 'a2',     x: 340, y: 130, w: 100, h: 46, label: 'Agent · B',    sub: 'free lane',           kind: 'agent' },
-      { id: 'a3',     x: 340, y: 220, w: 100, h: 46, label: 'Agent · C',    sub: 'free lane',           kind: 'agent' },
-      { id: 'merge',  x: 480, y: 130, w:  90, h: 50, label: 'Reviewer',     sub: 'free lane',           kind: 'merged' },
-    ];
-    const edges = [
-      ['root',  'plan'],
-      ['plan',  'a1'],
-      ['plan',  'a2'],
-      ['plan',  'a3'],
-      ['a1',    'merge'],
-      ['a2',    'merge'],
-      ['a3',    'merge'],
-    ];
-
-    const NS = 'http://www.w3.org/2000/svg';
-    const center = (n) => ({ x: n.x + n.w / 2, y: n.y + n.h / 2 });
-    const nodeById = Object.fromEntries(nodes.map(n => [n.id, n]));
-
-    edges.forEach(([from, to]) => {
-      const a = center(nodeById[from]);
-      const b = center(nodeById[to]);
-      const path = document.createElementNS(NS, 'path');
-      path.setAttribute('d', `M${a.x} ${a.y} C ${a.x+40} ${a.y}, ${b.x-40} ${b.y}, ${b.x} ${b.y}`);
-      path.setAttribute('marker-end', 'url(#arr)');
-      dagEdges.appendChild(path);
-    });
-
-    nodes.forEach(n => {
-      const g = document.createElementNS(NS, 'g');
-      g.classList.add('dag__node', `dag__node--${n.kind}`);
-      g.dataset.id = n.id;
-      const rect = document.createElementNS(NS, 'rect');
-      rect.setAttribute('x', n.x); rect.setAttribute('y', n.y);
-      rect.setAttribute('width', n.w); rect.setAttribute('height', n.h);
-      rect.setAttribute('rx', '2');
-      g.appendChild(rect);
-      const t1 = document.createElementNS(NS, 'text');
-      t1.setAttribute('x', n.x + n.w / 2);
-      t1.setAttribute('y', n.y + 22);
-      t1.setAttribute('text-anchor', 'middle');
-      t1.textContent = n.label;
-      g.appendChild(t1);
-      const t2 = document.createElementNS(NS, 'text');
-      t2.setAttribute('x', n.x + n.w / 2);
-      t2.setAttribute('y', n.y + 38);
-      t2.setAttribute('text-anchor', 'middle');
-      t2.classList.add('dag__sub');
-      t2.textContent = n.sub;
-      g.appendChild(t2);
-      dagNodes.appendChild(g);
-    });
-
-    const overlay  = $('#swarmOverlay');
-    const runBtn   = $('#swarmRun');
-    const reduced  = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    async function swarmRun() {
-      overlay?.classList.add('is-hidden');
-      const order = [
-        ['root'], ['plan'],
-        ['a1','a2','a3'],
-        ['a1','a2','a3'],
-        ['merge'],
+    if (demoBody) {
+      const steps = [
+        { p: 'alphacode', m: 'free lane', text: '<span class="l-dim">›</span> <span class="l-info">launching — no API key found, no key needed</span>' },
+        { p: 'provider',  m: 'free lane', text: '<span class="l-free">✓ free model provider ready</span> <span class="l-dim">$0 · 0 setup steps</span>' },
+        { p: 'you',       m: 'free lane', text: '<span class="l-info">"scan repo, plan migration to OAuth 2.1"</span>' },
+        { p: 'plan',      m: 'free lane', text: '<span class="l-warn">[planner]</span> <span class="l-info">decomposing goal…</span> <span class="l-dim">3 agents</span>' },
+        { p: 'agent-1',   m: 'free lane', text: '<span class="l-warn">[auth/routes.ts]</span> <span class="l-info">refactor login → authorization code</span>' },
+        { p: 'agent-2',   m: 'free lane', text: '<span class="l-warn">[auth/tokens.ts]</span> <span class="l-info">add PKCE, refresh-rotation</span>' },
+        { p: 'tests',     m: 'free lane', text: '<span class="l-info">running</span> <span class="l-dim">cargo test --workspace</span> <span class="l-ok">✓ 142/142</span>' },
+        { p: 'done',      m: 'free lane', text: '<span class="l-ok l-bold">✓ ready to commit</span> <span class="l-dim">2 files · 142 tests · $0 spent</span>' },
       ];
-      $$('#dag-nodes g').forEach(g => g.classList.remove('dag__node--active', 'dag__node--merged'));
+
       const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
-      for (const phase of order) {
-        $$('#dag-nodes g').forEach(g => g.classList.remove('dag__node--active'));
-        phase.forEach(id => {
-          const g = $(`#dag-nodes g[data-id="${id}"]`);
-          if (g) g.classList.add('dag__node--active');
+      function setStatus(s) { demoStatus.textContent = s; }
+      function setTime(t)   { demoTime.textContent = t.toFixed(1) + 's'; }
+      function setTools(n)  { demoTools.textContent = String(n); }
+      function setModel(m)  { demoModel.textContent = m; }
+
+      async function run() {
+        demoBody.innerHTML = '';
+        setStatus('running');
+        demoBar.style.width = '0%';
+        demoBarW && demoBarW.setAttribute('aria-valuenow', '0');
+        demoFootDot && demoFootDot.classList.remove('is-done');
+        setTools(0); setTime(0);
+
+        const start = performance.now();
+        const tick = setInterval(() => {
+          setTime((performance.now() - start) / 1000);
+        }, 50);
+
+        for (let i = 0; i < steps.length; i++) {
+          const s = steps[i];
+          setModel(s.m);
+          const line = document.createElement('div');
+          line.innerHTML = `<span class="l-prompt">$</span> <span class="l-bold">${s.p}</span>  ${s.text}<span class="l-caret"></span>`;
+          demoBody.appendChild(line);
+          setTools(i + 1);
+          const pct = ((i + 1) / steps.length) * 100;
+          demoBar.style.width = pct + '%';
+          demoBarW && demoBarW.setAttribute('aria-valuenow', String(Math.round(pct)));
+          await sleep(850 + Math.random() * 450);
+          line.querySelector('.l-caret')?.remove();
+        }
+
+        clearInterval(tick);
+        setStatus('done');
+        demoFootDot && demoFootDot.classList.add('is-done');
+      }
+
+      function renderStatic() {
+        demoBody.innerHTML = '';
+        steps.forEach(s => {
+          const line = document.createElement('div');
+          line.innerHTML = `<span class="l-prompt">$</span> <span class="l-bold">${s.p}</span>  ${s.text}`;
+          demoBody.appendChild(line);
         });
-        const targets = phase.filter(id => id !== 'merge' && id !== 'plan' && id !== 'root');
-        targets.forEach(id => {
-          const from = nodeById[id], to = nodeById['merge'];
-          if (!from || !to) return;
-          const c = document.createElementNS(NS, 'circle');
-          c.setAttribute('r', '3');
-          c.classList.add('pkt');
-          dagPkts.appendChild(c);
-          const startX = from.x + from.w;
-          const startY = from.y + from.h / 2;
-          const endX   = to.x;
-          const endY   = to.y + to.h / 2;
-          c.setAttribute('cx', startX); c.setAttribute('cy', startY);
-          const steps = 24;
-          for (let i = 1; i <= steps; i++) {
-            const t = i / steps;
-            const x = startX + (endX - startX) * t;
-            const y = startY + (endY - startY) * t;
-            requestAnimationFrame(() => {
-              c.setAttribute('cx', x); c.setAttribute('cy', y);
-            });
-          }
-          setTimeout(() => c.remove(), 600);
-        });
-        await sleep(reduced ? 50 : 700);
-        phase.forEach(id => {
-          const g = $(`#dag-nodes g[data-id="${id}"]`);
-          if (g && id !== 'root') g.classList.remove('dag__node--active');
-          if (g && id !== 'root') g.classList.add('dag__node--merged');
+        setModel('free lane');
+        setTools(steps.length);
+        demoBar.style.width = '100%';
+        demoBarW && demoBarW.setAttribute('aria-valuenow', '100');
+        setStatus('done');
+        setTime(5.8);
+        demoFootDot && demoFootDot.classList.add('is-done');
+      }
+
+      let cancelled = false;
+      function loop() {
+        run().then(() => sleep(6000)).then(() => {
+          if (!cancelled) loop();
         });
       }
-      await sleep(reduced ? 50 : 600);
-      if (!reduced) {
-        setTimeout(() => overlay?.classList.remove('is-hidden'), 1200);
+
+      if (reducedMotion) {
+        renderStatic();
+      } else {
+        loop();
       }
     }
 
-    runBtn?.addEventListener('click', () => {
-      overlay?.classList.add('is-hidden');
-      swarmRun().then(() => {
-        if (reduced) overlay?.classList.remove('is-hidden');
+    /* ------------------------------------------------------------
+       Swarm DAG animation
+       ------------------------------------------------------------ */
+    const dagNodes = $('#dag-nodes');
+    const dagEdges = $('#dag-edges');
+    const dagPkts  = $('#dag-pkts');
+
+    if (dagNodes && dagEdges) {
+      const nodes = [
+        { id: 'root',   x:  40, y: 130, w: 110, h: 50, label: 'Goal',         sub: 'migrate → OAuth 2.1', kind: 'root' },
+        { id: 'plan',   x: 180, y: 130, w: 110, h: 50, label: 'Planner',      sub: 'free lane',           kind: 'plan' },
+        { id: 'a1',     x: 340, y:  40, w: 100, h: 46, label: 'Agent · A',    sub: 'free lane',           kind: 'agent' },
+        { id: 'a2',     x: 340, y: 130, w: 100, h: 46, label: 'Agent · B',    sub: 'free lane',           kind: 'agent' },
+        { id: 'a3',     x: 340, y: 220, w: 100, h: 46, label: 'Agent · C',    sub: 'free lane',           kind: 'agent' },
+        { id: 'merge',  x: 480, y: 130, w:  90, h: 50, label: 'Reviewer',     sub: 'free lane',           kind: 'merged' },
+      ];
+      const edges = [
+        ['root',  'plan'],
+        ['plan',  'a1'],
+        ['plan',  'a2'],
+        ['plan',  'a3'],
+        ['a1',    'merge'],
+        ['a2',    'merge'],
+        ['a3',    'merge'],
+      ];
+
+      const NS = 'http://www.w3.org/2000/svg';
+      const center = (n) => ({ x: n.x + n.w / 2, y: n.y + n.h / 2 });
+      const nodeById = Object.fromEntries(nodes.map(n => [n.id, n]));
+
+      edges.forEach(([from, to]) => {
+        const a = center(nodeById[from]);
+        const b = center(nodeById[to]);
+        const path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', `M${a.x} ${a.y} C ${a.x+40} ${a.y}, ${b.x-40} ${b.y}, ${b.x} ${b.y}`);
+        path.setAttribute('marker-end', 'url(#arr)');
+        dagEdges.appendChild(path);
       });
-    });
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            io.disconnect();
-            swarmRun();
-          }
+
+      nodes.forEach(n => {
+        const g = document.createElementNS(NS, 'g');
+        g.classList.add('dag__node', `dag__node--${n.kind}`);
+        g.dataset.id = n.id;
+        const rect = document.createElementNS(NS, 'rect');
+        rect.setAttribute('x', n.x); rect.setAttribute('y', n.y);
+        rect.setAttribute('width', n.w); rect.setAttribute('height', n.h);
+        rect.setAttribute('rx', '2');
+        g.appendChild(rect);
+        const t1 = document.createElementNS(NS, 'text');
+        t1.setAttribute('x', n.x + n.w / 2);
+        t1.setAttribute('y', n.y + 22);
+        t1.setAttribute('text-anchor', 'middle');
+        t1.textContent = n.label;
+        g.appendChild(t1);
+        const t2 = document.createElementNS(NS, 'text');
+        t2.setAttribute('x', n.x + n.w / 2);
+        t2.setAttribute('y', n.y + 38);
+        t2.setAttribute('text-anchor', 'middle');
+        t2.classList.add('dag__sub');
+        t2.textContent = n.sub;
+        g.appendChild(t2);
+        dagNodes.appendChild(g);
+      });
+
+      const overlay  = $('#swarmOverlay');
+      const runBtn   = $('#swarmRun');
+      const reduced  = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      async function swarmRun() {
+        overlay?.classList.add('is-hidden');
+        const order = [
+          ['root'], ['plan'],
+          ['a1','a2','a3'],
+          ['a1','a2','a3'],
+          ['merge'],
+        ];
+        $$('#dag-nodes g').forEach(g => g.classList.remove('dag__node--active', 'dag__node--merged'));
+        const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+        for (const phase of order) {
+          $$('#dag-nodes g').forEach(g => g.classList.remove('dag__node--active'));
+          phase.forEach(id => {
+            const g = $(`#dag-nodes g[data-id="${id}"]`);
+            if (g) g.classList.add('dag__node--active');
+          });
+          const targets = phase.filter(id => id !== 'merge' && id !== 'plan' && id !== 'root');
+          targets.forEach(id => {
+            const from = nodeById[id], to = nodeById['merge'];
+            if (!from || !to) return;
+            const c = document.createElementNS(NS, 'circle');
+            c.setAttribute('r', '3');
+            c.classList.add('pkt');
+            dagPkts.appendChild(c);
+            const startX = from.x + from.w;
+            const startY = from.y + from.h / 2;
+            const endX   = to.x;
+            const endY   = to.y + to.h / 2;
+            c.setAttribute('cx', startX); c.setAttribute('cy', startY);
+            const steps = 24;
+            for (let i = 1; i <= steps; i++) {
+              const t = i / steps;
+              const x = startX + (endX - startX) * t;
+              const y = startY + (endY - startY) * t;
+              requestAnimationFrame(() => {
+                c.setAttribute('cx', x); c.setAttribute('cy', y);
+              });
+            }
+            setTimeout(() => c.remove(), 600);
+          });
+          await sleep(reduced ? 50 : 700);
+          phase.forEach(id => {
+            const g = $(`#dag-nodes g[data-id="${id}"]`);
+            if (g && id !== 'root') g.classList.remove('dag__node--active');
+            if (g && id !== 'root') g.classList.add('dag__node--merged');
+          });
+        }
+        await sleep(reduced ? 50 : 600);
+        if (!reduced) {
+          setTimeout(() => overlay?.classList.remove('is-hidden'), 1200);
+        }
+      }
+
+      runBtn?.addEventListener('click', () => {
+        overlay?.classList.add('is-hidden');
+        swarmRun().then(() => {
+          if (reduced) overlay?.classList.remove('is-hidden');
         });
-      }, { threshold: 0.3 });
-      io.observe($('#swarm'));
+      });
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              io.disconnect();
+              swarmRun();
+            }
+          });
+        }, { threshold: 0.3 });
+        io.observe($('#swarm'));
+      }
     }
-  }
 
-  /* ------------------------------------------------------------
-     Benchmark bars
-     ------------------------------------------------------------ */
-  const BENCH_DATA = {
-    '1': [
-      { name: 'AlphaCode',         val: 27.8,  best: true, self: true },
-      { name: 'Codex CLI',         val: 140.0 },
-      { name: 'pi',                val: 144.4 },
-      { name: 'Cursor Agent',      val: 214.9 },
-      { name: 'Antigravity CLI',   val: 243.7 },
-      { name: 'OpenCode',          val: 371.5 },
-      { name: 'GitHub Copilot CLI',val: 333.3 },
-      { name: 'Claude Code',       val: 386.6 },
-    ],
-    '10': [
-      { name: 'AlphaCode',         val: 117.0, best: true, self: true },
-      { name: 'Codex CLI',         val: 334.8 },
-      { name: 'pi',                val: 833.0 },
-      { name: 'Antigravity CLI',   val: 1021.2 },
-      { name: 'Cursor Agent',      val: 1632.4 },
-      { name: 'GitHub Copilot CLI',val: 1756.5 },
-      { name: 'Claude Code',       val: 2300.6 },
-      { name: 'OpenCode',          val: 3237.2 },
-    ],
-  };
+    /* ------------------------------------------------------------
+       Benchmark bars
+       ------------------------------------------------------------ */
+    const BENCH_DATA = {
+      '1': [
+        { name: 'AlphaCode',         val: 27.8,  best: true, self: true },
+        { name: 'Codex CLI',         val: 140.0 },
+        { name: 'pi',                val: 144.4 },
+        { name: 'Cursor Agent',      val: 214.9 },
+        { name: 'Antigravity CLI',   val: 243.7 },
+        { name: 'OpenCode',          val: 371.5 },
+        { name: 'GitHub Copilot CLI',val: 333.3 },
+        { name: 'Claude Code',       val: 386.6 },
+      ],
+      '10': [
+        { name: 'AlphaCode',         val: 117.0, best: true, self: true },
+        { name: 'Codex CLI',         val: 334.8 },
+        { name: 'pi',                val: 833.0 },
+        { name: 'Antigravity CLI',   val: 1021.2 },
+        { name: 'Cursor Agent',      val: 1632.4 },
+        { name: 'GitHub Copilot CLI',val: 1756.5 },
+        { name: 'Claude Code',       val: 2300.6 },
+        { name: 'OpenCode',          val: 3237.2 },
+      ],
+    };
 
-  $$('.bench__bars').forEach(host => {
-    const which = host.dataset.bench || '1';
-    const data = BENCH_DATA[which] || [];
-    const max = Math.max(...data.map(d => d.val));
-    data.forEach(d => {
-      const row = document.createElement('div');
-      row.className = 'bench__row';
-      const label = document.createElement('div');
-      label.className = 'bench__label' + (d.best ? ' is-best' : '') + (d.self ? ' is-self' : '');
-      label.textContent = d.name;
-      const wrap = document.createElement('div');
-      wrap.className = 'bench__bar-wrap';
-      const bar = document.createElement('div');
-      bar.className = 'bench__bar' + (d.best ? ' is-best' : '') + (d.self ? ' is-self' : '');
-      wrap.appendChild(bar);
-      const val = document.createElement('div');
-      val.className = 'bench__val';
-      val.innerHTML = `<b>${d.val}</b> MB`;
-      row.append(label, wrap, val);
-      host.appendChild(row);
-      requestAnimationFrame(() => {
-        const pct = (d.val / max) * 100;
-        bar.style.width = pct + '%';
+    $$('.bench__bars').forEach(host => {
+      const which = host.dataset.bench || '1';
+      const data = BENCH_DATA[which] || [];
+      const max = Math.max(...data.map(d => d.val));
+      data.forEach(d => {
+        const row = document.createElement('div');
+        row.className = 'bench__row';
+        const label = document.createElement('div');
+        label.className = 'bench__label' + (d.best ? ' is-best' : '') + (d.self ? ' is-self' : '');
+        label.textContent = d.name;
+        const wrap = document.createElement('div');
+        wrap.className = 'bench__bar-wrap';
+        const bar = document.createElement('div');
+        bar.className = 'bench__bar' + (d.best ? ' is-best' : '') + (d.self ? ' is-self' : '');
+        wrap.appendChild(bar);
+        const val = document.createElement('div');
+        val.className = 'bench__val';
+        val.innerHTML = `<b>${d.val}</b> MB`;
+        row.append(label, wrap, val);
+        host.appendChild(row);
+        requestAnimationFrame(() => {
+          const pct = (d.val / max) * 100;
+          bar.style.width = pct + '%';
+        });
       });
     });
+
+    /* ------------------------------------------------------------
+       Live repo stats (graceful fallback)
+       ------------------------------------------------------------ */
+    (function () {
+      const ns = $('#navStars'), sg = $('#statStars'), lbl = sg && sg.nextElementSibling;
+      const show = n => {
+        if (ns) ns.textContent = '\u2605 ' + n;
+        if (sg) sg.textContent = String(n);
+        if (lbl) lbl.textContent = 'GitHub stars';
+        try { localStorage.setItem('ac_stars', n); } catch (e) {}
+      };
+      try { const c = localStorage.getItem('ac_stars'); if (c) show(c); } catch (e) {}
+      fetch('https://api.github.com/repos/dragonked2/alphacode')
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(d => d.stargazers_count)
+        .catch(() => fetch('https://img.shields.io/github/stars/dragonked2/alphacode.json').then(r => r.json()).then(d => d.value))
+        .then(n => { if (n !== undefined && n !== null && n !== '') show(n); })
+        .catch(() => {});
+    })();
+
+    fetch('https://api.github.com/repos/dragonked2/alphacode/releases/latest', { headers: { 'Accept': 'application/vnd.github+json' }})
+      .then(r => r.ok ? r.json() : null)
+      .then(j => {
+        if (!j || !j.tag_name) return;
+        const normalized = /^v/i.test(j.tag_name) ? j.tag_name : ('v' + j.tag_name);
+        $$('.js-version').forEach(el => { el.textContent = normalized; });
+      })
+      .catch(() => {});
   });
 
-  /* ------------------------------------------------------------
-     Live repo stats (graceful fallback)
-     ------------------------------------------------------------ */
-  (function () {
-    const ns = $('#navStars'), sg = $('#statStars'), lbl = sg && sg.nextElementSibling;
-    const show = n => {
-      if (ns) ns.textContent = '\u2605 ' + n;
-      if (sg) sg.textContent = String(n);
-      if (lbl) lbl.textContent = 'GitHub stars';
-      try { localStorage.setItem('ac_stars', n); } catch (e) {}
-    };
-    try { const c = localStorage.getItem('ac_stars'); if (c) show(c); } catch (e) {}
-    fetch('https://api.github.com/repos/dragonked2/alphacode')
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .then(d => d.stargazers_count)
-      .catch(() => fetch('https://img.shields.io/github/stars/dragonked2/alphacode.json').then(r => r.json()).then(d => d.value))
-      .then(n => { if (n !== undefined && n !== null && n !== '') show(n); })
-      .catch(() => {});
-  })();
-
-  fetch('https://api.github.com/repos/dragonked2/alphacode/releases/latest', { headers: { 'Accept': 'application/vnd.github+json' }})
-    .then(r => r.ok ? r.json() : null)
-    .then(j => {
-      if (!j || !j.tag_name) return;
-      const normalized = /^v/i.test(j.tag_name) ? j.tag_name : ('v' + j.tag_name);
-      $$('.js-version').forEach(el => { el.textContent = normalized; });
-    })
-    .catch(() => {});
 
   /* ------------------------------------------------------------
      Provider search
