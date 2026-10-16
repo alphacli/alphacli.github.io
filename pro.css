@@ -51,3 +51,7 @@ section{scroll-margin-top:80px}
 .hero__title{font-size:clamp(36px,5.6vw,66px)!important;max-width:18ch;margin-inline:auto}
 @media(min-width:900px){.nav__inner{gap:10px}.nav__links{gap:0}.nav__links>a{padding:8px 9px!important;font-size:13.5px}.nav__cta{gap:6px}.nav__cta .btn--sm{padding-inline:12px}}
 @media(max-width:1180px){.nav__free,.nav__cta .btn--ghost{display:none}}
+/* mobile dock */
+.m-dock{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:95;display:none;gap:8px;padding:8px;border:1px solid var(--line-2);border-radius:16px;background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(14px);box-shadow:0 18px 40px -12px rgba(0,0,0,.6);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.m-dock.show{transform:none}.m-dock .btn{flex:1;justify-content:center}
+@media(max-width:760px){.m-dock{display:flex}.m-top-btn{bottom:calc(86px + env(safe-area-inset-bottom,0px))}}

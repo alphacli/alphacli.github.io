@@ -19,3 +19,8 @@ const b=$('.boot')[0];if(b&&matchMedia('(hover:hover) and (prefers-reduced-motio
 $('.stat__num').forEach(el=>{const m=el.textContent.trim().match(/^(\d+)(\+?)$/);if(!m||!('IntersectionObserver'in window))return;const n=+m[1];
  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1200);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+m[2];if(k<1)requestAnimationFrame(f)})(t0)}}).observe(el)});
 })();
+(()=>{const i=document.getElementById('install');if(!i||!document.querySelector('.hero'))return;const d=document.createElement('div');d.className='m-dock';
+d.innerHTML='<a class="btn btn--primary" href="#install">Install free</a><a class="btn btn--ghost" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">★ GitHub</a>';document.body.append(d);
+let past=false,inst=false;const up=()=>d.classList.toggle('show',past&&!inst);
+addEventListener('scroll',()=>{past=scrollY>600;up()},{passive:true});
+if('IntersectionObserver'in window)new IntersectionObserver(e=>{inst=e[0].isIntersecting;up()}).observe(i)})();

@@ -9,3 +9,10 @@ Already done in this update: `rel="me"` identity links, `sameAs` schema (X, Face
 4. **Content links**: publish tutorials ("fix failing tests with AlphaCode", "MCP + Burp walkthrough") and link back to /mcp/ and /ai-coding-agent/.
 5. **Badge**: ask users to add the README badge from the homepage Follow section.
 6. **Search Console**: submit sitemap.xml (verification file already present) and request indexing for /about/.
+
+## Get indexed on every search engine (do once)
+- Google: Search Console -> add https://alphacli.github.io/ -> Sitemaps -> submit `sitemap.xml` -> URL Inspection -> Request indexing for `/`, `/about/`, `/docs/`, `/mcp/`, `/ai-coding-agent/`.
+- Bing + Yahoo + DuckDuckGo: Bing Webmaster Tools -> import from Google Search Console -> submit sitemap.
+- IndexNow (Bing, Yandex, Seznam, Naver): key file `5db844014a1b414f13881d85223e09db.txt` is in the site root. Open
+  https://www.bing.com/indexnow?url=https://alphacli.github.io/&key=5db844014a1b414f13881d85223e09db
+- Yandex Webmaster and Baidu Webmaster: add the site and submit the sitemap.
