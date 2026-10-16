@@ -31,5 +31,43 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "dir": "ltr",
+  "orientation": "any",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Documentation",
+      "short_name": "Docs",
+      "url": "/docs/",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "MCP servers guide",
+      "short_name": "MCP",
+      "url": "/mcp/",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Install AlphaCode",
+      "short_name": "Install",
+      "url": "/#install",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

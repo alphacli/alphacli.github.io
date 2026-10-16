@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8"/><meta content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://img.shields.io; connect-src 'self' https://api.github.com https://img.shields.io; media-src 'self'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/><meta content="strict-origin-when-cross-origin" name="referrer"/><script src="/security.js?v=20261030"></script>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <title>AlphaCode Docs: Install the Free AI Coding Agent CLI</title>
 <meta content="Install AlphaCode, the free open-source AI coding agent. Quick start, commands, troubleshooting, safety model and FAQ for Windows, macOS and Linux." name="description"/>
@@ -35,8 +35,7 @@
 <meta content="https://alphacli.github.io/og-image.png" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="/styles.css?v=20261019" rel="stylesheet"/>
 <link href="/theme.css?v=20261019" rel="stylesheet"/>
 <link href="../docs/docs.css" rel="stylesheet"/>
@@ -55,7 +54,7 @@
 <link href="/modern.css?v=20261020" rel="stylesheet"/>
 <link href="/pro.css?v=20261021" rel="stylesheet"/>
 <link href="/pro2.css?v=20261022" rel="stylesheet"/>
-<link href="/pro3.css?v=20261023" rel="stylesheet"/></head>
+<link href="/pro3.css?v=20261023" rel="stylesheet"/><meta content="@alphaclicode" name="twitter:site"/><meta content="AlphaCode, a free open-source AI coding agent for the terminal" name="twitter:image:alt"/><link href="/ui.css?v=20261030" rel="stylesheet"/><link href="/utility.css?v=20261030" rel="stylesheet"/></head>
 <body>
 <a class="skip" href="#docs">Skip to content</a>
 <header class="nav" role="banner">
@@ -161,7 +160,7 @@
 <p>Press <code>Cmd + Space</code> → type <strong>"Terminal"</strong> → press Enter</p>
 <p> <td></td></p>
 <p>Press <code>Ctrl + Alt + T</code> (most distros)</p>
-<p>  </p>
+<p> </p>
 <p>Once it's open, everything below just works by copy-pasting one line at a time. If something looks like an error, jump straight to <a href="#troubleshooting--fixing-common-errors">Troubleshooting</a> — every common issue has a copy-paste fix.</p>
 <hr/>
 <h2 class="docs__h2" id="what-is-alphacode-really-the-technical-explanation">🧭 What is AlphaCode, really? (The technical explanation)</h2>
@@ -231,7 +230,7 @@
 <li><a href="#frequently-asked-questions">FAQ</a></li>
 <li><a href="#license">License</a></li>
 </ul>
-<p>  </p>
+<p> </p>
 <hr/>
 <h2 class="docs__h2" id="install-alphacode">📥 Install AlphaCode</h2>
 <p>Pick your operating system below. Each installer downloads AlphaCode, checks that the download is safe and untampered (a security step called checksum verification), and sets it up automatically.</p>
@@ -323,10 +322,10 @@ $actual   = (Get-FileHash .\alphacode-windows-x86_64.zip -Algorithm SHA256).Hash
 <p>Uses the free built-in <strong>GMI Cloud</strong> AI automatically.   <tr> <td>🔑 <b>A · Sign in</b></td> <td>Using your existing Claude/OpenAI/Gemini account</td> <td></td></tr></p>
 <pre class="docs__code"><code class="lang-bash">alphacode login
 alphacode login --provider openai</code></pre>
-<p>  <tr> <td>⚙️ <b>B · API key</b></td> <td>Developers, CI pipelines, scripts</td> <td></td></tr></p>
+<p> <tr> <td>⚙️ <b>B · API key</b></td> <td>Developers, CI pipelines, scripts</td> <td></td></tr></p>
 <pre class="docs__code"><code class="lang-bash">export ALPHACODE_OPENAI_API_KEY=sk-...
 alphacode</code></pre>
-<p>  </p>
+<p> </p>
 <blockquote class="docs__quote"><p><strong>💡 Beginner tip:</strong> if you're not sure which to pick, just run <code>alphacode</code> with no arguments. It works immediately using the free built-in AI — you can always switch providers later with <code>alphacode login</code>.</p></blockquote>
 <h3 class="docs__h3" id="launch-it">Launch it</h3>
 <pre class="docs__code"><code class="lang-bash">alphacode</code></pre>
@@ -531,7 +530,7 @@ alphacode model use gpt-4o           # pin a specific model</code></pre>
 <p> <td align="center" width="25%"></td></p>
 <p><strong>4️⃣ Clear reporting</strong></p>
 <p>Every finished task ends with: <em>what changed · what was verified · what's left.</em></p>
-<p>  </p>
+<p> </p>
 <p>The source of truth lives in <code>src/alphacode_base/prompt/system_prompt.md</code>, enforced by the tool implementations under <code>src/alphacode_app_core/tool/</code>.</p>
 <hr/>
 <h2 class="docs__h2" id="commands-reference">⌨️ Commands reference</h2>
@@ -659,7 +658,6 @@ cargo clippy --lib -- -D warnings</code></pre>
 <p><br/><br/></p>
 <p><sub>Made with care by <a href="https://github.com/dragonked2">Ali Essam</a> · MIT licensed</sub></p>
 <p></p>
-
 <footer class="footer" role="contentinfo">
 <div class="footer__inner">
 <div class="footer__top">
@@ -760,27 +758,11 @@ cargo clippy --lib -- -D warnings</code></pre>
 </div>
 </footer>
 <script defer="" src="../script.js"></script>
-<script>
-  // Highlight active TOC item on scroll
-  (() => {
-    const links = Array.from(document.querySelectorAll('.toc__item'));
-    const targets = links.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
-    if (!('IntersectionObserver' in window) || !targets.length) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const id = e.target.id;
-          links.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + id));
-        }
-      });
-    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-    targets.forEach(t => io.observe(t));
-  })();
-</script>
+<script defer="" src="/docs/docs.js"></script>
 <script defer="" src="/community.js?v=20261019"></script>
 <script defer="" src="/app.js?v=20261019"></script>
 <script defer="" src="/pro2.js?v=20261022"></script>
 <script defer="" src="/pro.js?v=20261021"></script>
 <script defer="" src="/modern.js?v=20261020"></script>
-<script defer="" src="/i18n.js?v=20261022"></script></body>
+<script defer="" src="/i18n.js?v=20261022"></script><script defer="" src="/ui.js?v=20261030"></script></body>
 </html>

@@ -2,7 +2,7 @@
 
 <html dir="ltr" id="top" lang="de-DE">
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8"/><meta content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://img.shields.io; connect-src 'self' https://api.github.com https://img.shields.io; media-src 'self'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <title>AlphaCode: Kostenloser Open-Source KI-Coding-Agent</title>
 <meta content="AlphaCode ist ein kostenloser, quelloffener KI-Coding-Agent für dein Terminal. Liest deinen Code, bearbeitet Dateien, führt Tests aus. Ohne API-Schlüssel." name="description"/>
@@ -18,7 +18,7 @@
 <meta content="#F7F6FF" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="dark light" name="color-scheme"/>
 <meta content="telephone=no" name="format-detection"/>
-<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/><script src="/security.js?v=20261030"></script>
 <link href="https://alphacli.github.io/de-de/" rel="canonical"/>
 <link href="/llms.txt" rel="alternate" title="LLM-readable summary" type="text/plain"/>
 <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='3' fill='%230B0C0A'/%3E%3Cpath d='M5 6 L10 11 L5 16' stroke='%238B7CFF' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 16 L17 16' stroke='%238B7CFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
@@ -28,8 +28,7 @@
 <link href="/site.webmanifest" rel="manifest"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="/styles.css?v=20261019" rel="stylesheet"/>
 <link href="/theme.css?v=20261019" rel="stylesheet"/>
 <meta content="website" property="og:type"/>
@@ -70,7 +69,7 @@
 <link href="https://alphacli.github.io/tr-tr/" hreflang="tr-TR" rel="alternate"/>
 <link href="https://alphacli.github.io/" hreflang="en" rel="alternate"/>
 <link href="https://alphacli.github.io/" hreflang="x-default" rel="alternate"/>
-<link href="/pro3.css?v=20261023" rel="stylesheet"/></head>
+<link href="/pro3.css?v=20261023" rel="stylesheet"/><link href="/ui.css?v=20261030" rel="stylesheet"/><link href="/utility.css?v=20261030" rel="stylesheet"/></head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
 <div aria-hidden="true" class="gutter"></div>
@@ -290,7 +289,7 @@
 <div class="ins__panel" data-cmd="curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash" data-p="mac" hidden="" role="tabpanel"><pre><code><span class="p">$</span> <span class="c">curl</span> <span class="o">-fsSL</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | <span class="c">bash</span></code></pre></div>
 <div class="ins__panel" data-cmd="iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex" data-p="win" hidden="" role="tabpanel"><pre><code><span class="p">PS&gt;</span> <span class="c">iwr</span> <span class="o">-useb</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | <span class="c">iex</span></code></pre></div>
 <div class="ins__panel" data-cmd="git clone https://github.com/dragonked2/alphacode.git &amp;&amp; cd alphacode &amp;&amp; cargo build --release" data-p="src" hidden="" role="tabpanel"><pre><code><span class="p">$</span> <span class="c">git clone</span> https://github.com/dragonked2/alphacode.git &amp;&amp; <span class="c">cd</span> alphacode &amp;&amp; <span class="c">cargo build</span> <span class="o">--release</span></code></pre></div></div>
-<p style="margin:18px 0 0;color:var(--text-dim);font-size:14px">Danach prüfen:</p>
+<p class="u-f4125b">Danach prüfen:</p>
 <ol class="ins__steps"><li>which alphacode</li><li>alphacode --version</li><li>alphacode doctor</li><li>alphacode</li></ol></div>
 <p class="install__free-note"><span aria-hidden="true">→</span> <span>No step here asks for a key. <b>The free provider is ready the moment install finishes.</b> Prefer to read the script first? <a href="https://github.com/dragonked2/alphacode/blob/main/scripts/install.sh" rel="noopener noreferrer" target="_blank">View install.sh</a>.</span></p>
 </div>
@@ -446,5 +445,5 @@
 <script defer="" src="/pro.js?v=20261021"></script>
 <script defer="" src="/modern.js?v=20261020"></script>
 <script defer="" src="/i18n.js?v=20261022"></script>
-</body>
+<script defer="" src="/ui.js?v=20261030"></script></body>
 </html>

@@ -5,3 +5,4 @@ Preferred-Languages: en, ar
 Canonical: https://alphacli.github.io/mcp/.well-known/security.txt
 Canonical: https://alphacli.github.io/.well-known/security.txt
 Policy: https://github.com/dragonked2/alphacode/blob/main/SECURITY.md
+Acknowledgments: https://github.com/dragonked2/alphacode/security/advisories

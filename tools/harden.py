@@ -1,0 +1,72 @@
+"""Idempotent security + SEO + UX post-processor. Run LAST (after build_home.py / polish.py):
+   python tools/harden.py
+Adds meta CSP, removes inline scripts/handlers/styles (so CSP can stay strict), wires ui.css/ui.js/security.js,
+completes OG/Twitter tags, and rewrites utility.css from the inline styles it finds."""
+import re,glob,hashlib,pathlib
+from bs4 import BeautifulSoup
+R=pathlib.Path(__file__).resolve().parent.parent;U='https://alphacli.github.io';V='?v=20261030'
+CSP="; ".join(["default-src 'self'","script-src 'self'","style-src 'self' https://fonts.googleapis.com","font-src https://fonts.gstatic.com",
+ "img-src 'self' data: https://img.shields.io","connect-src 'self' https://api.github.com https://img.shields.io","media-src 'self'",
+ "object-src 'none'","frame-src 'none'","worker-src 'none'","manifest-src 'self'","base-uri 'self'","form-action 'self'","upgrade-insecure-requests"])
+FONT_RE=re.compile(r'fonts\.googleapis\.com/css2')
+util={}
+_u=R/'utility.css'
+if _u.exists():
+    for k,v in re.findall(r'^\.(u-[0-9a-f]{6})\{(.*)\}$',_u.read_text(),re.M):util[k]=v
+def cls_for(css):
+    css=css.strip().rstrip(';');k='u-'+hashlib.md5(css.encode()).hexdigest()[:6];util[k]=css;return k
+def meta(soup,attr,key,content):
+    m=soup.find('meta',attrs={attr:key})
+    if m is None:
+        m=soup.new_tag('meta');m[attr]=key;m['content']=content;soup.head.append(m)
+    elif not m.get('content'):m['content']=content
+files=[f for f in R.glob('**/*.html') if not any(p in f.parts for p in('tools','.git','node_modules'))and not f.name.startswith('google')]
+for f in sorted(files):
+    rel=f.relative_to(R).as_posix();s=BeautifulSoup(f.read_text(),'html.parser');h=s.head
+    if not h:continue
+    # 1) inline scripts -> external files
+    for sc in s.find_all('script'):
+        if sc.get('src') or sc.get('type')=='application/ld+json':continue
+        t=(sc.string or '')
+        if 'location.replace' in t:sc['src']='/mcp-redirect.js';sc['defer']='';sc.string=''
+        elif 'Highlight active TOC' in t:sc['src']='/docs/docs.js';sc['defer']='';sc.string=''
+    # 2) font preload w/ inline onload -> normal stylesheet
+    for l in s.find_all('link'):
+        if l.get('onload'):
+            del l['onload'];l['rel']='stylesheet'
+            if l.get('as'):del l['as']
+    for ns in s.find_all('noscript'):
+        if ns.find('link',href=FONT_RE):ns.decompose()
+    # 3) inline handlers + style attributes -> classes
+    for el in s.find_all(True):
+        for a in [a for a in el.attrs if a.startswith('on')]:del el.attrs[a]
+        if el.get('style'):
+            c=cls_for(el['style']);el['class']=(el.get('class') or [])+[c];del el['style']
+    # 4) CSP + referrer (first things in <head>)
+    for m in h.find_all('meta',attrs={'http-equiv':re.compile('content-security-policy',re.I)}):m.decompose()
+    csp=s.new_tag('meta');csp['http-equiv']='Content-Security-Policy';csp['content']=CSP
+    cs=h.find('meta',charset=True);(cs.insert_after(csp) if cs else h.insert(0,csp))
+    if not h.find('meta',attrs={'name':'referrer'}):
+        r=s.new_tag('meta');r['name']='referrer';r['content']='strict-origin-when-cross-origin';csp.insert_after(r)
+    # 5) assets
+    if not h.find('script',src=re.compile('security.js')):
+        t=s.new_tag('script',src='/security.js'+V);r=h.find('meta',attrs={'name':'referrer'});r.insert_after(t)
+    for href in ('/ui.css','/utility.css'):
+        for l in h.find_all('link',href=re.compile('^'+re.escape(href)+r'(\?|$)')):l.decompose()
+        h.append(s.new_tag('link',rel='stylesheet',href=href+V))
+    if s.body and not s.body.find('script',src=re.compile('ui.js')):
+        t=s.new_tag('script',src='/ui.js'+V);t['defer']='';s.body.append(t)
+    # 6) outbound link safety
+    for a in s.find_all('a',target='_blank'):
+        r=set(a.get('rel') or []);r|={'noopener','noreferrer'};a['rel']=sorted(r)
+    # 7) complete social/SEO tags on indexable pages
+    if rel not in('404.html','mcp.html') and s.title:
+        can=h.find('link',rel='canonical');url=can['href'] if can else U+'/'+rel.replace('index.html','')
+        title=(h.find('meta',attrs={'property':'og:title'}) or {}).get('content') or s.title.get_text();d=(h.find('meta',attrs={'name':'description'}) or {}).get('content','')
+        img=U+'/og-image.png';alt='AlphaCode, a free open-source AI coding agent for the terminal'
+        for k,v in [('og:type','website'),('og:site_name','AlphaCode'),('og:title',title),('og:description',d),('og:url',url),('og:image',img),('og:image:width','1200'),('og:image:height','630'),('og:image:alt',alt)]:meta(s,'property',k,v)
+        for k,v in [('twitter:card','summary_large_image'),('twitter:site','@alphaclicode'),('twitter:title',title),('twitter:description',d),('twitter:image',img),('twitter:image:alt',alt)]:meta(s,'name',k,v)
+        meta(s,'name','robots','index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
+    f.write_text(str(s))
+(R/'utility.css').write_text('/* generated by tools/harden.py from former inline styles (keeps CSP free of unsafe-inline) */\n'+''.join(f'.{k}{{{v}}}\n' for k,v in sorted(util.items())))
+print('hardened',len(files),'pages;',len(util),'utility classes')

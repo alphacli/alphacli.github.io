@@ -19,6 +19,9 @@ This repo only contains static site assets. CLI source lives in
 - `404.html` — fallback for Pages
 - `robots.txt`, `sitemap.xml`, `.well-known/security.txt` — SEO + disclosure
 - `community.css`, `community.js` — Discord popup, floating join pill, community buttons
+- `ui.css`, `ui.js` — modern UX layer (count-up stats, animated FAQ/tabs, press states)
+- `security.js`, `_headers` — clickjacking fallback + full HTTP header set (see `SECURITY-HARDENING.md`)
+- `tools/harden.py` — run last after the other build scripts: adds CSP meta, completes OG/Twitter tags
 - `LICENSE` — MIT (inherited from Alphacode)
 - `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`
 - `.github/` — Dependabot, issue + PR templates

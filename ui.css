@@ -1,0 +1,38 @@
+/* ui.css — modern UX layer (loads after pro3.css). Progressive enhancement only. */
+:root{interpolate-size:allow-keywords;--ease-out:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth;scrollbar-gutter:stable;-webkit-text-size-adjust:100%}
+:target,[id]{scroll-margin-top:84px}
+::selection{background:color-mix(in srgb,#8B7CFF 45%,transparent);color:inherit}
+h1,h2,h3{text-wrap:balance}p,li{text-wrap:pretty}
+:focus-visible{outline:2px solid #8B7CFF;outline-offset:3px;border-radius:6px;transition:outline-offset .15s var(--ease-out)}
+a,button,summary,[role=tab]{-webkit-tap-highlight-color:transparent}
+button,.btn,[role=tab],summary{touch-action:manipulation}
+@media(pointer:coarse){.btn,.ins__tab,.nav__links a,summary{min-height:44px}}
+/* buttons: press + shine */
+.btn{position:relative;overflow:hidden;isolation:isolate;transition:transform .2s var(--ease-out),box-shadow .25s,filter .2s}
+.btn:active{transform:scale(.97)}
+.btn--primary::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s var(--ease-out)}
+.btn--primary:hover::after{transform:translateX(120%)}
+.btn.is-busy{pointer-events:none;opacity:.8}
+/* tabs: smooth panel swap */
+.ins__panel:not([hidden]){animation:ui-fade .35s var(--ease-out)}
+.ins__tab{transition:background .25s,color .2s,transform .2s var(--ease-out)}
+.ins__tab:active{transform:scale(.96)}
+@keyframes ui-fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* FAQ accordion: animated open/close (Chromium 131+, graceful elsewhere) */
+details::details-content{block-size:0;overflow:hidden;transition:block-size .35s var(--ease-out),content-visibility .35s allow-discrete}
+details[open]::details-content{block-size:auto}
+details>summary{cursor:pointer;transition:color .2s}
+/* staggered reveal for grids */
+[data-stagger]>*{transition-delay:calc(var(--i,0)*60ms)}
+/* focus the card the pointer is on */
+@media(hover:hover){.features__grid:has(.feat:hover) .feat:not(:hover){opacity:.72;transition:opacity .3s}.features__grid .feat{transition:opacity .3s,transform .3s var(--ease-out)}}
+/* count-up numbers stay stable width */
+.stat__num{font-variant-numeric:tabular-nums}
+/* offscreen sections render lazily — better LCP/INP */
+main>section:not(:first-child),.footer{content-visibility:auto;contain-intrinsic-size:auto 600px}
+/* inline-style replacements are generated into utility.css */
+.sr-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* respect reduced motion everywhere */
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.m-marq__t{animation:none!important}}
+@media print{.nav,.m-top-btn,.m-progress,.m-kbd,.m-marq{display:none!important}}
