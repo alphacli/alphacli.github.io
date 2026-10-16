@@ -14,6 +14,7 @@
 - [What is an AI coding agent?](https://alphacli.github.io/ai-coding-agent/): plain-English guide to AI coding agents and how to start free
 - [MCP servers guide](https://alphacli.github.io/mcp/): how AlphaCode discovers, authorizes and runs MCP servers
 
+- [What is Alpha Code?](https://alphacli.github.io/alpha-code/): disambiguation and overview (not the Alpha Coders wallpaper site)
 - [About AlphaCode and its author Ali Essam](https://alphacli.github.io/about/): project mission, author, social profiles
 
 ## Community

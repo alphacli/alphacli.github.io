@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>AlphaCode: Free Open-Source AI Coding Agent for Terminal</title>
+  <title>AlphaCode (Alpha Code): Free Open-Source AI Coding Agent</title>
 
   <meta name="description" content="AlphaCode is a free, open-source AI coding agent written in Rust. Edit code, run tests and automate your browser from the terminal. No API key needed." />
   <meta name="author" content="Ali Essam" />
@@ -11,7 +11,7 @@
   <link rel="me" href="https://x.com/alphaclicode" />
   <link rel="me" href="https://www.facebook.com/xalphacode" />
   <link rel="me" href="https://www.linkedin.com/company/dragonmeta" />
-  <meta name="keywords" content="AI coding agent, AI coding assistant, terminal AI, CLI coding agent, open source AI, free AI coding, agentic coding, LLM coding tool, Claude Code alternative, Rust, MCP, multi-agent AI" />
+  <meta name="keywords" content="alpha code, alphacode, alpha codes, alpha coder, alpha console, AI coding agent, AI coding assistant, terminal AI, CLI coding agent, open source AI, free AI coding, agentic coding, LLM coding tool, Claude Code alternative, Rust, MCP, multi-agent AI" />
   <meta name="application-name" content="AlphaCode" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
   <meta name="theme-color" content="#0A0A12" media="(prefers-color-scheme: dark)" />
@@ -86,7 +86,7 @@
       "@type": "WebSite",
       "@id": "https://alphacli.github.io/#website",
       "name": "AlphaCode",
-      "alternateName": "AlphaCode AI Coding Agent",
+      "alternateName": ["Alpha Code","alphacode","AlphaCode CLI","AlphaCode AI Coding Agent"],
       "url": "https://alphacli.github.io/",
       "inLanguage": "en",
       "description": "AlphaCode is a free, open-source AI coding agent written in Rust. Edit code, run tests and automate your browser from the terminal. No API key needed.",
@@ -180,6 +180,16 @@
         },
         {
           "@type": "Question",
+          "name": "What is Alpha Code?",
+          "acceptedAnswer": {"@type": "Answer","text": "AlphaCode (also written Alpha Code or alphacode) is a free, open-source AI coding agent written in Rust that runs in your terminal. Learn more on the Alpha Code page."}
+        },
+        {
+          "@type": "Question",
+          "name": "Is AlphaCode the same as Alpha Coders or Wallpaper Abyss?",
+          "acceptedAnswer": {"@type": "Answer","text": "No. Alpha Coders and Wallpaper Abyss (wall.alphacoders.com) is an unrelated wallpaper website. AlphaCode is an AI coding agent for developers and is not affiliated with it."}
+        },
+        {
+          "@type": "Question",
           "name": "How does swarm mode work?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -236,6 +246,7 @@
 <link rel="stylesheet" href="/modern.css?v=20261020" />
 <link rel="stylesheet" href="/pro.css?v=20261021" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Install AlphaCode, the free open-source AI coding agent","totalTime":"PT2M","tool":{"@type":"HowToTool","name":"Terminal"},"step":[{"@type":"HowToStep","name":"Run the installer","text":"macOS/Linux: curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash. Windows: iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex"},{"@type":"HowToStep","name":"Verify the install","text":"Run alphacode --version and alphacode doctor."},{"@type":"HowToStep","name":"Start coding","text":"Open a project, run alphacode and describe what you want changed. No API key needed."}]}</script>
+<link rel="stylesheet" href="/pro2.css?v=20261022" />
 </head>
 <body>
 
@@ -549,6 +560,8 @@
         <details class="faq__item" open><summary>Is AlphaCode really free? Do I need an API key?</summary><p>Yes. AlphaCode is MIT-licensed and ships with a free, built-in AI model provider that works immediately after install — no API key, account, or payment required to start. Connect your own Claude, GPT, Gemini, or other provider key later if you want to, but it's never required.</p></details>
         <details class="faq__item"><summary>Does AlphaCode send code to a model provider?</summary><p>AlphaCode runs on your machine, but it may send task context to the active model provider to generate responses. Which data is sent depends on the task, tools used, and provider configuration. Review provider privacy terms and avoid including secrets in prompts or files shared with a model.</p></details>
         <details class="faq__item"><summary>Which models and providers work?</summary><p>The built-in free provider works out of the box. AlphaCode also supports a range of third-party integrations and OpenAI-compatible endpoints. The available providers may change by release; check the <a href="/docs/">documentation</a> for current setup details.</p></details>
+        <details class="faq__item"><summary>What is Alpha Code?</summary><p>AlphaCode (also written Alpha Code or alphacode) is a free, open-source AI coding agent written in Rust that runs in your terminal. Learn more on the <a href="/alpha-code/">Alpha Code page</a>.</p></details>
+        <details class="faq__item"><summary>Is AlphaCode the same as Alpha Coders or Wallpaper Abyss?</summary><p>No. Alpha Coders and Wallpaper Abyss (wall.alphacoders.com) is an unrelated wallpaper website. AlphaCode is an AI coding agent for developers and is not affiliated with it.</p></details>
         <details class="faq__item"><summary>How does swarm mode work?</summary><p>A planner turns your goal into a task DAG. Workers — each with their own model — execute independent nodes in parallel. A reviewer node merges and verifies the diff.</p></details>
         <details class="faq__item"><summary>Can I use it on a remote box with no GUI?</summary><p>Yes. Pure terminal. Pipe-friendly. Plays well with tmux, screen, and SSH.</p></details>
         <details class="faq__item"><summary>How is AlphaCode different from other coding agents?</summary><p>AlphaCode is MIT-licensed, includes a built-in free AI provider, supports multiple model providers, offers swarm workflows, and is written in Rust. The benchmark section provides historical memory measurements for specific test conditions; results vary by version, configuration, and workload.</p></details>
@@ -624,6 +637,7 @@
               <li><a href="/ai-coding-agent/">AI coding agent guide</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="/about/">About &amp; author</a></li>
+              <li><a href="/alpha-code/">What is Alpha Code?</a></li>
               <li><a href="https://github.com/dragonked2/alphacode/releases" target="_blank" rel="noopener noreferrer">Releases</a></li>
             </ul>
           </nav>
@@ -650,6 +664,7 @@
   <script src="/script.js?v=20261019" defer></script>
   <script src="/community.js?v=20261019" defer></script>
   <script src="/app.js?v=20261019" defer></script>
+<script src="/pro2.js?v=20261022" defer></script>
 <script src="/pro.js?v=20261021" defer></script>
   <script src="/modern.js?v=20261020" defer></script>
 </body>

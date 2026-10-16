@@ -34,7 +34,7 @@
   const overlay = document.createElement('div');
   overlay.className = 'dc-overlay';
   overlay.innerHTML = `
-    <div class="dc-modal" role="dialog" aria-modal="true" aria-labelledby="dcTitle" aria-describedby="dcDesc">
+    <div class="dc-modal" role="dialog" aria-modal="false" aria-labelledby="dcTitle" aria-describedby="dcDesc">
       <button class="dc-x" type="button" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
@@ -64,12 +64,9 @@
     shown = true;
     lastFocus = document.activeElement;
     overlay.classList.add('is-open');
-    document.documentElement.style.overflow = 'hidden';
-    setTimeout(() => modal.querySelector('.btn--discord').focus(), 30);
   }
   function close(snooze = true) {
     overlay.classList.remove('is-open');
-    document.documentElement.style.overflow = '';
     if (snooze) store.set({ until: Date.now() + SNOOZE_MS });
     showPill();
     lastFocus && lastFocus.focus && lastFocus.focus({ preventScroll: true });
@@ -88,29 +85,15 @@
   document.addEventListener('keydown', (e) => {
     if (!overlay.classList.contains('is-open')) return;
     if (e.key === 'Escape') { e.preventDefault(); close(); }
-    if (e.key === 'Tab') {
-      const f = focusables();
-      const first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
   });
 
   if (snoozed) { showPill(); return; }
 
-  /* triggers: engaged scroll, 30s on page, or desktop exit intent. Whichever is first, once. */
-  const trigger = () => { cleanup(); if (!document.querySelector('.nav.is-open')) open(); };
-  const onScroll = () => {
-    const d = document.documentElement;
-    if ((window.scrollY || d.scrollTop) / Math.max(1, d.scrollHeight - d.clientHeight) > .45) trigger();
-  };
-  const onLeave = (e) => { if (e.clientY <= 0) trigger(); };
-  const timer = setTimeout(trigger, 30000);
-  function cleanup() {
-    clearTimeout(timer);
-    window.removeEventListener('scroll', onScroll);
-    document.removeEventListener('mouseleave', onLeave);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  if (matchMedia('(hover:hover)').matches) document.addEventListener('mouseleave', onLeave);
+  /* Non-blocking toast. Never opens mid-scroll or right after a nav click, never locks scroll or moves focus. */
+  let lastScroll = 0, lastNav = 0;
+  addEventListener('scroll', () => { lastScroll = Date.now(); }, { passive: true });
+  document.addEventListener('click', (e) => { if (e.target.closest('a[href^="#"],.nav__toggle,.install__tab,.ins__tab')) lastNav = Date.now(); });
+  const calm = () => Date.now() - lastScroll > 2000 && Date.now() - lastNav > 3000 && !document.querySelector('.nav.is-open') && document.visibilityState === 'visible';
+  const attempt = () => { if (shown) return; calm() ? open() : setTimeout(attempt, 1500); };
+  setTimeout(attempt, 25000);
 })();
