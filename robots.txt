@@ -1,62 +1,22 @@
-# Search and AI answer engines are welcome. Build tooling is not indexable.
+# AlphaCode robots.txt
+# Search engines and AI answer engines are welcome. Only build tooling is excluded.
+
 User-agent: *
-Allow: /
-Disallow: /tools/
-
 User-agent: Googlebot
-Allow: /
-Disallow: /tools/
-
+User-agent: Googlebot-Image
 User-agent: Bingbot
-Allow: /
-Disallow: /tools/
-
 User-agent: DuckDuckBot
-Allow: /
-Disallow: /tools/
-
 User-agent: YandexBot
-Allow: /
-Disallow: /tools/
-
 User-agent: Baiduspider
-Allow: /
-Disallow: /tools/
-
 User-agent: Applebot
-Allow: /
-Disallow: /tools/
-
 User-agent: Applebot-Extended
-Allow: /
-Disallow: /tools/
-
 User-agent: GPTBot
-Allow: /
-Disallow: /tools/
-
 User-agent: OAI-SearchBot
-Allow: /
-Disallow: /tools/
-
 User-agent: ChatGPT-User
-Allow: /
-Disallow: /tools/
-
 User-agent: ClaudeBot
-Allow: /
-Disallow: /tools/
-
 User-agent: Claude-SearchBot
-Allow: /
-Disallow: /tools/
-
 User-agent: PerplexityBot
-Allow: /
-Disallow: /tools/
-
 User-agent: Google-Extended
-Allow: /
 Disallow: /tools/
 
 Sitemap: https://alphacli.github.io/sitemap.xml
