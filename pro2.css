@@ -30,3 +30,15 @@ html[lang^=ar] .m-hero h1{letter-spacing:0;line-height:1.35}
 .m-faq{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin:10px 0;padding:0 18px}.m-faq summary{cursor:pointer;padding:16px 0;font-weight:600;color:var(--text)}.m-faq p{margin:0 0 16px;color:var(--text-2)}
 .nav__brand{direction:ltr;unicode-bidi:isolate}
 .m-hero h1{font-size:clamp(30px,5vw,54px)}.m-hero .m-lede{margin-bottom:6px}
+/* AlphaX Free — royal gold */
+.model.is-free{position:relative;overflow:hidden;color:#2A1B00!important;font-weight:800;letter-spacing:.01em;background:linear-gradient(135deg,#FFF1B8 0%,#F0C94A 38%,#D9A21B 70%,#B8860B 100%)!important;border:1px solid #FFE08A!important;box-shadow:0 0 0 1px rgba(255,215,0,.35),0 12px 34px -10px rgba(232,180,40,.65),inset 0 1px 0 rgba(255,255,255,.6);padding-inline-start:14px}
+.model.is-free .model__dot{width:auto;height:auto;background:none!important;font-size:15px;line-height:1;margin-inline-end:2px}
+.model.is-free .model__dot::before{content:"♛";color:#5B3A00}
+.model.is-free::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.65) 50%,transparent 65%);transform:translateX(-130%);animation:m-gold 4.5s ease-in-out infinite}
+@keyframes m-gold{60%,100%{transform:translateX(130%)}}
+.model.is-free:hover{transform:translateY(-2px) scale(1.03)}
+.stat__num.is-free,.hero__free strong{background:linear-gradient(120deg,#FFE9A0,#E8B428,#B8860B);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+/* RTL: keep terminal/code surfaces left-to-right */
+[dir=rtl] .boot,[dir=rtl] .code,[dir=rtl] pre,[dir=rtl] .bench__row,[dir=rtl] .hero__sub code,[dir=rtl] code{direction:ltr;text-align:left;unicode-bidi:isolate}
+[dir=rtl] .hero__sub code,[dir=rtl] .faq__item code,[dir=rtl] p code{display:inline-block}
+@media(min-width:700px){.models__grid .model.is-free{grid-column:span 2;font-size:15px;padding-block:14px}}
