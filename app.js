@@ -26,7 +26,7 @@
 
   /* Copy buttons on every code block that has none (docs, MCP, guide pages) */
   $$('pre').forEach((pre) => {
-    if (pre.closest('.code') || pre.querySelector('.lang-mermaid') || pre.closest('.boot')) return;
+    if (pre.closest('.code') || pre.querySelector('.lang-mermaid') || pre.closest('.boot') || pre.closest('.ins')) return;
     pre.classList.add('has-copy');
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'pre-copy'; b.textContent = 'Copy'; b.setAttribute('aria-label', 'Copy code block');

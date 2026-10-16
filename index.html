@@ -233,6 +233,8 @@
   <link rel="stylesheet" href="/community.css?v=20261019" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "AlphaCode", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows, macOS, Linux", "description": "Free, open-source AI coding agent for the terminal, written in Rust.", "url": "https://alphacli.github.io/", "downloadUrl": "https://github.com/dragonked2/alphacode/releases", "license": "https://opensource.org/licenses/MIT", "image": "https://alphacli.github.io/og-image.png", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
 <link rel="stylesheet" href="/modern.css?v=20261020" />
+<link rel="stylesheet" href="/pro.css?v=20261021" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Install AlphaCode, the free open-source AI coding agent","totalTime":"PT2M","tool":{"@type":"HowToTool","name":"Terminal"},"step":[{"@type":"HowToStep","name":"Run the installer","text":"macOS/Linux: curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash. Windows: iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex"},{"@type":"HowToStep","name":"Verify the install","text":"Run alphacode --version and alphacode doctor."},{"@type":"HowToStep","name":"Start coding","text":"Open a project, run alphacode and describe what you want changed. No API key needed."}]}</script>
 </head>
 <body>
 
@@ -480,57 +482,14 @@
           <h2 class="section__title">Install the AI coding agent in one line.</h2>
         </header>
 
-        <div class="install__card">
-          <div class="install__tabs" role="tablist" aria-label="Install method">
-            <button class="install__tab is-active" id="tab-mac" data-platform="mac" role="tab" aria-selected="true" aria-controls="panel-mac" tabindex="0">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 2c0 1.5-.6 3-1.7 4-1 1-2.4 1.7-3.7 1.6 0-1.5.7-3 1.7-4S15 1.9 16.4 2zM20 17.2c-1.1 2.6-3.2 4.4-5.1 4.5-1.1.1-1.8-.4-2.7-.4-.9 0-1.9.4-2.8.4C7.1 21.7 5 19.8 5 17c0-2.2 1.4-3.2 3-4.1.8-.5 1.6-.9 2.4-.9 1 0 1.9.6 2.8.6.8 0 1.9-.7 3-.6.6 0 2.3.3 3.5 1.8-.1.1-2.1 1.2-2.1 3.5z"/></svg>
-              macOS / Linux
-            </button>
-            <button class="install__tab" id="tab-win" data-platform="win" role="tab" aria-selected="false" aria-controls="panel-win" tabindex="-1">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5l8-1v8H3zM12 4l9-1v9h-9zM3 13h8v8l-8-1zM12 13h9v9l-9-1z"/></svg>
-              Windows
-            </button>
-            <button class="install__tab" id="tab-src" data-platform="src" role="tab" aria-selected="false" aria-controls="panel-src" tabindex="-1">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 6 2 12l6 6M16 6l6 6-6 6"/></svg>
-              Source
-            </button>
-            <span class="install__indicator" id="installIndicator" aria-hidden="true"></span>
-          </div>
-
-          <div class="install__panels">
-            <div class="install__panel" id="panel-mac" data-platform="mac" role="tabpanel" aria-labelledby="tab-mac">
-              <div class="code">
-                <button class="code__copy" type="button" data-copy="curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash" aria-label="Copy install command">Copy</button>
-                <pre><code><span class="code__prompt">$</span> <span class="code__cmd">curl -fsSL</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh <span class="code__pipe">|</span> <span class="code__cmd">bash</span></code></pre>
-              </div>
-            </div>
-            <div class="install__panel" id="panel-win" data-platform="win" role="tabpanel" aria-labelledby="tab-win" hidden>
-              <div class="code">
-                <button class="code__copy" type="button" data-copy="iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex" aria-label="Copy install command">Copy</button>
-                <pre><code><span class="code__prompt">PS&gt;</span> <span class="code__cmd">iwr -useb</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 <span class="code__pipe">|</span> <span class="code__cmd">iex</span></code></pre>
-              </div>
-            </div>
-            <div class="install__panel" id="panel-src" data-platform="src" role="tabpanel" aria-labelledby="tab-src" hidden>
-              <div class="code">
-                <button class="code__copy" type="button" data-copy="git clone https://github.com/dragonked2/alphacode.git && cd alphacode && cargo build --release" aria-label="Copy install command">Copy</button>
-                <pre><code><span class="code__cmd">git clone</span> https://github.com/dragonked2/alphacode.git
-<span class="code__cmd">cd</span> alphacode
-<span class="code__cmd">cargo build --release</span></code></pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="install__verify">
-            <span class="install__verify-label">Then verify:</span>
-            <div class="install__verify-list">
-              <code><span class="install__verify-num">1</span>which alphacode</code>
-              <code><span class="install__verify-num">2</span>alphacode --version</code>
-              <code><span class="install__verify-num">3</span>alphacode doctor</code>
-              <code class="install__verify-go"><span class="install__verify-num">4</span>alphacode</code>
-            </div>
-          </div>
-        </div>
-
+        <div class="ins">
+<div class="ins__tabs" role="tablist" aria-label="Install method"><button class="ins__tab" role="tab" data-p="mac" data-title="bash — macOS / Linux" aria-selected="false">macOS / Linux</button><button class="ins__tab" role="tab" data-p="win" data-title="PowerShell — Windows" aria-selected="false">Windows</button><button class="ins__tab" role="tab" data-p="src" data-title="bash — build from source" aria-selected="false">Source</button></div>
+<div class="ins__term"><div class="ins__bar"><span class="ins__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="ins__title" id="insTitle">bash</span><button class="ins__copy" type="button">Copy command</button></div>
+<div class="ins__panel" data-p="mac" data-cmd="curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash" role="tabpanel" hidden><pre><code><span class="p">$</span> <span class="c">curl</span> <span class="o">-fsSL</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | <span class="c">bash</span></code></pre></div>
+<div class="ins__panel" data-p="win" data-cmd="iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex" role="tabpanel" hidden><pre><code><span class="p">PS&gt;</span> <span class="c">iwr</span> <span class="o">-useb</span> https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | <span class="c">iex</span></code></pre></div>
+<div class="ins__panel" data-p="src" data-cmd="git clone https://github.com/dragonked2/alphacode.git && cd alphacode && cargo build --release" role="tabpanel" hidden><pre><code><span class="p">$</span> <span class="c">git clone</span> https://github.com/dragonked2/alphacode.git &amp;&amp; <span class="c">cd</span> alphacode &amp;&amp; <span class="c">cargo build</span> <span class="o">--release</span></code></pre></div></div>
+<p style="margin:18px 0 0;color:var(--text-dim);font-size:14px">Then verify:</p>
+<ol class="ins__steps"><li>which alphacode</li><li>alphacode --version</li><li>alphacode doctor</li><li>alphacode</li></ol></div>
         <p class="install__free-note"><span aria-hidden="true">→</span> <span>No step here asks for a key. <b>The free provider is ready the moment install finishes.</b> Prefer to read the script first? <a href="https://github.com/dragonked2/alphacode/blob/main/scripts/install.sh" target="_blank" rel="noopener noreferrer">View install.sh</a>.</span></p>
       </div>
     </section>
@@ -690,6 +649,7 @@
   <script src="/script.js?v=20261019" defer></script>
   <script src="/community.js?v=20261019" defer></script>
   <script src="/app.js?v=20261019" defer></script>
-<script src="/modern.js?v=20261020" defer></script>
+<script src="/pro.js?v=20261021" defer></script>
+  <script src="/modern.js?v=20261020" defer></script>
 </body>
 </html>
