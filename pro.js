@@ -10,7 +10,7 @@ const tabs=$('.ins__tab');if(tabs.length){const cp=$('.ins__copy')[0],ti=$('#ins
  tabs.forEach((t,i)=>{t.onclick=()=>sel(t);t.onkeydown=e=>{const n=tabs[(i+(e.key==='ArrowRight')-(e.key==='ArrowLeft')+tabs.length)%tabs.length];if(/Arrow(Left|Right)/.test(e.key)){n.focus();sel(n)}}});
  const os=/Win/.test(navigator.platform)?'win':'mac';sel(tabs.find(t=>t.dataset.p===os)||tabs[0]);
  cp.onclick=async()=>{const p=$('.ins__panel:not([hidden])')[0];try{await navigator.clipboard.writeText(p.dataset.cmd)}catch(_){const a=d.createElement('textarea');a.value=p.dataset.cmd;d.body.append(a);a.select();d.execCommand('copy');a.remove()}
-  cp.classList.add('ok');cp.textContent='✓ Copied';setTimeout(()=>{cp.classList.remove('ok');cp.textContent='Copy command'},1800)}}
+  cp.classList.add('ok');cp.textContent=cp.dataset.done||'✓ Copied';setTimeout(()=>{cp.classList.remove('ok');cp.textContent=cp.dataset.label||'Copy command'},1800)}}
 // terminal tilt
 const b=$('.boot')[0];if(b&&matchMedia('(hover:hover) and (prefers-reduced-motion:no-preference)').matches){const h=b.parentElement;
  h.addEventListener('pointermove',e=>{const q=b.getBoundingClientRect();b.style.setProperty('--ry',((e.clientX-q.left)/q.width-.5)*6+'deg');b.style.setProperty('--rx',(.5-(e.clientY-q.top)/q.height)*5+'deg')});

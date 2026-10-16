@@ -27,3 +27,16 @@
 - [GitHub repository](https://github.com/dragonked2/alphacode)
 - [Releases](https://github.com/dragonked2/alphacode/releases)
 - [Security policy](https://github.com/dragonked2/alphacode/blob/main/SECURITY.md)
+
+## Languages
+- [English (US)](https://alphacli.github.io/en-us/)
+- [English (UK)](https://alphacli.github.io/en-gb/)
+- [العربية (مصر)](https://alphacli.github.io/ar-eg/)
+- [العربية (السعودية)](https://alphacli.github.io/ar-sa/)
+- [العربية (الإمارات)](https://alphacli.github.io/ar-ae/)
+- [Nederlands](https://alphacli.github.io/nl-nl/)
+- [Deutsch](https://alphacli.github.io/de-de/)
+- [Français](https://alphacli.github.io/fr-fr/)
+- [Español](https://alphacli.github.io/es-es/)
+- [Português (Brasil)](https://alphacli.github.io/pt-br/)
+- [Türkçe](https://alphacli.github.io/tr-tr/)
