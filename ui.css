@@ -36,3 +36,6 @@ main>section:not(:first-child),.footer{content-visibility:auto;contain-intrinsic
 /* respect reduced motion everywhere */
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.m-marq__t{animation:none!important}}
 @media print{.nav,.m-top-btn,.m-progress,.m-kbd,.m-marq{display:none!important}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* Narrow phones (<=420px): header controls overflowed and pushed the menu button off-screen. The drawer already has "Install free". */
+@media (max-width:420px){.nav__cta>.btn--primary{display:none}.nav__cta{gap:6px}}

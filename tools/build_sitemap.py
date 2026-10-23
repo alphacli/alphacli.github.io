@@ -1,7 +1,7 @@
 """Regenerates sitemap.xml (pages only — no CSS/JS/markdown/assets) and robots.txt."""
 import pathlib
 from i18n_data import LOCALES
-R=pathlib.Path(__file__).resolve().parent.parent;U='https://alphacli.github.io';NOW='2026-10-16'
+R=pathlib.Path(__file__).resolve().parent.parent;U='https://alphacli.github.io';NOW='2026-10-23'
 alt=''.join(f'\n    <xhtml:link rel="alternate" hreflang="{l[1]}" href="{U}/{l[0]}/"/>' for l in LOCALES)+f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{U}/"/>'
 def url(loc,freq,pri,extra=''):return f'  <url>\n    <loc>{U}{loc}</loc>\n    <lastmod>{NOW}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{pri}</priority>{extra}\n  </url>\n'
 img=f'\n    <image:image>\n      <image:loc>{U}/og-image.png</image:loc>\n      <image:title>AlphaCode, the free open-source AI coding agent</image:title>\n    </image:image>'
