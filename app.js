@@ -108,10 +108,10 @@
   /* nav trigger button */
   const cta = $('.nav__cta');
   if (cta) {
-    const k = document.createElement('button');
+    const k = cta.querySelector('.nav__k') || document.createElement('button');
     k.type = 'button'; k.className = 'nav__k'; k.setAttribute('aria-label', 'Open command palette');
     k.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.500-3.500"/></svg><kbd>${mod}K</kbd>`;
     k.addEventListener('click', open);
-    cta.insertBefore(k, cta.firstChild);
+    if (!k.parentNode) cta.insertBefore(k, cta.firstChild);
   }
 })();

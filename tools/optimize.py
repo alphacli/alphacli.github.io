@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 R=pathlib.Path(__file__).resolve().parent.parent
 FONT_INTER='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap'
 CSS_BASE=['styles','theme','community','modern','pro','pro2','pro3','ui','utility']
-JS_BASE=['script','community','app','pro2','pro','modern','i18n','ui']
+JS_BASE=['script','community','app','pro2','pro','modern','i18n','ui','enhance']
 def min_css(s):
     out=[];i=0;n=len(s);q=None
     while i<n:

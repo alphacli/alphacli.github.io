@@ -1,9 +1,9 @@
 (()=>{const d=document,r=d.documentElement,$=(s,x=d)=>[...x.querySelectorAll(s)];
 try{const t=localStorage.getItem('theme');if(t)r.dataset.theme=t}catch(_){}
 const cur=()=>r.dataset.theme||'dark',ico=()=>cur()==='dark'?'☾':'☀';
-const tb=d.createElement('button');tb.className='m-theme';tb.type='button';tb.setAttribute('aria-label','Toggle light or dark theme');tb.textContent=ico();
+const tb=$('.m-theme')[0]||d.createElement('button');tb.className='m-theme';tb.type='button';tb.setAttribute('aria-label','Toggle light or dark theme');tb.textContent=ico();
 tb.onclick=()=>{const n=cur()==='dark'?'light':'dark';r.dataset.theme=n;tb.textContent=ico();try{localStorage.setItem('theme',n)}catch(_){}};
-const slot=$('.nav__cta')[0]||$('.m-head__in')[0];if(slot)slot.prepend(tb);
+const slot=$('.nav__cta')[0]||$('.m-head__in')[0];if(slot&&!tb.parentNode)slot.prepend(tb);
 // install tabs + copy
 const tabs=$('.ins__tab');if(tabs.length){const cp=$('.ins__copy')[0],ti=$('#insTitle')[0];
  const sel=t=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===t));$('.ins__panel').forEach(p=>p.hidden=p.dataset.p!==t.dataset.p);ti.textContent=t.dataset.title};
@@ -21,6 +21,6 @@ $('.stat__num').forEach(el=>{const m=el.textContent.trim().match(/^(\d+)(\+?)$/)
 })();
 (()=>{const i=document.getElementById('install');if(!i||!document.querySelector('.hero'))return;const d=document.createElement('div');d.className='m-dock';
 d.innerHTML='<a class="btn btn--primary" href="#install">Install free</a><a class="btn btn--ghost" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">★ GitHub</a>';document.body.append(d);
-let past=false,inst=false;const up=()=>d.classList.toggle('show',past&&!inst);
+let past=false,inst=false,ft=false;const up=()=>d.classList.toggle('show',past&&!inst&&!ft);
 addEventListener('scroll',()=>{past=scrollY>600;up()},{passive:true});
-if('IntersectionObserver'in window)new IntersectionObserver(e=>{inst=e[0].isIntersecting;up()}).observe(i)})();
+if('IntersectionObserver'in window)new IntersectionObserver(e=>{inst=e[0].isIntersecting;up()}).observe(i);const fo=document.querySelector('footer');if(fo&&'IntersectionObserver'in window)new IntersectionObserver(e=>{ft=e[0].isIntersecting;up()}).observe(fo)})();

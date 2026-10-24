@@ -2,7 +2,6 @@
    Brand: violet→cyan gradient (primary) + royal gold (free / premium). */
 :root{--gold:#E8B428;--gold-hi:#F3CF63;--green:#E8B428;--green-hi:#F3CF63;--ok:#2FD08A}
 :root[data-theme=light]{--gold:#B8860B;--gold-hi:#8A6508;--green:#B8860B;--green-hi:#8A6508}
-@media(prefers-color-scheme:light){:root:not([data-theme=dark]):not([data-theme=light]){--green:#B8860B;--green-hi:#8A6508}}
 a{text-underline-offset:3px}
 .prose a,.docs a:not(.btn),.m-wrap a:not(.btn):not(.m-card){color:var(--amber-hi)}
 .prose a:hover,.docs a:not(.btn):hover{text-decoration:underline}

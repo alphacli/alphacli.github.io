@@ -788,11 +788,11 @@
   /* nav trigger button */
   const cta = $('.nav__cta');
   if (cta) {
-    const k = document.createElement('button');
+    const k = cta.querySelector('.nav__k') || document.createElement('button');
     k.type = 'button'; k.className = 'nav__k'; k.setAttribute('aria-label', 'Open command palette');
     k.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.500-3.500"/></svg><kbd>${mod}K</kbd>`;
     k.addEventListener('click', open);
-    cta.insertBefore(k, cta.firstChild);
+    if (!k.parentNode) cta.insertBefore(k, cta.firstChild);
   }
 })();;
 (()=>{const d=document,$=(s,x=d)=>[...x.querySelectorAll(s)],fine=matchMedia('(hover:hover) and (prefers-reduced-motion:no-preference)').matches;
@@ -814,9 +814,9 @@ if(fine&&$('.hero')[0]){const k=d.createElement('div');k.className='m-kbd';k.tex
 (()=>{const d=document,r=d.documentElement,$=(s,x=d)=>[...x.querySelectorAll(s)];
 try{const t=localStorage.getItem('theme');if(t)r.dataset.theme=t}catch(_){}
 const cur=()=>r.dataset.theme||'dark',ico=()=>cur()==='dark'?'☾':'☀';
-const tb=d.createElement('button');tb.className='m-theme';tb.type='button';tb.setAttribute('aria-label','Toggle light or dark theme');tb.textContent=ico();
+const tb=$('.m-theme')[0]||d.createElement('button');tb.className='m-theme';tb.type='button';tb.setAttribute('aria-label','Toggle light or dark theme');tb.textContent=ico();
 tb.onclick=()=>{const n=cur()==='dark'?'light':'dark';r.dataset.theme=n;tb.textContent=ico();try{localStorage.setItem('theme',n)}catch(_){}};
-const slot=$('.nav__cta')[0]||$('.m-head__in')[0];if(slot)slot.prepend(tb);
+const slot=$('.nav__cta')[0]||$('.m-head__in')[0];if(slot&&!tb.parentNode)slot.prepend(tb);
 // install tabs + copy
 const tabs=$('.ins__tab');if(tabs.length){const cp=$('.ins__copy')[0],ti=$('#insTitle')[0];
  const sel=t=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===t));$('.ins__panel').forEach(p=>p.hidden=p.dataset.p!==t.dataset.p);ti.textContent=t.dataset.title};
@@ -834,9 +834,9 @@ $('.stat__num').forEach(el=>{const m=el.textContent.trim().match(/^(\d+)(\+?)$/)
 })();
 (()=>{const i=document.getElementById('install');if(!i||!document.querySelector('.hero'))return;const d=document.createElement('div');d.className='m-dock';
 d.innerHTML='<a class="btn btn--primary" href="#install">Install free</a><a class="btn btn--ghost" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer">★ GitHub</a>';document.body.append(d);
-let past=false,inst=false;const up=()=>d.classList.toggle('show',past&&!inst);
+let past=false,inst=false,ft=false;const up=()=>d.classList.toggle('show',past&&!inst&&!ft);
 addEventListener('scroll',()=>{past=scrollY>600;up()},{passive:true});
-if('IntersectionObserver'in window)new IntersectionObserver(e=>{inst=e[0].isIntersecting;up()}).observe(i)})();;
+if('IntersectionObserver'in window)new IntersectionObserver(e=>{inst=e[0].isIntersecting;up()}).observe(i);const fo=document.querySelector('footer');if(fo&&'IntersectionObserver'in window)new IntersectionObserver(e=>{ft=e[0].isIntersecting;up()}).observe(fo)})();;
 (()=>{const d=document,$=(s,r=d)=>[...r.querySelectorAll(s)];
 const hasP=!!d.querySelector('.progress,.scroll-progress,[class*=progress]:not(.demo__bar)');if(hasP){}else if(!CSS.supports('animation-timeline','scroll()')){const p=d.createElement('div');p.className='m-progress';d.body.prepend(p);
  addEventListener('scroll',()=>{const h=d.documentElement;p.style.transform=`scaleX(${scrollY/Math.max(1,h.scrollHeight-innerHeight)})`},{passive:true})}
@@ -853,7 +853,7 @@ $('.m-badge [data-copy]').forEach(el=>{if(el.dataset.mBound)return;el.dataset.mB
 const seg=location.pathname.split('/').filter(Boolean)[0]||'',cur=L.find(x=>x[0]===seg);
 try{if(cur)localStorage.setItem('lang-pref',cur[0])}catch(_){}
 const slot=d.querySelector('.nav__cta');
-if(slot){const m=d.createElement('details');m.className='m-lang m-lang--icon';m.innerHTML='<summary aria-label="Language"><span aria-hidden="true">🌐</span></summary><ul>'+L.map(x=>'<li><a href="'+'/'+x[0]+'/" hreflang="'+x[2]+'" lang="'+x[2]+'"'+(cur&&cur[0]===x[0]?' aria-current="true"':'')+'>'+x[1]+'</a></li>').join('')+'</ul>';slot.prepend(m)}
+if(slot&&!slot.querySelector('.m-lang')){const m=d.createElement('details');m.className='m-lang m-lang--icon';m.innerHTML='<summary aria-label="Language"><span aria-hidden="true">🌐</span></summary><ul>'+L.map(x=>'<li><a href="'+'/'+x[0]+'/" hreflang="'+x[2]+'" lang="'+x[2]+'"'+(cur&&cur[0]===x[0]?' aria-current="true"':'')+'>'+x[1]+'</a></li>').join('')+'</ul>';slot.prepend(m)}
 if(cur||(seg&&seg!=='index.html'))return;
 const tzMap={'Africa/Cairo':'ar-eg','Asia/Riyadh':'ar-sa','Asia/Dubai':'ar-ae','Asia/Muscat':'ar-ae','Asia/Kuwait':'ar-sa','Asia/Qatar':'ar-sa','Asia/Bahrain':'ar-sa','Europe/Amsterdam':'nl-nl','Europe/Brussels':'nl-nl','Europe/Berlin':'de-de','Europe/Vienna':'de-de','Europe/Zurich':'de-de','Europe/Paris':'fr-fr','Europe/Madrid':'es-es','America/Sao_Paulo':'pt-br','Europe/Istanbul':'tr-tr','Europe/London':'en-gb'};
 const by={ar:'ar-eg',nl:'nl-nl',de:'de-de',fr:'fr-fr',es:'es-es',pt:'pt-br',tr:'tr-tr'};
@@ -884,5 +884,18 @@ const live=d.createElement('div');live.className='sr-live';live.setAttribute('ar
 d.addEventListener('click',e=>{const b=e.target.closest('[data-copy],.ins__copy,.copy');if(!b)return;b.classList.add('is-busy');live.textContent='Copied to clipboard';setTimeout(()=>{b.classList.remove('is-busy');live.textContent=''},1200)},{passive:true});
 // offline hint
 addEventListener('offline',()=>{live.textContent='You are offline. Some features are unavailable.'});addEventListener('online',()=>{live.textContent=''});
+})();;
+/* Hero quick-install: OS-aware command + one-click copy (no inline handlers: CSP-safe) */
+(function(){'use strict';
+var bar=document.querySelector('.hero__install');if(!bar)return;
+var u=bar.querySelector('[data-os=unix]'),w=bar.querySelector('[data-os=win]'),btn=bar.querySelector('.hero__copy');
+if(!u||!btn)return;
+var win=/Windows/i.test(navigator.userAgent)&&!/Phone/i.test(navigator.userAgent);
+if(win&&w){w.hidden=false;u.hidden=true}
+var live=btn.querySelector('.sr-only');
+function cmd(){return ((win&&w)?w:u).textContent.replace(/^\s*(\$|PS>)\s*/,'').trim()}
+function done(){btn.classList.add('is-done');if(live)live.textContent='Copied';setTimeout(function(){btn.classList.remove('is-done');if(live)live.textContent=''},1800)}
+function fallback(t){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{if(document.execCommand('copy'))done()}catch(e){}document.body.removeChild(ta)}
+btn.addEventListener('click',function(){var t=cmd();if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){fallback(t)})}else{fallback(t)}});
 })();;
 (function(){document.querySelectorAll('link[data-font]').forEach(function(l){l.media='all'})})();

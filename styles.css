@@ -866,8 +866,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visibl
   --amber:#8B7CFF; --amber-hi:#B2A8FF; --amber-lo:#6E56CF;
   --amber-dim:rgba(139,124,255,.5); --amber-glow:rgba(139,124,255,.32);
   --r:12px; --r-md:16px;
-  --type:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --type:'Inter','Inter Fallback',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono','JetBrains Mono Fallback',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --shadow-md:0 18px 44px -18px rgba(0,0,0,.75);
 }
 @media (prefers-color-scheme: light) {

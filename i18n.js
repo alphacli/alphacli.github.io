@@ -2,7 +2,7 @@
 const seg=location.pathname.split('/').filter(Boolean)[0]||'',cur=L.find(x=>x[0]===seg);
 try{if(cur)localStorage.setItem('lang-pref',cur[0])}catch(_){}
 const slot=d.querySelector('.nav__cta');
-if(slot){const m=d.createElement('details');m.className='m-lang m-lang--icon';m.innerHTML='<summary aria-label="Language"><span aria-hidden="true">🌐</span></summary><ul>'+L.map(x=>'<li><a href="'+'/'+x[0]+'/" hreflang="'+x[2]+'" lang="'+x[2]+'"'+(cur&&cur[0]===x[0]?' aria-current="true"':'')+'>'+x[1]+'</a></li>').join('')+'</ul>';slot.prepend(m)}
+if(slot&&!slot.querySelector('.m-lang')){const m=d.createElement('details');m.className='m-lang m-lang--icon';m.innerHTML='<summary aria-label="Language"><span aria-hidden="true">🌐</span></summary><ul>'+L.map(x=>'<li><a href="'+'/'+x[0]+'/" hreflang="'+x[2]+'" lang="'+x[2]+'"'+(cur&&cur[0]===x[0]?' aria-current="true"':'')+'>'+x[1]+'</a></li>').join('')+'</ul>';slot.prepend(m)}
 if(cur||(seg&&seg!=='index.html'))return;
 const tzMap={'Africa/Cairo':'ar-eg','Asia/Riyadh':'ar-sa','Asia/Dubai':'ar-ae','Asia/Muscat':'ar-ae','Asia/Kuwait':'ar-sa','Asia/Qatar':'ar-sa','Asia/Bahrain':'ar-sa','Europe/Amsterdam':'nl-nl','Europe/Brussels':'nl-nl','Europe/Berlin':'de-de','Europe/Vienna':'de-de','Europe/Zurich':'de-de','Europe/Paris':'fr-fr','Europe/Madrid':'es-es','America/Sao_Paulo':'pt-br','Europe/Istanbul':'tr-tr','Europe/London':'en-gb'};
 const by={ar:'ar-eg',nl:'nl-nl',de:'de-de',fr:'fr-fr',es:'es-es',pt:'pt-br',tr:'tr-tr'};
