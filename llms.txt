@@ -17,6 +17,8 @@
 - [What is Alpha Code?](https://alphacli.github.io/alpha-code/): disambiguation and overview (not the Alpha Coders wallpaper site)
 - [About AlphaCode and its author Ali Essam](https://alphacli.github.io/about/): project mission, author, social profiles
 
+- [Full text export for LLMs](https://alphacli.github.io/llms-full.txt): all pages above as one plain-text file
+
 ## Community
 - [X / Twitter](https://x.com/alphaclicode)
 - [Facebook](https://www.facebook.com/xalphacode)
