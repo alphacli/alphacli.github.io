@@ -1,7 +1,7 @@
 # AlphaCode: full documentation for LLMs
 
 > Plain-text export of the AlphaCode website (https://alphacli.github.io/). AlphaCode is a free, open-source (MIT) AI coding agent written in Rust that runs in the terminal.
-> Generated 2026-11-01. Canonical sources: the page URLs listed below.
+> Generated 2026-11-05. Canonical sources: the page URLs listed below.
 
 
 ---
