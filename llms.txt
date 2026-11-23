@@ -42,3 +42,7 @@
 - [Español](https://alphacli.github.io/es-es/)
 - [Português (Brasil)](https://alphacli.github.io/pt-br/)
 - [Türkçe](https://alphacli.github.io/tr-tr/)
+
+## Current source of truth
+- [Latest source README](https://github.com/dragonked2/alphacode/blob/main/README.md)
+- [Latest GitHub release](https://github.com/dragonked2/alphacode/releases/latest)

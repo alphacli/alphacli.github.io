@@ -43,8 +43,8 @@
   ]
 }
 </script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "AlphaCode documentation", "description": "Install, quick start, commands, troubleshooting and safety model for the AlphaCode AI coding agent.", "url": "https://alphacli.github.io/docs/", "image": "https://alphacli.github.io/og-image.png", "inLanguage": "en", "dateModified": "2026-11-05", "author": {"@type": "Organization", "name": "Alphacli", "url": "https://alphacli.github.io/"}, "publisher": {"@type": "Organization", "name": "Alphacli", "logo": {"@type": "ImageObject", "url": "https://alphacli.github.io/icon-512.png"}}}</script>
-<meta content="@alphaclicode" name="twitter:site"/><meta content="AlphaCode, a free open-source AI coding agent for the terminal" name="twitter:image:alt"/><link href="/llms-full.txt" rel="alternate" title="Full LLM-readable text" type="text/plain"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="/assets/docs.css?v=ea702762" rel="stylesheet"/><link data-font="" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" media="print" rel="stylesheet"/><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/></noscript></head>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "AlphaCode documentation", "description": "Install, quick start, commands, troubleshooting and safety model for the AlphaCode AI coding agent.", "url": "https://alphacli.github.io/docs/", "image": "https://alphacli.github.io/og-image.png", "inLanguage": "en", "dateModified": "2026-11-23", "author": {"@type": "Organization", "name": "Alphacli", "url": "https://alphacli.github.io/"}, "publisher": {"@type": "Organization", "name": "Alphacli", "logo": {"@type": "ImageObject", "url": "https://alphacli.github.io/icon-512.png"}}}</script>
+<meta content="@alphaclicode" name="twitter:site"/><meta content="AlphaCode, a free open-source AI coding agent for the terminal" name="twitter:image:alt"/><link href="/llms-full.txt" rel="alternate" title="Full LLM-readable text" type="text/plain"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="/assets/docs.css?v=45a10f24" rel="stylesheet"/><link data-font="" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" media="print" rel="stylesheet"/><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/></noscript></head>
 <body>
 <a class="skip" href="#docs">Skip to content</a>
 <header class="nav" role="banner">
@@ -72,7 +72,7 @@
 <main class="docs" id="docs">
 <aside aria-label="Table of contents" class="docs__sidebar">
 <div class="docs__sidebar-inner">
-<h2 class="docs__sidebar-title">Contents</h2>
+<h2 class="docs__sidebar-title">Contents</h2><section aria-labelledby="docs-current-title" class="docs-current" id="current-product-guide"><h2 id="docs-current-title">Current product guide</h2><p>AlphaCode ships with a built-in free model, terminal and desktop workflows, 40+ tools, and browser automation. For up-to-date installation flags and feature details, the <a href="https://github.com/dragonked2/alphacode#readme-top" rel="noopener noreferrer">official GitHub README</a> is the authoritative reference.</p><ul><li><strong>Windows desktop:</strong> <code>alphacode --gui</code></li><li><strong>Providers:</strong> OpenRouter and OrcaRouter, alongside Claude, GPT, Gemini, DeepSeek and local Ollama</li><li><strong>Appearance:</strong> <code>/theme royal-gold</code> or <code>/theme</code> to browse themes</li><li><strong>Pin a Windows installer version:</strong> load the installer as a PowerShell script block, then run <code>&amp; $installer -Version vX.Y.Z</code>.</li></ul></section>
 <nav class="toc">
 <a class="toc__item toc__item--h2" href="#in-one-sentence">🪄 In one sentence</a>
 <a class="toc__item toc__item--h2" href="#im-brand-new-to-this-start-here">🆕 I'm brand new to this. Start here.</a>
@@ -235,14 +235,15 @@
 <p>Technical detail: detects architecture (<code>x86_64</code>/<code>arm64</code>) → resolves the latest release tag → downloads <code>alphacode-windows-{arch}.zip</code> and <code>SHA256SUMS</code> → verifies the SHA-256 checksum → extracts <code>alphacode.exe</code> into <code>%LOCALAPPDATA%\Programs\alphacode\bin\</code> → prompts you to add that folder to your <code>PATH</code> (one-time, guided).</p>
 <p></p>
 <p><strong>Optional: pin a specific version or install location</strong></p>
-<pre class="docs__code"><code class="lang-powershell"># Pin a version
-iwr -useb ... | iex -Version v1.0.7
+<pre class="docs__code"><code class="lang-powershell">$installer = [scriptblock]::Create((irm https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1))
+# Pin a version
+&amp; $installer -Version v1.1.19
 
 # Install into a custom folder
-iwr -useb ... | iex -Prefix "$env:LOCALAPPDATA\Programs\alphacode"
+&amp; $installer -Prefix "$env:LOCALAPPDATA\Programs\alphacode"
 
 # Build from source instead of downloading
-iwr -useb ... | iex -FromSource</code></pre>
+&amp; $installer -FromSource</code></pre>
 <h3 class="docs__h3" id="macos--linux">macOS / Linux</h3>
 <ol class="docs__list">
 <li>Open <strong>Terminal</strong>.</li>
@@ -254,8 +255,8 @@ iwr -useb ... | iex -FromSource</code></pre>
 <p>Technical detail: detects OS (<code>linux</code>/<code>macos</code>) and architecture → resolves the latest release tag from the GitHub API → downloads <code>alphacode-{os}-{arch}.tar.gz</code> and <code>SHA256SUMS</code> → verifies SHA-256 → extracts the binary into <code>~/.local/bin/</code> (or <code>$ALPHACODE_PREFIX/bin</code>) → prints a <code>PATH</code> hint if needed.</p>
 <p></p>
 <p><strong>Optional settings (environment variables):</strong></p>
-<table class="docs__table"><thead><tr><th>Variable</th><th>Default</th><th>What it changes</th></tr></thead><tbody><tr><td><code>ALPHACODE_PREFIX</code></td><td><code>~/.local</code></td><td>Where it gets installed</td></tr><tr><td><code>ALPHACODE_BIN_DIR</code></td><td><code>$PREFIX/bin</code></td><td>Exact folder for the program file</td></tr><tr><td><code>ALPHACODE_VERSION</code></td><td><code>latest</code></td><td>Lock to one version, e.g. <code>v1.0.7</code></td></tr><tr><td><code>ALPHACODE_REPO</code></td><td><code>dragonked2/alphacode</code></td><td>Install from a fork/mirror</td></tr><tr><td><code>ALPHACODE_FROM_SOURCE=1</code></td><td>off</td><td>Build it yourself instead of downloading</td></tr><tr><td><code>ALPHACODE_SOURCE_ONLY=1</code></td><td>off</td><td>Never fall back to a source build</td></tr><tr><td><code>ALPHACODE_SOURCE_REF=&lt;ref&gt;</code></td><td>HEAD</td><td>Which branch/tag/commit to build</td></tr></tbody></table>
-<pre class="docs__code"><code class="lang-bash">curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash -s -- --version v1.0.7 --prefix ~/.local</code></pre>
+<table class="docs__table"><thead><tr><th>Variable</th><th>Default</th><th>What it changes</th></tr></thead><tbody><tr><td><code>ALPHACODE_PREFIX</code></td><td><code>~/.local</code></td><td>Where it gets installed</td></tr><tr><td><code>ALPHACODE_BIN_DIR</code></td><td><code>$PREFIX/bin</code></td><td>Exact folder for the program file</td></tr><tr><td><code>ALPHACODE_VERSION</code></td><td><code>latest</code></td><td>Lock to one version, e.g. <code>v1.1.19</code></td></tr><tr><td><code>ALPHACODE_REPO</code></td><td><code>dragonked2/alphacode</code></td><td>Install from a fork/mirror</td></tr><tr><td><code>ALPHACODE_FROM_SOURCE=1</code></td><td>off</td><td>Build it yourself instead of downloading</td></tr><tr><td><code>ALPHACODE_SOURCE_ONLY=1</code></td><td>off</td><td>Never fall back to a source build</td></tr><tr><td><code>ALPHACODE_SOURCE_REF=&lt;ref&gt;</code></td><td>HEAD</td><td>Which branch/tag/commit to build</td></tr></tbody></table>
+<pre class="docs__code"><code class="lang-bash">curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash -s -- --version v1.1.19 --prefix ~/.local</code></pre>
 <h3 class="docs__h3" id="build-from-source-advanced">Build from source (advanced)</h3>
 <p>Only needed if you want to compile it yourself or there's no ready-made download for your exact machine type.</p>
 <pre class="docs__code"><code class="lang-bash">git clone https://github.com/dragonked2/alphacode.git
@@ -287,18 +288,18 @@ which alphacode          # macOS / Linux
 Get-Command alphacode    # PowerShell
 
 # 2 — Is it the version you expect?
-alphacode --version      # → v1.0.7 (964e49e, …)
+alphacode --version      # → v1.1.19 (964e49e, …)
 
 # 3 — Is everything healthy?
 alphacode doctor         # checks PATH, terminal, providers, optional dependencies</code></pre>
 <p><code>alphacode doctor</code> prints <code>OK</code>, <code>WARN</code>, or <code>FAIL</code> for each check, with a fix for anything not green. <strong>If something fails, jump to <a href="#troubleshooting--fixing-common-errors">Troubleshooting</a>.</strong></p>
 <p><details> <summary>🔐 Paranoid mode: manually verify the download's checksum</summary> <br/></details></p>
 <pre class="docs__code"><code class="lang-bash"># macOS / Linux
-curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.0.7/SHA256SUMS -o SHA256SUMS
-curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.0.7/alphacode-linux-x86_64.tar.gz -o alphacode.tar.gz
+curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.1.19/SHA256SUMS -o SHA256SUMS
+curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.1.19/alphacode-linux-x86_64.tar.gz -o alphacode.tar.gz
 sha256sum --ignore-missing -c SHA256SUMS</code></pre>
 <pre class="docs__code"><code class="lang-powershell"># Windows (PowerShell)
-Invoke-WebRequest https://github.com/dragonked2/alphacode/releases/download/v1.0.7/SHA256SUMS -OutFile SHA256SUMS
+Invoke-WebRequest https://github.com/dragonked2/alphacode/releases/download/v1.1.19/SHA256SUMS -OutFile SHA256SUMS
 $expected = (Get-Content SHA256SUMS | Where-Object { $_ -like '*windows-x86_64*' })[0].Split(' ')[0]
 $actual   = (Get-FileHash .\alphacode-windows-x86_64.zip -Algorithm SHA256).Hash.ToLower()
 "$expected  expected"
@@ -363,7 +364,7 @@ fish_add_path ~/.local/bin</code></pre>
 <p></p>
 <p><details> <summary><b>⏳ It's stuck on "Compiling alphacode (this can take 5-30 minutes)"</b></summary> <br/></details></p>
 <p><strong>What this means:</strong> there's no ready-made download for your exact computer type, so it's building AlphaCode from scratch on your machine. This is normal, just slow. To avoid it next time:</p>
-<pre class="docs__code"><code class="lang-bash">curl -fsSL ... | ALPHACODE_VERSION=v1.0.7 bash</code></pre>
+<pre class="docs__code"><code class="lang-bash">curl -fsSL ... | ALPHACODE_VERSION=v1.1.19 bash</code></pre>
 <p></p>
 <p><details> <summary><b>🦀 "rustc … is too old; need &gt;= 1.91"</b></summary> <br/></details></p>
 <p>Only relevant if you're building from source.</p>
@@ -747,5 +748,5 @@ cargo clippy --lib -- -D warnings</code></pre>
 </div>
 </div>
 </footer>
-<script defer="" src="/assets/site.js?v=4b2dc2a8"></script><script defer="" src="/docs/docs.js?v=051d2297"></script></body>
+<script defer="" src="/assets/site.js?v=a9ec301a"></script><script defer="" src="/docs/docs.js?v=051d2297"></script></body>
 </html>

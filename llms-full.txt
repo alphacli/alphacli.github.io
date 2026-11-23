@@ -1,7 +1,7 @@
 # AlphaCode: full documentation for LLMs
 
 > Plain-text export of the AlphaCode website (https://alphacli.github.io/). AlphaCode is a free, open-source (MIT) AI coding agent written in Rust that runs in the terminal.
-> Generated 2026-11-05. Canonical sources: the page URLs listed below.
+> Site content last modified 2026-11-23. Canonical sources: the page URLs listed below.
 
 
 ---
@@ -9,20 +9,18 @@
 ## Home
 URL: https://alphacli.github.io/
 
-v1.0.76 · MIT · Rust · free AI included 
-
- The open-source AI coding agent that lives in your terminal. 
-
- AlphaCode is a free, open-source AI coding agent and AI pair programmer that lives in your terminal. Powered by large language models (LLMs), it reads your codebase, edits files, runs tests, automates Firefox and controls desktop apps — no API key required to get started. Switch to Claude, GPT, Gemini or a local model such as Ollama whenever you like.
-
+v1.1.19 · MIT · Rust · free AI included 
+ Your codebase. Your AI team. 
+ Meet AlphaCode: the free, open-source AI coding agent that plans, edits, tests and verifies work in your terminal. Automate Firefox and desktop apps, run multi-agent workflows and choose the model you trust. No API key needed to start. 
  → Zero setup required. The free lane is configured automatically after install — open a project, run alphacode , and describe what you want changed. 
-
- $ curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash PS> iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex 
+ $ curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash PS> irm https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex 
 
  macOS, Linux and Windows · all install options 
 
  Install AlphaCode — free 
  Watch the demo 
+
+ WORKSPACE PREVIEW / TERMINAL Built for real work 
 
  Upgrade anytime to 
  Claude GPT-4o/5 Gemini DeepSeek Mistral xAI Groq Ollama +46 more 
@@ -42,6 +40,8 @@ v1.0.76 · MIT · Rust · free AI included
 
  running 0.0s 0 /42 tools 
 
+ ✓ tests passed
+
  $0
  to start — no key needed
 
@@ -56,6 +56,13 @@ v1.0.76 · MIT · Rust · free AI included
 
  MIT
  license
+
+ From idea to working code. Three simple steps.
+ No elaborate setup. Your agent handles the steps, and you stay in control.
+
+ STEP 01 / INSTALL Install AlphaCode Choose Windows, macOS or Linux. The free AI lane works out of the box. 
+ STEP 02 / DESCRIBE Tell it your goal Ask it to build, debug, refactor or automate. Review its plan and actions. 
+ STEP 03 / VERIFY See the result Watch file changes, tests and evidence, then take it further. 
 
  $ alphacode --demo 
 
@@ -102,7 +109,7 @@ v1.0.76 · MIT · Rust · free AI included
 
  02
  Free AI, or any LLM you choose
- Start on the free built-in lane. Add Claude, GPT, Gemini, Copilot, Cursor, Bedrock, OpenRouter, or any OpenAI-compatible endpoint. Switch with Ctrl + T .
+ Start on the built-in free lane. Bring Claude, GPT, Gemini, Copilot, OpenRouter, OrcaRouter, Ollama or another compatible provider. Switch without changing your workflow.
 
  03
  Multi-agent AI swarm mode
@@ -470,6 +477,12 @@ alphacode
 URL: https://alphacli.github.io/docs/
 
 Contents
+ Current product guide
+ AlphaCode ships with a built-in free model, terminal and desktop workflows, 40+ tools, and browser automation. For up-to-date installation flags and feature details, the official GitHub README is the authoritative reference.
+ Windows desktop: alphacode --gui 
+ Providers: OpenRouter and OrcaRouter, alongside Claude, GPT, Gemini, DeepSeek and local Ollama
+ Appearance: /theme royal-gold or /theme to browse themes
+ Pin a Windows installer version: load the installer as a PowerShell script block, then run & $installer -Version vX.Y.Z .
 
  🪄 In one sentence 
  🆕 I'm brand new to this. Start here. 
@@ -679,14 +692,15 @@ Contents
 
  Optional: pin a specific version or install location 
 
- # Pin a version
-iwr -useb ... | iex -Version v1.0.7
+ $installer = [scriptblock]::Create((irm https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1))
+# Pin a version
+& $installer -Version v1.1.19
 
 # Install into a custom folder
-iwr -useb ... | iex -Prefix "$env:LOCALAPPDATA\Programs\alphacode"
+& $installer -Prefix "$env:LOCALAPPDATA\Programs\alphacode"
 
 # Build from source instead of downloading
-iwr -useb ... | iex -FromSource 
+& $installer -FromSource 
 
  macOS / Linux
 
@@ -707,13 +721,13 @@ iwr -useb ... | iex -FromSource
  Variable Default What it changes 
  ALPHACODE_PREFIX ~/.local Where it gets installed 
  ALPHACODE_BIN_DIR $PREFIX/bin Exact folder for the program file 
- ALPHACODE_VERSION latest Lock to one version, e.g. v1.0.7 
+ ALPHACODE_VERSION latest Lock to one version, e.g. v1.1.19 
  ALPHACODE_REPO dragonked2/alphacode Install from a fork/mirror 
  ALPHACODE_FROM_SOURCE=1 off Build it yourself instead of downloading 
  ALPHACODE_SOURCE_ONLY=1 off Never fall back to a source build 
  ALPHACODE_SOURCE_REF=<ref> HEAD Which branch/tag/commit to build 
 
- curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash -s -- --version v1.0.7 --prefix ~/.local 
+ curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash -s -- --version v1.1.19 --prefix ~/.local 
 
  Build from source (advanced)
 
@@ -757,7 +771,7 @@ which alphacode # macOS / Linux
 Get-Command alphacode # PowerShell
 
 # 2 — Is it the version you expect?
-alphacode --version # → v1.0.7 (964e49e, …)
+alphacode --version # → v1.1.19 (964e49e, …)
 
 # 3 — Is everything healthy?
 alphacode doctor # checks PATH, terminal, providers, optional dependencies 
@@ -767,12 +781,12 @@ alphacode doctor # checks PATH, terminal, providers, optional dependencies
  🔐 Paranoid mode: manually verify the download's checksum 
 
  # macOS / Linux
-curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.0.7/SHA256SUMS -o SHA256SUMS
-curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.0.7/alphacode-linux-x86_64.tar.gz -o alphacode.tar.gz
+curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.1.19/SHA256SUMS -o SHA256SUMS
+curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.1.19/alphacode-linux-x86_64.tar.gz -o alphacode.tar.gz
 sha256sum --ignore-missing -c SHA256SUMS 
 
  # Windows (PowerShell)
-Invoke-WebRequest https://github.com/dragonked2/alphacode/releases/download/v1.0.7/SHA256SUMS -OutFile SHA256SUMS
+Invoke-WebRequest https://github.com/dragonked2/alphacode/releases/download/v1.1.19/SHA256SUMS -OutFile SHA256SUMS
 $expected = (Get-Content SHA256SUMS | Where-Object { $_ -like '*windows-x86_64*' })[0].Split(' ')[0]
 $actual = (Get-FileHash .\alphacode-windows-x86_64.zip -Algorithm SHA256).Hash.ToLower()
 "$expected expected"
@@ -867,7 +881,7 @@ fish_add_path ~/.local/bin
 
  What this means: there's no ready-made download for your exact computer type, so it's building AlphaCode from scratch on your machine. This is normal, just slow. To avoid it next time:
 
- curl -fsSL ... | ALPHACODE_VERSION=v1.0.7 bash 
+ curl -fsSL ... | ALPHACODE_VERSION=v1.1.19 bash 
 
  🦀 "rustc … is too old; need >= 1.91" 
 
@@ -1363,7 +1377,7 @@ cargo clippy --lib -- -D warnings
 ## MCP servers guide
 URL: https://alphacli.github.io/mcp/
 
-Documentation · MCP · v1.0.23 
+Documentation · MCP · v1.1.19 
 
  How AlphaCode handles MCP servers. 
 
