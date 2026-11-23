@@ -12,8 +12,8 @@
     "productivity",
     "utilities"
   ],
-  "background_color": "#090d12",
-  "theme_color": "#090d12",
+  "background_color": "#0b0d0d",
+  "theme_color": "#0b0d0d",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -61,7 +61,7 @@
     {
       "name": "Install AlphaCode",
       "short_name": "Install",
-      "url": "/#install",
+      "url": "/install/",
       "icons": [
         {
           "src": "/icon-192.png",
