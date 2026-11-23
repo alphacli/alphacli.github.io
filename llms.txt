@@ -7,6 +7,7 @@ Source: https://github.com/dragonked2/alphacode
 Website: https://alphacli.github.io/
 
 - [Installation](https://alphacli.github.io/install/): exact platform commands, verification and troubleshooting
+- [Benchmarks](https://alphacli.github.io/benchmarks/): historical memory snapshots and methodology
 - [Documentation](https://alphacli.github.io/docs/): workflows, commands, providers
 - [MCP](https://alphacli.github.io/mcp/): extension and security overview
 - [About](https://alphacli.github.io/about/): project and author

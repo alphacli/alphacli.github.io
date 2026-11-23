@@ -102,6 +102,33 @@
    window.setTimeout(() => {if (b.isConnected) b.textContent = original;}, 1600);
  });
 
+
+ // Memory archive. Pre-rendered bars remain readable without scripting.
+ for (const widget of qsa('[data-benchmark-widget]')) {
+   const tabs = qsa('[data-bench-tab]', widget);
+   const panels = qsa('[data-bench-panel]', widget);
+   const activate = (value) => {
+     tabs.forEach(tab => {
+       const chosen = tab.dataset.benchTab === value;
+       tab.setAttribute('aria-selected', String(chosen));
+       tab.classList.toggle('active', chosen);
+       tab.tabIndex = chosen ? 0 : -1;
+     });
+     panels.forEach(panel => {panel.hidden = panel.dataset.benchPanel !== value;});
+     const summary = qs('[data-bench-scenario]', widget);
+     if (summary) summary.textContent = value === '1' ? '01 ACTIVE SESSION' : '10 ACTIVE SESSIONS';
+   };
+   tabs.forEach((tab, i) => {
+     tab.addEventListener('click', () => activate(tab.dataset.benchTab));
+     tab.addEventListener('keydown', (event) => {
+       if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+       event.preventDefault();
+       const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (i + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+       tabs[next].focus(); activate(tabs[next].dataset.benchTab);
+     });
+   });
+ }
+
  // Gentle entrance transitions, never hide content without script support.
  if (!reduced && 'IntersectionObserver' in window) {
    const targets = qsa('.section-header,.step-card,.bento-card,.quick-install,.demo-grid,.faq-list,.closing-inner');

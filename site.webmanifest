@@ -12,8 +12,8 @@
     "productivity",
     "utilities"
   ],
-  "background_color": "#0b0d0d",
-  "theme_color": "#0b0d0d",
+  "background_color": "#08090d",
+  "theme_color": "#08090d",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -51,6 +51,17 @@
       "name": "MCP servers guide",
       "short_name": "MCP",
       "url": "/mcp/",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Historical benchmarks",
+      "short_name": "Benchmarks",
+      "url": "/benchmarks/",
       "icons": [
         {
           "src": "/icon-192.png",
