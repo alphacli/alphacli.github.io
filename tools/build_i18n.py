@@ -58,9 +58,11 @@ for loc in LOCALES:
     d=R/loc[0];d.mkdir(exist_ok=True);(d/'index.html').write_text(page(loc))
 # homepage: hreflang + footer language list
 h=R/'index.html';s=h.read_text()
-s=re.sub(r'<link rel="alternate" hreflang="[^"]*" href="[^"]*" />\n?','',s)
+# match ANY <link> carrying rel=alternate + hreflang, whatever the attribute order or self-closing style
+# (bs4 re-serialises as href/hreflang/rel, which the old fixed-order pattern never matched -> dupes every run)
+s=re.sub(r'<link\b(?=[^>]*\brel="alternate")(?=[^>]*\bhreflang=)[^>]*>\n?','',s)
 s=s.replace('</head>',alts()+'</head>',1)
-s=re.sub(r'<nav class="m-langs".*?</nav>','',s,flags=re.S)
+s=re.sub(r'<nav\b[^>]*\bclass="m-langs"[^>]*>.*?</nav>','',s,flags=re.S)   # attribute-order independent
 s=s.replace('</footer>',langnav()+'</footer>',1)
 if 'i18n.js' not in s: s=s.replace('</body>','<script src="/i18n.js?v=20261022" defer></script>\n</body>',1)
 h.write_text(s)

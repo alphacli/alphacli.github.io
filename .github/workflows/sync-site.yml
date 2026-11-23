@@ -1,0 +1,48 @@
+name: Sync site with alphacode repo
+
+# Keeps every page, JSON-LD block and llms file on the latest alphacode release.
+#  - daily cron
+#  - manual run
+#  - repository_dispatch type "alphacode-release" (send it from the product repo's release workflow)
+#  - PRs: guard that no page disagrees with site.config.json
+on:
+  schedule: [{ cron: "17 5 * * *" }]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [alphacode-release]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install beautifulsoup4
+
+      - name: Fetch latest release tag
+        if: github.event_name != 'pull_request'
+        env: { GITHUB_TOKEN: "${{ github.token }}" }
+        run: python tools/sync_version.py --fetch
+
+      - name: Build (order matters - sync_version runs again LAST because seo_boost rewrites JSON-LD)
+        run: |
+          for s in build_i18n build_home polish harden fixes sync_version optimize seo_boost sync_version; do
+            python tools/$s.py
+          done
+
+      - name: Guard - every page matches site.config.json
+        run: python tools/sync_version.py --check
+
+      - name: Commit if anything changed
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "alphacode-site-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "chore(site): sync to $(python -c "import json;print(json.load(open('site.config.json'))['version'])")"
+          git push

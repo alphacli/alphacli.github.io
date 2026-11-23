@@ -12,8 +12,8 @@
     "productivity",
     "utilities"
   ],
-  "background_color": "#f7f9fd",
-  "theme_color": "#5457ed",
+  "background_color": "#0A0A12",
+  "theme_color": "#0A0A12",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -59,20 +59,9 @@
       ]
     },
     {
-      "name": "Historical benchmarks",
-      "short_name": "Benchmarks",
-      "url": "/benchmarks/",
-      "icons": [
-        {
-          "src": "/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
       "name": "Install AlphaCode",
       "short_name": "Install",
-      "url": "/install/",
+      "url": "/#install",
       "icons": [
         {
           "src": "/icon-192.png",

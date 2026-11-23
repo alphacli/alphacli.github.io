@@ -1,16 +1,44 @@
 # AlphaCode
 
-> Free MIT-licensed AI coding agent for your terminal. Built in Rust and developed by Ali Essam.
+> AlphaCode is a free, open-source (MIT) AI coding agent written in Rust that runs in your terminal. It can read a codebase, edit files, run tests, automate Firefox and control desktop apps. A built-in free AI provider means no API key is required to start; 54 model providers (Claude, GPT, Gemini, DeepSeek, Mistral, Ollama and any OpenAI-compatible endpoint) can be added later.
 
-Version: v1.1.19 (pinned from https://github.com/dragonked2/alphacode/releases/latest; refreshed during scheduled builds)
-Source: https://github.com/dragonked2/alphacode
-Website: https://alphacli.github.io/
+## Key facts
+- License: MIT. Language: Rust. Platforms: Windows, macOS, Linux.
+- 40+ built-in tools, swarm mode (parallel multi-agent execution), MCP server support, resumable sessions.
+- Install (macOS/Linux): curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash
+- Install (Windows): iwr -useb https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1 | iex
 
-- [Installation](https://alphacli.github.io/install/): exact platform commands, verification and troubleshooting
-- [Benchmarks](https://alphacli.github.io/benchmarks/): historical memory snapshots and methodology
-- [Documentation](https://alphacli.github.io/docs/): workflows, commands, providers
-- [MCP](https://alphacli.github.io/mcp/): extension and security overview
-- [About](https://alphacli.github.io/about/): project and author
-- [Official README](https://github.com/dragonked2/alphacode#readme): authoritative for version-specific CLI behavior
+## Pages
+- [Home](https://alphacli.github.io/): overview, features, providers, install, benchmarks, FAQ
+- [Documentation](https://alphacli.github.io/docs/): install, quick start, commands, troubleshooting, safety model
+- [What is an AI coding agent?](https://alphacli.github.io/ai-coding-agent/): plain-English guide to AI coding agents and how to start free
+- [MCP servers guide](https://alphacli.github.io/mcp/): how AlphaCode discovers, authorizes and runs MCP servers
 
-AlphaCode has a free built-in AI provider. Paid third-party providers are optional. The website's terminal UI is an illustration, not proof that a code modification occurred.
+- [What is Alpha Code?](https://alphacli.github.io/alpha-code/): disambiguation and overview (not the Alpha Coders wallpaper site)
+- [About AlphaCode and its author Ali Essam](https://alphacli.github.io/about/): project mission, author, social profiles
+
+- [Full text export for LLMs](https://alphacli.github.io/llms-full.txt): all pages above as one plain-text file
+
+## Community
+- [X / Twitter](https://x.com/alphaclicode)
+- [Facebook](https://www.facebook.com/xalphacode)
+- [LinkedIn](https://www.linkedin.com/company/dragonmeta)
+- [Discord server](https://discord.gg/zhXGvgZzf2): ask questions, share workflows, request features
+
+## Source
+- [GitHub repository](https://github.com/dragonked2/alphacode)
+- [Releases](https://github.com/dragonked2/alphacode/releases)
+- [Security policy](https://github.com/dragonked2/alphacode/blob/main/SECURITY.md)
+
+## Languages
+- [English (US)](https://alphacli.github.io/en-us/)
+- [English (UK)](https://alphacli.github.io/en-gb/)
+- [العربية (مصر)](https://alphacli.github.io/ar-eg/)
+- [العربية (السعودية)](https://alphacli.github.io/ar-sa/)
+- [العربية (الإمارات)](https://alphacli.github.io/ar-ae/)
+- [Nederlands](https://alphacli.github.io/nl-nl/)
+- [Deutsch](https://alphacli.github.io/de-de/)
+- [Français](https://alphacli.github.io/fr-fr/)
+- [Español](https://alphacli.github.io/es-es/)
+- [Português (Brasil)](https://alphacli.github.io/pt-br/)
+- [Türkçe](https://alphacli.github.io/tr-tr/)

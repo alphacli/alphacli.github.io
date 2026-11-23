@@ -503,33 +503,40 @@
     });
 
     /* ------------------------------------------------------------
-       Live repo stats (graceful fallback)
+       Live repo stats + latest version.
+       ONE cached lookup (6 h TTL) instead of 2 API calls per page view:
+       the unauthenticated GitHub API allows only 60 req/h per IP, which
+       shared networks (offices, campuses, VPNs) exhaust quickly.
+       Build-time values (tools/sync_version.py) are the no-JS/offline fallback.
        ------------------------------------------------------------ */
     (function () {
+      const KEY = 'ac_repo_v2', TTL = 6 * 3600 * 1000, REPO = 'dragonked2/alphacode';
       const ns = $('#navStars'), sg = $('#statStars'), lbl = sg && sg.nextElementSibling;
-      const show = n => {
-        if (ns) ns.textContent = '\u2605 ' + n;
-        if (sg) sg.textContent = String(n);
-        if (lbl) lbl.textContent = 'GitHub stars';
-        try { localStorage.setItem('ac_stars', n); } catch (e) {}
+      const paint = d => {
+        if (!d) return;
+        if (d.stars != null) {
+          const n = Number(d.stars).toLocaleString('en-US');
+          if (ns) ns.textContent = '\u2605 ' + n;
+          if (sg) sg.textContent = n;
+          if (lbl) lbl.textContent = 'GitHub stars';
+        }
+        if (d.tag) $$('.js-version').forEach(el => { el.textContent = d.tag; });
       };
-      try { const c = localStorage.getItem('ac_stars'); if (c) show(c); } catch (e) {}
-      fetch('https://api.github.com/repos/dragonked2/alphacode')
-        .then(r => r.ok ? r.json() : Promise.reject())
-        .then(d => d.stargazers_count)
-        .catch(() => fetch('https://img.shields.io/github/stars/dragonked2/alphacode.json').then(r => r.json()).then(d => d.value))
-        .then(n => { if (n !== undefined && n !== null && n !== '') show(n); })
-        .catch(() => {});
+      const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } };
+      const write = d => { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} };
+      const cached = read();
+      if (cached) paint(cached);                                  // instant, no layout wait
+      if (cached && Date.now() - cached.t < TTL) return;          // fresh enough: zero network
+      const gh = p => fetch('https://api.github.com/repos/' + REPO + p, { headers: { Accept: 'application/vnd.github+json' } })
+        .then(r => r.ok ? r.json() : Promise.reject(r.status));
+      Promise.allSettled([gh(''), gh('/releases/latest')]).then(([r, rel]) => {
+        const d = Object.assign({}, cached || {}, { t: Date.now() });
+        if (r.status === 'fulfilled' && r.value.stargazers_count != null) d.stars = r.value.stargazers_count;
+        if (rel.status === 'fulfilled' && rel.value.tag_name) d.tag = /^v/i.test(rel.value.tag_name) ? rel.value.tag_name : 'v' + rel.value.tag_name;
+        if (r.status === 'rejected' && rel.status === 'rejected') { if (cached) { cached.t = Date.now() - TTL + 600000; write(cached); } return; } // back off 10 min
+        write(d); paint(d);
+      });
     })();
-
-    fetch('https://api.github.com/repos/dragonked2/alphacode/releases/latest', { headers: { 'Accept': 'application/vnd.github+json' }})
-      .then(r => r.ok ? r.json() : null)
-      .then(j => {
-        if (!j || !j.tag_name) return;
-        const normalized = /^v/i.test(j.tag_name) ? j.tag_name : ('v' + j.tag_name);
-        $$('.js-version').forEach(el => { el.textContent = normalized; });
-      })
-      .catch(() => {});
   });
 
 

@@ -9,7 +9,7 @@ import re,hashlib,pathlib
 from bs4 import BeautifulSoup
 R=pathlib.Path(__file__).resolve().parent.parent
 FONT_INTER='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap'
-CSS_BASE=['styles','theme','community','modern','pro','pro2','pro3','ui','utility','ux','refine']
+CSS_BASE=['styles','theme','community','modern','pro','pro2','pro3','ui','utility','ux','refine','art']
 JS_BASE=['script','community','app','pro2','pro','modern','i18n','ui','enhance','ux','refine']
 def min_css(s):
     out=[];i=0;n=len(s);q=None
@@ -53,6 +53,11 @@ for f in sorted(files):
     rel=f.relative_to(R).as_posix();s=BeautifulSoup(f.read_text(encoding='utf8'),'html.parser');h=s.head
     if not h or rel=='mcp.html':continue
     k=kind(rel);fonts=[]
+    # Drop old font <noscript> wrappers (and any empty ones left by earlier runs) BEFORE touching <link>s:
+    # the stylesheet loop below extracts the <link> inside them, which used to leave an empty <noscript>
+    # behind on every run (1 -> 2 -> 3 ...), defeating the idempotency promised above.
+    for nt in s.find_all('noscript'):
+        if not nt.get_text(strip=True) and (not nt.find() or 'fonts.googleapis' in str(nt)):nt.extract()
     for l in list(s.find_all('link',rel='stylesheet')):
         href=l.get('href','')
         if 'fonts.googleapis.com' in href:fonts.append(href.replace('&amp;','&'));l.extract()
@@ -67,7 +72,7 @@ for f in sorted(files):
     h.append(s.new_tag('link',rel='stylesheet',href=f'/assets/{k}.css?v={CV[k]}'))
     for fu in fonts:
         fl=s.new_tag('link',rel='stylesheet',href=fu);fl['media']='print';fl['data-font']='';h.append(fl)
-        ns=s.new_tag('noscript');ns.append(BeautifulSoup(f'<link rel="stylesheet" href="{fu}">','html.parser'));h.append(ns)
+        ns=s.new_tag('noscript');ns.append(s.new_tag('link',rel='stylesheet',href=fu));h.append(ns)
     for sc in list(s.find_all('script',src=True)):
         src=sc['src'].split('?')[0]
         if src.rsplit('/',1)[-1] in BUNDLED or src.endswith('assets/site.js'):sc.extract()

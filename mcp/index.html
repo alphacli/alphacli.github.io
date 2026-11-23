@@ -1,9 +1,402 @@
-<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="color-scheme" content="dark light"><meta name="theme-color" content="#f7f9fd"><meta name="robots" content="index, follow, max-image-preview:large"><meta name="description" content="Learn how AlphaCode uses Model Context Protocol (MCP) servers to connect external tools, context, and developer workflows."><meta name="author" content="Ali Essam"><title>MCP Integration for AlphaCode | Connect Tools &amp; Context</title><link rel="canonical" href="https://alphacli.github.io/mcp/">
-<meta property="og:type" content="website"><meta property="og:site_name" content="AlphaCode"><meta property="og:title" content="MCP Integration for AlphaCode | Connect Tools &amp; Context"><meta property="og:description" content="Learn how AlphaCode uses Model Context Protocol (MCP) servers to connect external tools, context, and developer workflows."><meta property="og:url" content="https://alphacli.github.io/mcp/"><meta property="og:image" content="https://alphacli.github.io/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="AlphaCode, the free open-source AI coding agent"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="MCP Integration for AlphaCode | Connect Tools &amp; Context"><meta name="twitter:description" content="Learn how AlphaCode uses Model Context Protocol (MCP) servers to connect external tools, context, and developer workflows."><meta name="twitter:image" content="https://alphacli.github.io/og-image.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<link href="/assets/style.css?v=bcf567a989e1" rel="stylesheet"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://alphacli.github.io/#organization","name":"AlphaCode","url":"https://alphacli.github.io/","logo":"https://alphacli.github.io/icon-512.png","sameAs":["https://github.com/dragonked2/alphacode","https://github.com/alphacli"]},{"@type":"WebSite","@id":"https://alphacli.github.io/#website","url":"https://alphacli.github.io/","name":"AlphaCode","inLanguage":"en"},{"@type":"WebPage","@id":"https://alphacli.github.io/mcp/#webpage","url":"https://alphacli.github.io/mcp/","name":"MCP Integration for AlphaCode | Connect Tools & Context","description":"Learn how AlphaCode uses Model Context Protocol (MCP) servers to connect external tools, context, and developer workflows.","inLanguage":"en","isPartOf":{"@id":"https://alphacli.github.io/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alphacli.github.io/"},{"@type":"ListItem","position":2,"name":"MCP Integration for AlphaCode","item":"https://alphacli.github.io/mcp/"}]}]}</script></head><body><a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap nav-inner"><a class="brand" href="/" aria-label="AlphaCode homepage"><span class="brand-icon" aria-hidden="true">α</span><span>alpha<span class="brand-second">code</span></span></a>
-<nav class="nav-links" id="site-navigation" aria-label="Main navigation"><a href="/#features">Product</a><a href="/#workflow">How it works</a><a href="/benchmarks/">Benchmarks</a><a href="/docs/">Docs</a><a href="/mcp/" aria-current="page">MCP</a><a class="mobile-only" href="/about/">About</a></nav>
-<div class="nav-actions"><a class="nav-github" href="https://github.com/dragonked2/alphacode" target="_blank" rel="noopener noreferrer" aria-label="AlphaCode source on GitHub">GitHub <span aria-hidden="true">↗</span></a><a class="button button-primary nav-cta" href="/install/">Get AlphaCode <span aria-hidden="true">↗</span></a><button class="mobile-menu" type="button" aria-label="Open navigation" aria-controls="site-navigation" aria-expanded="false" data-menu-toggle>☰</button></div></div></header><main id="main" class="inner-main"><section class="inner-hero"><div class="wrap"><div class="breadcrumb"><a href="/">HOME</a><span>/</span> MCP</div><div class="inner-hero-grid"><div><p class="section-kicker">EXTEND / MCP</p><h1>Give your agent<br><em>more reach.</em></h1><p class="inner-lede">Connect external tools and context to AlphaCode through the Model Context Protocol—without losing sight of permissions or control.</p></div><div class="inner-ornament" aria-hidden="true"><span>α</span><b>↗</b><small>OPEN SOURCE<br>BUILT FOR BUILDERS</small></div></div></div></section><div class="content-shell"><div class="wrap content-grid"><aside class="content-nav" aria-label="On this page"><h2>ON THIS PAGE</h2><a href="#what">What is MCP?</a><a href="#workflow">The connection flow</a><a href="#safety">Security by design</a><a href="#official">Current configuration</a></aside><div class="prose"><section id="what"><h2>What is MCP?</h2><p><strong>Model Context Protocol (MCP)</strong> is a common interface that lets compatible AI clients connect to external tools and data sources through MCP servers. AlphaCode supports MCP as one of its extensibility mechanisms.</p><div class="callout"><p>AlphaCode <strong>is the client</strong>. An MCP server provides the tools or resources. Always use a compatible and trusted server, and follow the active release's configuration guide.</p></div></section><section id="workflow"><h2>The connection flow</h2><div class="doc-card-grid"><div class="doc-tile"><span class="tile-icon">01</span><h3>Pick the capability</h3><p>Identify a real task: repository operations, data lookup or a local service.</p></div><div class="doc-tile"><span class="tile-icon">02</span><h3>Install a trusted server</h3><p>Read its documentation, dependencies, permissions and transport requirements.</p></div><div class="doc-tile"><span class="tile-icon">03</span><h3>Configure AlphaCode</h3><p>Follow the current repository's MCP instructions and validate the connection.</p></div><div class="doc-tile"><span class="tile-icon">04</span><h3>Review tool activity</h3><p>Grant only needed access and inspect calls and results.</p></div></div></section><section id="safety"><h2>Security by design</h2><p>MCP servers can expose powerful capabilities. Treat them like applications with privileges, not as harmless documentation. Use minimal permissions, keep secrets in appropriate credential stores, and avoid exposing untrusted tools to production resources.</p><p>Never copy unknown server setup commands into your terminal without reviewing what they install or execute.</p></section><section id="official"><h2>Current configuration</h2><p>The exact MCP configuration format and available tools may change. Instead of presenting potentially stale or fabricated JSON keys here, use the <a href="https://github.com/dragonked2/alphacode#built-in-tools-skills-and-mcp">current upstream MCP documentation</a> for the release you have installed.</p><p><a class="button button-primary" href="https://github.com/dragonked2/alphacode#built-in-tools-skills-and-mcp">Open official MCP instructions ↗</a></p></section></div></div></div></main><footer class="site-footer"><div class="wrap footer-main"><div class="footer-brand"><a class="brand" href="/"><span class="brand-icon" aria-hidden="true">α</span><span>alpha<span class="brand-second">code</span></span></a><p>Good ideas deserve great tools. Build, test and ship with the open-source AI coding agent for your terminal.</p><div class="footer-social"><a href="https://github.com/dragonked2/alphacode">GitHub ↗</a><a href="https://github.com/dragonked2/alphacode/discussions">Community ↗</a></div></div>
-<div class="footer-col"><h3>PRODUCT</h3><a href="/#features">Capabilities</a><a href="/#workflow">How it works</a><a href="/#demo">Video demo</a><a href="/install/">Get started</a></div><div class="footer-col"><h3>RESOURCES</h3><a href="/docs/">Documentation</a><a href="/mcp/">MCP integrations</a><a href="/benchmarks/">Benchmarks</a><a href="https://github.com/dragonked2/alphacode/releases/latest">Latest release</a></div><div class="footer-col"><h3>PROJECT</h3><a href="/about/">About</a><a href="https://github.com/dragonked2/alphacode">Source code</a><a href="https://github.com/dragonked2/alphacode/blob/main/LICENSE">MIT license</a><a href="https://github.com/dragonked2/alphacode/issues">Report an issue</a></div></div>
-<div class="wrap footer-bottom"><span>© 2026 AlphaCode · Made by Ali Essam · <a href="https://github.com/dragonked2/alphacode/releases/latest">v1.1.19</a></span><div class="footer-langs"><span>LANGUAGES</span> <a href="/en-us/" hreflang="en-US" lang="en-US">English (US)</a><a href="/en-gb/" hreflang="en-GB" lang="en-GB">English (UK)</a><a href="/ar-eg/" hreflang="ar-EG" lang="ar-EG">العربية (مصر)</a><a href="/ar-sa/" hreflang="ar-SA" lang="ar-SA">العربية (السعودية)</a><a href="/ar-ae/" hreflang="ar-AE" lang="ar-AE">العربية (الإمارات)</a><a href="/nl-nl/" hreflang="nl-NL" lang="nl-NL">Nederlands</a><a href="/de-de/" hreflang="de-DE" lang="de-DE">Deutsch</a><a href="/fr-fr/" hreflang="fr-FR" lang="fr-FR">Français</a><a href="/es-es/" hreflang="es-ES" lang="es-ES">Español</a><a href="/pt-br/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a><a href="/tr-tr/" hreflang="tr-TR" lang="tr-TR">Türkçe</a></div></div></footer><div id="global-live-status" class="sr-only" role="status" aria-live="polite"></div><script src="/assets/app.js?v=3f66a5f64d8d" defer></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://img.shields.io; connect-src 'self' https://api.github.com https://img.shields.io; media-src 'self'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/><meta content="strict-origin-when-cross-origin" name="referrer"/><script src="/init.js?v=fac077be"></script>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<title>MCP Servers Guide: Connect Tools to the AlphaCode AI Agent</title>
+<meta content="Learn how the AlphaCode AI coding agent discovers, authorizes and runs MCP servers, with a full Burp Suite walkthrough, tools reference and FAQ." name="description"/>
+<meta content="AI coding agent, MCP, Model Context Protocol, AI agent tools, Burp Suite MCP, CLI, Rust, open source" name="keywords"/>
+<meta content="Alphacli" name="author"/>
+<meta content="index,follow" name="robots"/>
+<meta content="#09090B" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="#FAFAF9" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="dark light" name="color-scheme"/>
+<link href="https://alphacli.github.io/mcp/" rel="canonical"/>
+<link href="https://alphacli.github.io/mcp/" hreflang="en" rel="alternate"/>
+<link href="https://alphacli.github.io/mcp/" hreflang="x-default" rel="alternate"/>
+<link href="/llms.txt" rel="alternate" title="LLM-readable summary" type="text/plain"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect width='22' height='22' rx='3' fill='%230B0C0A'/%3E%3Cpath d='M5 6 L10 11 L5 16' stroke='%238B7CFF' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 16 L17 16' stroke='%238B7CFF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<link color="#A78BFA" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M5.5 5 L5.5 17 L8 17 L8 10.5 L13 17 L15.5 17 L15.5 5 L13 5 L13 11.5 L8 5 Z'/%3E%3C/svg%3E" rel="mask-icon"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<link href="/icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
+<meta content="article" property="og:type"/>
+<meta content="AlphaCode" property="og:site_name"/>
+<meta content="MCP Servers Guide: Connect Tools to the AlphaCode AI Agent" property="og:title"/>
+<meta content="Learn how the AlphaCode AI coding agent discovers, authorizes and runs MCP servers, with a full Burp Suite walkthrough, tools reference and FAQ." property="og:description"/>
+<meta content="https://alphacli.github.io/mcp/" property="og:url"/>
+<meta content="https://alphacli.github.io/og-image.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="AlphaCode — MCP servers documentation" property="og:image:alt"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Servers Guide: Connect Tools to the AlphaCode AI Agent" name="twitter:title"/>
+<meta content="Learn how the AlphaCode AI coding agent discovers, authorizes and runs MCP servers, with a full Burp Suite walkthrough, tools reference and FAQ." name="twitter:description"/>
+<meta content="https://alphacli.github.io/og-image.png" name="twitter:image"/>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How AlphaCode handles MCP servers",
+    "description": "Architecture, registration, authorization, and tool execution. Burp Suite MCP walkthrough included.",
+    "author": { "@type": "Organization", "name": "Alphacli", "url": "https://github.com/alphacli" },
+    "publisher": { "@type": "Organization", "name": "Alphacli" },
+    "mainEntityOfPage": "https://alphacli.github.io/mcp/",
+    "keywords": "MCP, Model Context Protocol, Burp Suite, AI agent, security testing"
+  }
+  </script>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "AlphaCode", "item": "https://alphacli.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "MCP Servers", "item": "https://alphacli.github.io/mcp/" }
+    ]
+  }
+  </script>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does AlphaCode add a second authorization layer for MCP tools?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. MCP-mediated calls inherit your session's authorization. If the target is in-scope per your testing context, the agent can call any tool that operates on it." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if Burp crashes mid-session?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The agent sees the tool error, retries with backoff, and surfaces the failure in the session log. You can mcp reload to restart the server without losing the session." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I run multiple MCP servers at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Register as many as you want in mcp_config.json. Their tools merge into one namespace, with names prefixed by the server when collisions occur." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do MCP servers see my secrets?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only the ones you pass via env or that appear in tool arguments. The agent redacts known secret patterns in logs automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are MCP tool calls recorded for evidence?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every call captures request, response, status, headers, and timing — same as built-in tools. Evidence is written to the session log under your working directory." }
+      }
+    ]
+  }
+  </script>
+<meta content="@alphaclicode" name="twitter:site"/><meta content="AlphaCode, a free open-source AI coding agent for the terminal" name="twitter:image:alt"/><link href="/llms-full.txt" rel="alternate" title="Full LLM-readable text" type="text/plain"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="/assets/mcp.css?v=235028c6" rel="stylesheet"/><link data-font="" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" media="print" rel="stylesheet"/><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/></noscript></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav" role="banner">
+<div class="nav__inner">
+<a aria-label="AlphaCode home" class="nav__brand" href="/"><span class="p">$</span><span>alphacode</span></a>
+<nav aria-label="Primary" class="nav__links" id="navLinks">
+<a href="/#features">Features</a><a href="/#models">Providers</a><a class="nav__dup" href="/#install">Install</a><a href="/docs/">Docs</a><a aria-current="page" href="/mcp/">MCP</a><a href="/#faq">FAQ</a>
+<a href="/about/">About</a><div class="nav__drawer">
+<a class="btn btn--discord" href="https://discord.gg/zhXGvgZzf2" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.8ZM8 15.5c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.7 8 10.7s2.2 1.1 2.2 2.4S9.2 15.5 8 15.5Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"></path></svg><span>Join our Discord</span></a>
+<a class="btn btn--ghost" href="https://github.com/dragonked2/alphacode" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.9 1.1.1-.9.5-1.4.8-1.7-2.7-.3-5.6-1.3-5.6-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.3-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.9 5.6-5.6 5.9.5.4.8 1.2.8 2.5v3.7c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"></path></svg><span>Star on GitHub</span></a>
+<a class="btn btn--primary nav__dup" href="/#install"><span>Install free</span></a>
+</div>
+</nav>
+<div class="nav__cta"><details class="m-lang m-lang--icon"><summary aria-label="Language"><span aria-hidden="true">🌐</span></summary><ul><li><a href="/en-us/" hreflang="en-US" lang="en-US">English (US)</a></li><li><a href="/en-gb/" hreflang="en-GB" lang="en-GB">English (UK)</a></li><li><a href="/ar-eg/" hreflang="ar-EG" lang="ar-EG">العربية (مصر)</a></li><li><a href="/ar-sa/" hreflang="ar-SA" lang="ar-SA">العربية (السعودية)</a></li><li><a href="/ar-ae/" hreflang="ar-AE" lang="ar-AE">العربية (الإمارات)</a></li><li><a href="/nl-nl/" hreflang="nl-NL" lang="nl-NL">Nederlands</a></li><li><a href="/de-de/" hreflang="de-DE" lang="de-DE">Deutsch</a></li><li><a href="/fr-fr/" hreflang="fr-FR" lang="fr-FR">Français</a></li><li><a href="/es-es/" hreflang="es-ES" lang="es-ES">Español</a></li><li><a href="/pt-br/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a></li><li><a href="/tr-tr/" hreflang="tr-TR" lang="tr-TR">Türkçe</a></li></ul></details><button aria-label="Toggle light or dark theme" class="m-theme" type="button">☾</button><button aria-label="Open command palette" class="nav__k" type="button"><svg aria-hidden="true" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24" width="15"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.500-3.500"></path></svg><kbd>CtrlK</kbd></button>
+<a aria-label="Join our Discord community" class="btn btn--sm btn--discord" href="https://discord.gg/zhXGvgZzf2" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.6 1.3a18.3 18.3 0 0 0-5.6 0L8.6 3a19.7 19.7 0 0 0-4.9 1.4C.6 9.1-.3 13.7.1 18.2a19.9 19.9 0 0 0 6 3l1.3-2.1c-.7-.3-1.4-.6-2-1l.5-.4a14.2 14.2 0 0 0 12.2 0l.5.4c-.6.4-1.3.7-2 1l1.3 2.1a19.8 19.8 0 0 0 6-3c.5-5.2-.8-9.7-3.6-13.8ZM8 15.5c-1.2 0-2.2-1.1-2.2-2.4S6.8 10.7 8 10.7s2.2 1.1 2.2 2.4S9.2 15.5 8 15.5Zm8 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4-1 2.4-2.2 2.4Z"></path></svg><span>Discord</span></a>
+<a aria-label="AlphaCode on GitHub" class="btn btn--sm btn--ghost" href="https://github.com/dragonked2/alphacode" rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.9 1.1.1-.9.5-1.4.8-1.7-2.7-.3-5.6-1.3-5.6-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.2 0c2.3-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.6-2.9 5.6-5.6 5.9.5.4.8 1.2.8 2.5v3.7c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"></path></svg><span>GitHub</span><span class="nav__stars" id="navStars">★ Star</span></a>
+<a class="btn btn--sm btn--primary" href="/#install"><span>Install<span class="nav__free"> free</span></span></a>
+<button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation menu" class="nav__toggle" type="button">
+<svg aria-hidden="true" class="icon-open" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+<svg aria-hidden="true" class="icon-close" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+</div>
+</header>
+<main id="main">
+<section aria-labelledby="mcp-title" class="mcp-hero">
+<div aria-hidden="true" class="mcp-hero__bg"></div>
+<div class="mcp-hero__inner">
+<div>
+<div class="pill"><span class="pill__dot"></span><span><b>Documentation</b> · MCP · <span class="js-version">v1.0.76</span></span></div>
+<h1 id="mcp-title">How AlphaCode handles<br/><span class="hl">MCP servers.</span></h1>
+<p class="lede">Model Context Protocol servers become first-class tools inside AlphaCode. Discover them, register them, and let any agent call them with the same authorization and execution guarantees as built-ins. Burp Suite is the canonical example.</p>
+<div class="hero__cta">
+<a class="btn btn--primary btn--lg" href="#burp-walkthrough">See the Burp walkthrough</a>
+<a class="btn btn--ghost btn--lg" href="#register">Register a server</a>
+</div>
+</div>
+<div aria-label="AlphaCode connects to an MCP server which talks to a target" class="diagram" role="img">
+<div class="diagram__row">
+<div class="diagram__node diagram__node--alpha"><strong>AlphaCode</strong><span>the agent</span></div>
+<div aria-hidden="true" class="diagram__arrow">↔</div>
+<div class="diagram__node diagram__node--burp"><strong>MCP server</strong><span>e.g. Burp Suite</span></div>
+<div aria-hidden="true" class="diagram__arrow">→</div>
+<div class="diagram__node diagram__node--target"><strong>Target</strong><span>your app · in-scope</span></div>
+</div>
+<div class="diagram__meta">
+<span>transport: <b>stdio / HTTP</b></span>
+<span>protocol: <b>JSON-RPC 2.0</b></span>
+<span>auth: <b>inherited</b></span>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="what-title" class="features">
+<div class="container">
+<header class="section__head">
+<span class="section__eyebrow">— what is MCP?</span>
+<h2 class="section__title" id="what-title">A standard pipe between agents and tools.</h2>
+<p class="section__lede">The Model Context Protocol (MCP) is an open standard for connecting AI agents to external tools. Instead of every assistant inventing its own plugin format, MCP defines one JSON-RPC contract any server can speak.</p>
+</header>
+<div class="mcp-grid mcp-reveal">
+<article class="mcp-card">
+<div aria-hidden="true" class="mcp-card__icon">⚙</div>
+<h3>Tools</h3>
+<p>Functions the agent can call. Each tool declares a name, a JSON Schema for arguments, and a description. The agent decides when to invoke them based on the user's goal.</p>
+</article>
+<article class="mcp-card">
+<div aria-hidden="true" class="mcp-card__icon">📄</div>
+<h3>Resources</h3>
+<p>Structured data the server exposes — files, documents, proxy history, scope lists. The agent reads them like local files, but they live behind the MCP boundary.</p>
+</article>
+<article class="mcp-card">
+<div aria-hidden="true" class="mcp-card__icon">★</div>
+<h3>Prompts</h3>
+<p>Reusable prompt templates the server offers for common workflows (e.g. "replay this request", "scan for IDORs"). Agents can prefill them or surface them as slash commands.</p>
+</article>
+</div>
+</div>
+</section>
+<section aria-labelledby="how-title" class="features">
+<div class="container">
+<header class="section__head">
+<span class="section__eyebrow">— how AlphaCode handles MCP</span>
+<h2 class="section__title" id="how-title">Four primitives. One integration.</h2>
+<p class="section__lede">When you connect an MCP server, AlphaCode does four things and then gets out of the way. The agent uses the tools exactly like it uses built-ins.</p>
+</header>
+<div class="mcp-grid mcp-reveal">
+<article class="mcp-card">
+<div aria-hidden="true" class="mcp-card__icon">▲</div>
+<h3>1. Spawn</h3>
+<p>Launches the server process (stdio) or connects to its HTTP endpoint, with the env vars and args you registered. Lifecycle is managed automatically.</p>
+</article>
+<article class="mcp-card">
+<div aria-hidden="true" class="mcp-card__icon">◆</div>
+<h3>2. Discover</h3>
+<p>Sends <code>tools/list</code>, <code>resources/list</code>, and <code>prompts/list</code>. Every tool the server exposes is introspected, typed, and registered as a first-class agent tool.</p>
+</article>
+<article class="mcp-card">
+<div aria-hidden="true" class="mcp-card__icon">■</div>
+<h3>3. Authorize</h3>
+<p>Authorization context is inherited from your session. No separate prompt, no extra menu. If the target is in-scope, MCP-mediated calls are in-scope.</p>
+</article>
+<article class="mcp-card">
+<div aria-hidden="true" class="mcp-card__icon">▷</div>
+<h3>4. Execute</h3>
+<p>Each tool call is routed over JSON-RPC. Errors flow back as tool errors. Evidence is captured the same way as native tools, with secrets redacted.</p>
+</article>
+</div>
+</div>
+</section>
+<section aria-labelledby="why-title" class="features">
+<div class="container">
+<header class="section__head">
+<span class="section__eyebrow">— why it matters</span>
+<h2 class="section__title" id="why-title">Burp is powerful. The agent makes it <em>composable</em>.</h2>
+</header>
+<div class="why mcp-reveal">
+<div class="why__copy">
+<h3>Tools become part of the workflow.</h3>
+<p>Burp Suite already does request replay, scope management, and active scanning better than anything you can build in an afternoon. But by itself it doesn't reason. It waits for you to click.</p>
+<p>When Burp is exposed through MCP, every one of its tools is available to an AlphaCode reasoning loop. The agent can fetch <code>proxy_history</code>, mutate a request, replay it via Intruder-style insertion points, parse the response, and decide what to test next — all in a single chain.</p>
+<p>The same is true for any MCP server. Filesystem, Git, browser, database, Grafana, Sentry, custom internal tools. Each one becomes a verb the agent can use.</p>
+</div>
+<div class="why__list">
+<div class="why__item"><div class="why__num">1</div><div><strong>No plugin surgery</strong><span>MCP is a stable, versioned protocol. Servers upgrade independently of AlphaCode.</span></div></div>
+<div class="why__item"><div class="why__num">2</div><div><strong>Tool calls look like tool calls</strong><span>The agent treats Burp's <code>send_http1_request</code> the same as <code>bash</code>, <code>browser</code>, or <code>webfetch</code>.</span></div></div>
+<div class="why__item"><div class="why__num">3</div><div><strong>Evidence captured automatically</strong><span>Request, response, status, headers, and timing are stored alongside native tool calls.</span></div></div>
+<div class="why__item"><div class="why__num">4</div><div><strong>Failures surface as failures</strong><span>Proxy errors, scan errors, dropped connections — all come back as tool errors the agent can debug and retry.</span></div></div>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="burp-title" class="features" id="burp-walkthrough">
+<div class="container">
+<header class="section__head">
+<span class="section__eyebrow">— Burp Suite MCP walkthrough</span>
+<h2 class="section__title" id="burp-title">From zero to first scan in five steps.</h2>
+<p class="section__lede">Burp Suite exposes an MCP server through its extensions API. The bridge speaks JSON-RPC over stdio, so registration is one config block. After that, every Burp capability is a tool call.</p>
+</header>
+<div class="steps mcp-reveal">
+<article class="step"><div class="step__num">1</div><p class="footer__h">Run Burp</p><p>Start Burp Suite Pro or Community. Install the MCP extension from the BApp Store.</p></article>
+<article class="step"><div class="step__num">2</div><p class="footer__h">Register the server</p><p>Add an entry to <code>mcp_config.json</code> under your project folder.</p><code>mcp connect burp -- java -jar burp-mcp-bridge.jar</code></article>
+<article class="step"><div class="step__num">3</div><p class="footer__h">Tools appear</p><p>AlphaCode introspects the server. Burp's tools show up alongside <code>bash</code>, <code>browser</code>, and friends.</p></article>
+<article class="step"><div class="step__num">4</div><p class="footer__h">Describe the goal</p><p>Tell the agent what to find. It picks the right Burp tool, mutates requests, parses responses, and reasons through results.</p></article>
+</div>
+<div aria-label="How a typical Burp MCP call flows" class="flow mcp-reveal">
+<div class="flow__row">
+<div class="flow__col"><strong>You say</strong><code>"probe staging.example.com for IDORs on the orders endpoint"</code></div>
+<div aria-hidden="true" class="flow__arrow">→</div>
+<div class="flow__col"><strong>Agent plans</strong><code>set_scope then loop send_http1_request with mutated ids</code></div>
+</div>
+<div class="flow__row">
+<div class="flow__col"><strong>Burp runs</strong><code>Replay through proxy, capture status/body/headers, flag anomalies</code></div>
+<div aria-hidden="true" class="flow__arrow">→</div>
+<div class="flow__col"><strong>Agent decides</strong><code>401 to 403 escalation; chain create_scan; verify with auth-bypass probe</code></div>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="reg-title" class="features" id="register">
+<div class="container">
+<header class="section__head">
+<span class="section__eyebrow">— registering a server</span>
+<h2 class="section__title" id="reg-title">One file. Three transports.</h2>
+<p class="section__lede">MCP servers are declared in <code>mcp_config.json</code>. AlphaCode loads it from the project folder, then from <code>~/.alphacode</code>, merging the two.</p>
+</header>
+<div class="code mcp-reveal">
+<pre><code><span class="code__prompt">$</span> <span class="code__cmd">cat</span> mcp_config.json
+<span class="code__dim">{</span>
+  <span class="code__cmd">"mcpServers"</span>: <span class="code__dim">{</span>
+    <span class="code__cmd">"burp"</span>: <span class="code__dim">{</span>
+      <span class="code__cmd">"command"</span>: <span class="code__cmd">"java"</span>,
+      <span class="code__cmd">"args"</span>: <span class="code__dim">[</span><span class="code__cmd">"-jar"</span>, <span class="code__cmd">"/opt/burp/burp-mcp-bridge.jar"</span><span class="code__dim">]</span>,
+      <span class="code__cmd">"env"</span>: <span class="code__dim">{</span> <span class="code__cmd">"BURP_API_KEY"</span>: <span class="code__cmd">"***"</span> <span class="code__dim">}</span>
+    <span class="code__dim">}</span>,
+    <span class="code__cmd">"filesystem"</span>: <span class="code__dim">{</span>
+      <span class="code__cmd">"command"</span>: <span class="code__cmd">"npx"</span>,
+      <span class="code__cmd">"args"</span>: <span class="code__dim">[</span><span class="code__cmd">"-y"</span>, <span class="code__cmd">"@modelcontextprotocol/server-filesystem"</span>, <span class="code__cmd">"/srv/repos"</span><span class="code__dim">]</span>
+    <span class="code__dim">}</span>,
+    <span class="code__cmd">"remote"</span>: <span class="code__dim">{</span>
+      <span class="code__cmd">"url"</span>: <span class="code__cmd">"http://localhost:8765/mcp"</span>
+    <span class="code__dim">}</span>
+  <span class="code__dim">}</span>
+<span class="code__dim">}</span></code></pre>
+</div>
+</div>
+</section>
+<section aria-labelledby="tools-title" class="features">
+<div class="container">
+<header class="section__head">
+<span class="section__eyebrow">— common Burp MCP tools</span>
+<h2 class="section__title" id="tools-title">What Burp exposes.</h2>
+<p class="section__lede">Tools you'll see after <code>mcp connect burp</code>. The agent picks them just like built-ins.</p>
+</header>
+<table class="tools-table mcp-reveal">
+<thead><tr><th>Tool</th><th>What it does</th><th>Typical use</th></tr></thead>
+<tbody>
+<tr><td><code>send_http1_request</code></td><td>Replay or forge a single HTTP/1 request through Burp's proxy.</td><td>Mutating headers, body, cookies, auth tokens.</td></tr>
+<tr><td><code>send_http2_request</code></td><td>Same for HTTP/2.</td><td>Testing HPACK quirks and h2c downgrades.</td></tr>
+<tr><td><code>get_proxy_history</code></td><td>Pull captured traffic from the proxy log.</td><td>Post-session analysis, finding missed endpoints.</td></tr>
+<tr><td><code>define_insertion_point</code></td><td>Mark positions in a request for Intruder-style payloads.</td><td>Fuzzing a header value or JSON field.</td></tr>
+<tr><td><code>configure_payload_processing</code></td><td>Encode, prefix, or transform payloads mid-attack.</td><td>WAF bypass, case folding, double URL encoding.</td></tr>
+<tr><td><code>create_scan</code></td><td>Kick off an active vulnerability scan.</td><td>Broad coverage after manual recon.</td></tr>
+<tr><td><code>get_scan_status</code></td><td>Poll scan progress and findings.</td><td>Wait for completion, then triage results.</td></tr>
+<tr><td><code>set_scope</code></td><td>Push URL scope into Burp.</td><td>Tell Burp which targets are in-bounds for the audit.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section aria-labelledby="faq-title" class="features">
+<div class="container">
+<header class="section__head">
+<span class="section__eyebrow">— frequently asked</span>
+<h2 class="section__title" id="faq-title">Questions, answered.</h2>
+</header>
+<div class="faq-list mcp-reveal">
+<details open="">
+<summary>Does AlphaCode add a second authorization layer for MCP tools?</summary>
+<div><p>No. MCP-mediated calls inherit your session's authorization. If the target is in-scope per your testing context, the agent can call any tool that operates on it.</p></div>
+</details>
+<details>
+<summary>What if Burp crashes mid-session?</summary>
+<div><p>The agent sees the tool error, retries with backoff, and surfaces the failure in the session log. You can <code>mcp reload</code> to restart the server without losing the session.</p></div>
+</details>
+<details>
+<summary>Can I run multiple MCP servers at once?</summary>
+<div><p>Yes. Register as many as you want in <code>mcp_config.json</code>. Their tools merge into one namespace, with names prefixed by the server (e.g. <code>burp.send_http1_request</code>) when collisions occur.</p></div>
+</details>
+<details>
+<summary>Do MCP servers see my secrets?</summary>
+<div><p>Only the ones you pass via <code>env</code> or that appear in tool arguments. The agent redacts known secret patterns (bearer tokens, API keys) in logs automatically.</p></div>
+</details>
+<details>
+<summary>Are MCP tool calls recorded for evidence?</summary>
+<div><p>Yes. Every call captures request, response, status, headers, and timing — same as built-in tools. Evidence is written to the session log under your working directory.</p></div>
+</details>
+</div>
+</div>
+</section>
+<div class="container">
+<div class="mcp-cta mcp-reveal">
+<h2>Connect a server. Then tell the agent what to find.</h2>
+<p>One config block turns Burp — or any MCP server — into tools the agent can compose. No new plugin format, no second authorization flow.</p>
+<div class="mcp-cta__row">
+<a class="btn btn--primary btn--lg" href="/#install">Install AlphaCode</a>
+<a class="btn btn--ghost btn--lg" href="https://github.com/dragonked2/alphacode" rel="noopener noreferrer" target="_blank">Read the source</a>
+</div>
+</div>
+</div>
+</main>
+<footer class="footer">
+<div class="footer__inner">
+<div class="footer__top">
+<div>
+<a aria-label="AlphaCode home" class="footer__brand" href="/"><span class="p">$</span><span>alphacode</span></a>
+<p class="footer__tagline">The free AI coding agent for your terminal. No key needed to start. Open-source, model-agnostic, built in Rust.</p>
+</div>
+<nav aria-label="Product" class="footer__col">
+<p class="footer__h">Product</p>
+<ul>
+<li><a href="/#free">Free AI</a></li>
+<li><a href="/#demo">Demo</a></li>
+<li><a href="/#features">Features</a></li>
+<li><a href="/#swarm">Swarm mode</a></li>
+<li><a href="/#models">Models</a></li>
+<li><a class="nav__opt" href="/#bench">Benchmarks</a></li>
+<li><a href="/mcp/">MCP servers</a></li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="footer__col">
+<p class="footer__h">Resources</p>
+<ul>
+<li><a href="/#install">Install</a></li>
+<li><a href="/docs/">Documentation</a></li>
+<li><a href="/ai-coding-agent/">AI coding agent guide</a></li>
+<li><a href="/#faq">FAQ</a></li>
+<li><a href="/about/">About &amp; author</a></li>
+<li><a href="/alpha-code/">What is Alpha Code?</a></li>
+<li><a href="https://github.com/dragonked2/alphacode/releases" rel="noopener noreferrer" target="_blank">Releases</a></li>
+</ul>
+</nav>
+<nav aria-label="Project" class="footer__col">
+<p class="footer__h">Project</p>
+<ul>
+<li><a href="https://discord.gg/zhXGvgZzf2" rel="noopener noreferrer" target="_blank">Discord community</a></li>
+<li><a href="https://github.com/dragonked2/alphacode" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+<li><a href="https://github.com/sponsors/dragonked2" rel="noopener noreferrer" target="_blank">Sponsor</a></li>
+<li><a href="https://github.com/dragonked2/alphacode/blob/main/LICENSE" rel="noopener noreferrer" target="_blank">License</a></li>
+<li><a href="https://github.com/dragonked2/alphacode/blob/main/SECURITY.md" rel="noopener noreferrer" target="_blank">Security</a></li>
+<li><a href="/.well-known/security.txt">security.txt</a></li>
+</ul>
+</nav>
+</div>
+<div class="footer__bottom">
+<div class="footer__meta"><span>MIT</span><span class="dot">·</span><span>Rust</span><span class="dot">·</span><span>2026</span></div>
+<div class="footer__by">Built by <a href="/about/">Ali Essam</a> · <a href="https://github.com/alphacli" rel="noopener noreferrer" target="_blank">Alphacli</a>
+<ul aria-label="AlphaCode on social media" class="social">
+<li><a aria-label="Follow AlphaCode on X" href="https://x.com/alphaclicode" rel="me noopener noreferrer" target="_blank" title="X"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><use href="#i-x"></use></svg></a></li>
+<li><a aria-label="AlphaCode on Facebook" href="https://www.facebook.com/xalphacode" rel="me noopener noreferrer" target="_blank" title="Facebook"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><use href="#i-facebook"></use></svg></a></li>
+<li><a aria-label="AlphaCode on LinkedIn" href="https://www.linkedin.com/company/dragonmeta" rel="me noopener noreferrer" target="_blank" title="LinkedIn"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><use href="#i-linkedin"></use></svg></a></li>
+<li><a aria-label="AlphaCode on GitHub" href="https://github.com/dragonked2/alphacode" rel="me noopener noreferrer" target="_blank" title="GitHub"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><use href="#i-github"></use></svg></a></li>
+<li><a aria-label="Join the AlphaCode Discord" href="https://discord.gg/zhXGvgZzf2" rel="me noopener noreferrer" target="_blank" title="Discord"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><use href="#i-discord"></use></svg></a></li>
+</ul>
+</div>
+</div>
+</div>
+<nav aria-label="Languages" class="m-langs"><ul><li><a href="/en-us/" hreflang="en-US" lang="en-US">English (US)</a></li><li><a href="/en-gb/" hreflang="en-GB" lang="en-GB">English (UK)</a></li><li><a href="/ar-eg/" hreflang="ar-EG" lang="ar-EG">العربية (مصر)</a></li><li><a href="/ar-sa/" hreflang="ar-SA" lang="ar-SA">العربية (السعودية)</a></li><li><a href="/ar-ae/" hreflang="ar-AE" lang="ar-AE">العربية (الإمارات)</a></li><li><a href="/nl-nl/" hreflang="nl-NL" lang="nl-NL">Nederlands</a></li><li><a href="/de-de/" hreflang="de-DE" lang="de-DE">Deutsch</a></li><li><a href="/fr-fr/" hreflang="fr-FR" lang="fr-FR">Français</a></li><li><a href="/es-es/" hreflang="es-ES" lang="es-ES">Español</a></li><li><a href="/pt-br/" hreflang="pt-BR" lang="pt-BR">Português (Brasil)</a></li><li><a href="/tr-tr/" hreflang="tr-TR" lang="tr-TR">Türkçe</a></li></ul></nav></footer>
+<script defer="" src="/assets/site.js?v=16c49965"></script><script defer="" src="/mcp.js?v=3ad8c507"></script></body>
+</html>

@@ -1,0 +1,21 @@
+/* art.css - final layer (bundled last by tools/optimize.py).
+   Contains ONLY fixes confirmed by the touch/interaction audit; it does not restyle anything.
+
+   On coarse pointers these controls measured below the 44px comfortable minimum
+   (WCAG 2.5.5 / Apple HIG): copy button 34px, pause 32px, language menu 41px,
+   share links 33px. Install tabs, footer links and nav were already compliant (ui.css/refine.css). */
+@media (pointer: coarse) {
+  .ins__copy, .boot__pause { min-height: 44px; }
+  .boot__pause { min-width: 44px; }
+  .m-lang ul a { min-height: 44px; }
+  .m-share a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+}
+
+/* Catch-all for users who ask their OS for reduced motion: individual widgets already
+   handle it, this guarantees no decorative loop slips through. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
+}

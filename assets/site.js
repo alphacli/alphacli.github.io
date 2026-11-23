@@ -502,8 +502,43 @@
       });
     });
 
-    /* Release and repo data managed by sync_release.py / art.js. */
+    /* ------------------------------------------------------------
+       Live repo stats + latest version.
+       ONE cached lookup (6 h TTL) instead of 2 API calls per page view:
+       the unauthenticated GitHub API allows only 60 req/h per IP, which
+       shared networks (offices, campuses, VPNs) exhaust quickly.
+       Build-time values (tools/sync_version.py) are the no-JS/offline fallback.
+       ------------------------------------------------------------ */
+    (function () {
+      const KEY = 'ac_repo_v2', TTL = 6 * 3600 * 1000, REPO = 'dragonked2/alphacode';
+      const ns = $('#navStars'), sg = $('#statStars'), lbl = sg && sg.nextElementSibling;
+      const paint = d => {
+        if (!d) return;
+        if (d.stars != null) {
+          const n = Number(d.stars).toLocaleString('en-US');
+          if (ns) ns.textContent = '\u2605 ' + n;
+          if (sg) sg.textContent = n;
+          if (lbl) lbl.textContent = 'GitHub stars';
+        }
+        if (d.tag) $$('.js-version').forEach(el => { el.textContent = d.tag; });
+      };
+      const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } };
+      const write = d => { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} };
+      const cached = read();
+      if (cached) paint(cached);                                  // instant, no layout wait
+      if (cached && Date.now() - cached.t < TTL) return;          // fresh enough: zero network
+      const gh = p => fetch('https://api.github.com/repos/' + REPO + p, { headers: { Accept: 'application/vnd.github+json' } })
+        .then(r => r.ok ? r.json() : Promise.reject(r.status));
+      Promise.allSettled([gh(''), gh('/releases/latest')]).then(([r, rel]) => {
+        const d = Object.assign({}, cached || {}, { t: Date.now() });
+        if (r.status === 'fulfilled' && r.value.stargazers_count != null) d.stars = r.value.stargazers_count;
+        if (rel.status === 'fulfilled' && rel.value.tag_name) d.tag = /^v/i.test(rel.value.tag_name) ? rel.value.tag_name : 'v' + rel.value.tag_name;
+        if (r.status === 'rejected' && rel.status === 'rejected') { if (cached) { cached.t = Date.now() - TTL + 600000; write(cached); } return; } // back off 10 min
+        write(d); paint(d);
+      });
+    })();
   });
+
 
   /* ------------------------------------------------------------
      Provider search
@@ -943,60 +978,5 @@ $$('.docs__body :is(h1,h2,h3,h4)[id]').forEach(h=>{
     var c=e.target.closest&&e.target.closest('.feat,.model,.free__item,.bench__card');if(!c)return;
     var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');
   },{passive:true});
-})();;
-/* AlphaCode AURORA: accessible progressive enhancement with zero dependencies. */
-(() => {
-  'use strict';
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce && 'IntersectionObserver' in window) {
-    const nodes = [...document.querySelectorAll('.section__head, .feat, .free__item, .stats__inner, .ac-journey__shell')];
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
-      });
-    }, { threshold: .08, rootMargin: '0px 0px 36px 0px' });
-    nodes.forEach(node => node.setAttribute('data-ac-reveal', ''));
-    document.documentElement.classList.add('has-ac-motion');
-    nodes.forEach(node => obs.observe(node));
-    // Fail open: avoid hidden content if browser background-throttles animations.
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) document.querySelectorAll('[data-ac-reveal]:not(.is-visible)').forEach(node => {
-        const b = node.getBoundingClientRect();
-        if (b.top < innerHeight && b.bottom > 0) node.classList.add('is-visible');
-      });
-    });
-  }
-  // Only one GitHub API request per cache window, with expiry and failure backoff.
-  // Release versions are generated at build time, NOT overwritten by a client fetch.
-  const KEY = 'ac-github-stats-v2', TTL = 6 * 60 * 60 * 1000, FAIL = 60 * 60 * 1000;
-  const apply = n => {
-    if (!Number.isSafeInteger(n) || n < 0) return;
-    const ns = document.querySelector('#navStars');
-    const sg = document.querySelector('#statStars');
-    if (ns) ns.textContent = `★ ${n.toLocaleString()}`;
-    if (sg) { sg.textContent = n.toLocaleString(); const lbl = sg.nextElementSibling; if (lbl) lbl.textContent = 'GitHub stars'; }
-  };
-  try {
-    const raw = localStorage.getItem(KEY), c = raw && JSON.parse(raw);
-    if (c && Number.isSafeInteger(c.stars)) apply(c.stars);
-    if (c && typeof c.time === 'number' && Date.now() - c.time < (c.failed ? FAIL : TTL)) return;
-  } catch (_) { /* localStorage unavailable; use network graceful fallback */ }
-  // Defer nonessential analytics-like repo lookup until first paint.
-  const query = async () => {
-    try {
-      const response = await fetch('https://api.github.com/repos/dragonked2/alphacode', {
-        headers: { Accept: 'application/vnd.github+json' }, signal: AbortSignal.timeout(6000)
-      });
-      if (!response.ok) throw new Error('GitHub rate-limited or unavailable');
-      const data = await response.json();
-      if (!Number.isSafeInteger(data.stargazers_count)) throw new Error('Invalid response');
-      apply(data.stargazers_count);
-      try { localStorage.setItem(KEY, JSON.stringify({ time: Date.now(), stars: data.stargazers_count })); } catch (_) {}
-    } catch (_) {
-      try { localStorage.setItem(KEY, JSON.stringify({ time: Date.now(), failed: true })); } catch (_) {}
-    }
-  };
-  if ('requestIdleCallback' in window) requestIdleCallback(query, { timeout: 2500 });
-  else setTimeout(query, 500);
 })();;
 (function(){document.querySelectorAll('link[data-font]').forEach(function(l){l.media='all'})})();
