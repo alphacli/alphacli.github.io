@@ -30,7 +30,7 @@
    menuButton.addEventListener('click', () => toggleMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
    navigation.addEventListener('click', (e) => { if (e.target.closest('a')) toggleMenu(false); });
    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleMenu(false); });
-   window.matchMedia('(min-width: 951px)').addEventListener('change', (e) => { if (e.matches) toggleMenu(false); });
+   window.matchMedia('(min-width: 1021px)').addEventListener('change', (e) => { if (e.matches) toggleMenu(false); });
  }
 
  const themeToggle = qs('[data-theme-toggle]');
@@ -131,7 +131,7 @@
 
  // Gentle entrance transitions, never hide content without script support.
  if (!reduced && 'IntersectionObserver' in window) {
-   const targets = qsa('.section-header,.step-card,.bento-card,.quick-install,.demo-grid,.faq-list,.closing-inner');
+   const targets = qsa('.section-heading,.workflow-card,.feature-card,.quick-install,.demo-layout,.faq-layout,.end-cta-inner');
    const obs = new IntersectionObserver(entries => {
      entries.forEach(entry => {if(entry.isIntersecting){entry.target.classList.add('is-visible');obs.unobserve(entry.target);}});
    }, {rootMargin:'0px 0px 25px 0px',threshold:0.02});

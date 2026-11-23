@@ -12,8 +12,8 @@
     "productivity",
     "utilities"
   ],
-  "background_color": "#08090d",
-  "theme_color": "#08090d",
+  "background_color": "#f7f9fd",
+  "theme_color": "#5457ed",
   "icons": [
     {
       "src": "/icon-192.png",
