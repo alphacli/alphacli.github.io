@@ -1,7 +1,7 @@
 # AlphaCode: full documentation for LLMs
 
 > Plain-text export of the AlphaCode website (https://alphacli.github.io/). AlphaCode is a free, open-source (MIT) AI coding agent written in Rust that runs in the terminal.
-> Generated 2026-11-23. Canonical sources: the page URLs listed below.
+> Generated 2026-11-24. Canonical sources: the page URLs listed below.
 
 
 ---
@@ -9,7 +9,7 @@
 ## Home
 URL: https://alphacli.github.io/
 
-v1.0.76 · MIT · Rust · free AI included 
+v1.1.20 · MIT · Rust · free AI included 
 
  The open-source AI coding agent that lives in your terminal. 
 
@@ -683,7 +683,7 @@ Contents
 $installer = [scriptblock]::Create((irm https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.ps1))
 
 # Pin a version
-& $installer -Version v1.0.76
+& $installer -Version v1.1.20
 
 # Install into a custom folder
 & $installer -Prefix "$env:LOCALAPPDATA\Programs\alphacode"
@@ -714,13 +714,13 @@ $installer = [scriptblock]::Create((irm https://raw.githubusercontent.com/dragon
  Variable Default What it changes 
  ALPHACODE_PREFIX ~/.local Where it gets installed 
  ALPHACODE_BIN_DIR $PREFIX/bin Exact folder for the program file 
- ALPHACODE_VERSION latest Lock to one version, e.g. v1.0.76 
+ ALPHACODE_VERSION latest Lock to one version, e.g. v1.1.20 
  ALPHACODE_REPO dragonked2/alphacode Install from a fork/mirror 
  ALPHACODE_FROM_SOURCE=1 off Build it yourself instead of downloading 
  ALPHACODE_SOURCE_ONLY=1 off Never fall back to a source build 
  ALPHACODE_SOURCE_REF=<ref> HEAD Which branch/tag/commit to build 
 
- curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash -s -- --version v1.0.76 --prefix ~/.local 
+ curl -fsSL https://raw.githubusercontent.com/dragonked2/alphacode/main/scripts/install.sh | bash -s -- --version v1.1.20 --prefix ~/.local 
 
  More installer flags: --no-path leaves your shell profile untouched, and --link also links the binary into /usr/local/bin .
 
@@ -782,12 +782,12 @@ alphacode doctor # checks PATH, terminal, providers, optional dependencies
  🔐 Paranoid mode: manually verify the download's checksum 
 
  # macOS / Linux
-curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.0.76/SHA256SUMS -o SHA256SUMS
-curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.0.76/alphacode-linux-x86_64.tar.gz -o alphacode.tar.gz
+curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.1.20/SHA256SUMS -o SHA256SUMS
+curl -fsSL https://github.com/dragonked2/alphacode/releases/download/v1.1.20/alphacode-linux-x86_64.tar.gz -o alphacode.tar.gz
 sha256sum --ignore-missing -c SHA256SUMS 
 
  # Windows (PowerShell)
-Invoke-WebRequest https://github.com/dragonked2/alphacode/releases/download/v1.0.76/SHA256SUMS -OutFile SHA256SUMS
+Invoke-WebRequest https://github.com/dragonked2/alphacode/releases/download/v1.1.20/SHA256SUMS -OutFile SHA256SUMS
 $expected = (Get-Content SHA256SUMS | Where-Object { $_ -like '*windows-x86_64*' })[0].Split(' ')[0]
 $actual = (Get-FileHash .\alphacode-windows-x86_64.zip -Algorithm SHA256).Hash.ToLower()
 "$expected expected"
@@ -882,7 +882,7 @@ fish_add_path ~/.local/bin
 
  What this means: there's no ready-made download for your exact computer type, so it's building AlphaCode from scratch on your machine. This is normal, just slow. To avoid it next time:
 
- curl -fsSL ... | ALPHACODE_VERSION=v1.0.76 bash 
+ curl -fsSL ... | ALPHACODE_VERSION=v1.1.20 bash 
 
  🦀 "rustc … is too old; need >= 1.91" 
 
@@ -1380,7 +1380,7 @@ cargo clippy --lib -- -D warnings
 ## MCP servers guide
 URL: https://alphacli.github.io/mcp/
 
-Documentation · MCP · v1.0.76 
+Documentation · MCP · v1.1.20 
 
  How AlphaCode handles MCP servers. 
 
