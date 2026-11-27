@@ -2,6 +2,6 @@
   "_comment": "Single source of truth for facts that change. Run `python tools/sync_version.py --fetch` to refresh from GitHub; every page, JSON-LD block and llms file is stamped from here.",
   "repo": "dragonked2/alphacode",
   "site": "https://alphacli.github.io",
-  "version": "v1.1.21",
-  "released": "2026-11-24"
+  "version": "v1.1.22",
+  "released": "2026-11-26"
 }
